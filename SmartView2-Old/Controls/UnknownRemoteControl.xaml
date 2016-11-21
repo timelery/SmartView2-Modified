@@ -1,0 +1,172 @@
+<UserControl x:Class="SmartView2.Controls.UnknownRemoteControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="clr-namespace:SmartView2.Behaviors">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Grid Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Grid Row="3">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Style="{StaticResource RemoteControlRecButtonStyle}" Grid.Column="0" Content="Rec"
+                Command="{Binding Record}"/>
+        <Button Style="{StaticResource RemoteControlPlayButtonStyle}" Grid.Column="1" Content="Pause"
+                Command="{Binding Pause}"/>
+        <Button Style="{StaticResource RemoteControlPauseButtonStyle}" Grid.Column="2" Content="Play"
+                Command="{Binding Play}"/>
+        <Button Style="{StaticResource RemoteControlStopButtonStyle}" Grid.Column="3" Content="Stop"
+                Command="{Binding Stop}"/>
+      </Grid>
+    </Grid>
+    <Grid Column="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <Grid Row="1" Column="0">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Row="0">
+          <TabControl Opacity="0.3">
+            <TabItem Header="Touchs">
+              <Canvas Background="Transparent">
+                <Interaction.Behaviors>
+                  <b:TouchPadBehavior AcceptCommand="{Binding JoystickOk}" MoveUpCommand="{Binding JoystickUp}"
+                                      MoveRightCommand="{Binding JoystickRight}" MoveDownCommand="{Binding JoystickDown}"
+                                      MoveLeftCommand="{Binding JoystickLeft}"/>
+                </Interaction.Behaviors>
+              </Canvas>
+            </TabItem>
+            <TabItem Header="Keys">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource RemoteControlUpButtonStyle}" Grid.Row="0" Grid.Column="2" Content="Up"
+                        Command="{Binding JoystickUp}"/>
+                <Button Style="{StaticResource RemoteControlLeftButtonStyle}" Grid.Row="1" Grid.Column="0" Content="Left"
+                        Command="{Binding JoystickLeft}"/>
+                <Button Style="{StaticResource RemoteControlEnterButtonStyle}" Grid.Row="1" Grid.Column="2" Content="Enter"
+                        Command="{Binding JoystickOk}"/>
+                <Button Style="{StaticResource RemoteControlRightButtonStyle}" Grid.Row="1" Grid.Column="3" Content="Right"
+                        Command="{Binding JoystickRight}"/>
+                <Button Style="{StaticResource RemoteControlDownButtonStyle}" Grid.Row="2" Grid.Column="2" Content="Down"
+                        Command="{Binding JoystickDown}"/>
+              </Grid>
+            </TabItem>
+          </TabControl>
+        </Grid>
+        <Grid Row="1">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <Button Style="{StaticResource RemoteControlKeypadButtonStyle}" Grid.Column="0" Content="Keypad"
+                  CommandParameter="NONE" Command="{Binding Keypad}"/>
+          <Button Style="{StaticResource RemoteControlBackButtonStyle}" Grid.Column="1" Content="Back"
+                  CommandParameter="NONE" Command="{Binding Return}"/>
+          <Button Style="{StaticResource RemoteControlExitButtonStyle}" Grid.Column="2" Content="Exit"
+                  CommandParameter="NONE" Command="{Binding Exit}"/>
+        </Grid>
+        <Grid Row="2">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <Button Style="{StaticResource RemoteControlAButtonStyle}" Grid.Column="0" Content="A"
+                  Command="{Binding ButtonA}"/>
+          <Button Style="{StaticResource RemoteControlBButtonStyle}" Grid.Column="1" Content="B"
+                  Command="{Binding ButtonB}"/>
+          <Button Style="{StaticResource RemoteControlCButtonStyle}" Grid.Column="2" Content="C"
+                  Command="{Binding ButtonC}"/>
+          <Button Style="{StaticResource RemoteControlDButtonStyle}" Grid.Column="3" Content="D"
+                  Command="{Binding ButtonD}"/>
+        </Grid>
+        <Grid Row="3">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <Button Style="{StaticResource RemoteControlFirstButtonStyle}" Grid.Column="0" Content="FP"
+                  Command="{Binding FastRewind}"/>
+          <Button Style="{StaticResource RemoteControlPreviousButtonStyle}" Grid.Column="1" Content="FF"
+                  Command="{Binding FastForward}"/>
+          <Button Style="{StaticResource RemoteControlNextButtonStyle}" Grid.Column="2" Content="Prev"
+                  Command="{Binding Rewind}"/>
+          <Button Style="{StaticResource RemoteControlLastButtonStyle}" Grid.Column="3" Content="Forward"
+                  Command="{Binding Forward}"/>
+        </Grid>
+      </Grid>
+      <Grid Row="1" Column="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="0.4*"/>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource RemoteControlStandartButtonStyle}" Grid.Row="0" Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Content="{Binding COM_TV_SID_SMART_HUB_UPPER, Source={StaticResource LocalizationSource}}"
+                Command="{Binding SmartHub}"/>
+        <Grid Row="1">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Button Grid.Row="0" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                  Content="{Binding COM_SID_MENU, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding Menu}"/>
+          <Button Grid.Row="1" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                  Content="{Binding COM_BUTTON_SEARCH_UPPER, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding Search}"/>
+        </Grid>
+        <Grid Row="2">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Button Grid.Row="0" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                  Content="{Binding COM_SID_INFO_UPPER, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding Info}"/>
+          <Button Grid.Row="1" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                  Content="{Binding COM_SID_TOOLS_UPPER, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding Tools}"/>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

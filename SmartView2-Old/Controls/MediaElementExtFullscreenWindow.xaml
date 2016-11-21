@@ -1,0 +1,21 @@
+<Window x:Class="SmartView2.Controls.MediaElementExtFullscreenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MediaElementExtFullscreenWindow" Height="300" Width="300" WindowState="Maximized"
+        WindowStyle="None" Topmost="true" Background="Black">
+  <Control.Template>
+    <ControlTemplate TargetType="{x:Type Window}">
+      <Border BorderBrush="{TemplateBinding Control.BorderBrush}"
+              BorderThickness="{TemplateBinding Control.BorderThickness}"
+              Background="{TemplateBinding Control.Background}">
+        <AdornerDecorator>
+          <Grid>
+            <ContentPresenter/>
+            <PopupHost ItemsSource="{Binding PopupSource, RelativeSource={RelativeSource AncestorType=Window}}"/>
+            <NotificationHost NotificationSource="{Binding NotificationSource, RelativeSource={RelativeSource AncestorType=Window}}"/>
+          </Grid>
+        </AdornerDecorator>
+      </Border>
+    </ControlTemplate>
+  </Control.Template>
+</Window>

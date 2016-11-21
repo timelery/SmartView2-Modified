@@ -1,0 +1,29 @@
+﻿
+<Application x:Class="SmartView2.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources\Styles\CommonStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\PopupStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\WelcomePageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\PinPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\MainPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\DeviceListPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\SettingsPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\RemoteControlPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\TvVideoPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\MediaPlayerPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\MusicPageStyles.xaml" />
+        <ResourceDictionary Source="Controls\MediaElementExtTemplate.xaml" />
+        <ResourceDictionary Source="Controls\MediaPlayerExtTemplate.xaml" />
+        <ResourceDictionary Source="Controls\ScrollPageBarTemplate.xaml" />
+        <ResourceDictionary Source="Resources\Styles\WindowStyle.xaml" />
+        <ResourceDictionary Source="Controls\GlobalMenuTemplate.xaml" />
+        <ResourceDictionary Source="Resources\Styles\MultimediaPageStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\QueueSettingsPopupStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\MenuStyles.xaml" />
+        <ResourceDictionary Source="Resources\Styles\MbrVideoControlStyles.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

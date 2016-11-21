@@ -1,0 +1,22 @@
+<UserControl x:Class="SmartView2.Controls.AbcdControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Button Style="{StaticResource RemoteControlAButtonStyle}" Grid.Column="0" Content="A"
+            Command="{Binding ButtonA}"/>
+    <Button Style="{StaticResource RemoteControlBButtonStyle}" Grid.Column="1" Content="B"
+            Command="{Binding ButtonB}"/>
+    <Button Style="{StaticResource RemoteControlCButtonStyle}" Grid.Column="2" Content="C"
+            Command="{Binding ButtonC}"/>
+    <Button Style="{StaticResource RemoteControlDButtonStyle}" Grid.Column="3" Content="D"
+            Command="{Binding ButtonD}"/>
+  </Grid>
+</UserControl>

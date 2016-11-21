@@ -1,0 +1,54 @@
+<UserControl x:Class="SmartView2.Views.Popups.MessagePopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:SmartView2.Common"
+             Width="420" Height="250">
+  <UIElement.InputBindings>
+    <KeyBinding Key="Escape" Command="{Binding CloseCommand}"/>
+  </UIElement.InputBindings>
+  <FrameworkElement.Resources>
+    <common:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+  </FrameworkElement.Resources>
+  <Border Style="{StaticResource PopupBorderStyle}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid Column="0" Background="{StaticResource HeaderBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource WindowHeaderStyle}" Text="{Binding Caption}"/>
+        <Button Grid.Column="1" Height="22" IsCancel="true" Width="22" Style="{StaticResource HeaderCloseButton}"
+                Command="{Binding CloseCommand}"/>
+      </Grid>
+      <Grid Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap"
+                   Foreground="#ccced1" FontSize="15pt" FontFamily="Arial" TextAlignment="Left"
+                   Text="{Binding Message}"/>
+        <Grid Row="1" Margin="-22">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+          </Grid.ColumnDefinitions>
+          <CheckBox Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonCheckBoxStyle}"
+                    Visibility="{Binding IsCheckBoxVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Content="{Binding COM_TV_DO_NOT_SHOW_AGAIN, Source={StaticResource LocalizationSource}}"
+                    IsChecked="{Binding CheckBoxState}"/>
+        </Grid>
+        <Button Style="{StaticResource TheMostCommonButtonStyle}" Grid.Row="1" IsDefault="true" Height="30"
+                Width="150" Command="{Binding CloseCommand}"
+                Content="{Binding COM_TV_SID_OK, Source={StaticResource LocalizationSource}}"/>
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

@@ -1,0 +1,88 @@
+<UserControl x:Class="SmartView2.Views.Popups.ChangeTVPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vs="clr-namespace:SmartView2.Views.Settings"
+             xmlns:animation="clr-namespace:SmartView2.Resources.Animation"
+             Width="700" Height="437" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,100">
+  <Interaction.Behaviors>
+    <VisualStateBehavior VisualStateSource="{Binding IsDataLoaded}">
+      <VisualStateTrigger Value="true" VisualState="NonLoading"/>
+      <VisualStateTrigger Value="false" VisualState="Loading"/>
+    </VisualStateBehavior>
+  </Interaction.Behaviors>
+  <Grid>
+    <Border BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="5">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0" Background="{StaticResource HeaderBackgroundBrush}">
+          <TextBlock HorizontalAlignment="Left" Style="{StaticResource WindowHeaderStyle}"
+                     Text="{Binding MAPP_SID_CHANGE_TV, Source={StaticResource LocalizationSource}}"/>
+          <Button Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource HeaderCloseButton}"
+                  Margin="0 0 0 5" Command="{Binding CloseCommand}"/>
+        </Grid>
+        <Grid Row="1" Background="{StaticResource LightBackgroundBrush}" Height="330">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="260"/>
+            <RowDefinition Height="10"/>
+          </Grid.RowDefinitions>
+          <Grid Row="0" Background="{StaticResource Button.Static.BackgroundBrush}"
+                Width="{Binding ActualWidth, ElementName=layoutRoot}">
+            <TextBlock Style="{StaticResource DeviceListNetworksNameTextBlockStyle}" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Foreground="White"
+                       FontSize="16" Margin="0">
+              <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} - {1}">
+                  <Binding Path="MAPP_SID_MIX_CONNECT_NETWORK" Source="{StaticResource LocalizationSource}"/>
+                  <Binding Path="NetworkNames" Mode="OneWay"/>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+            <Button Style="{StaticResource TransparentButtonStyle}" Width="30" Height="30" HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center" Padding="4" Margin="5,0" Command="{Binding RefreshCommand}">
+              <Path Data="{StaticResource RefreshButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+            </Button>
+          </Grid>
+          <Grid Row="2">
+            <vs:ChangeDevice DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+          </Grid>
+        </Grid>
+        <Grid Row="2" Background="{StaticResource LightPopupBackgroundBrush}">
+          <Button HorizontalAlignment="Center" Width="140" Height="40" IsDefault="true" Margin="15"
+                  Style="{StaticResource TheMostCommonButtonStyle}"
+                  Content="{Binding COM_TV_SID_CANCEL, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding CloseCommand}"/>
+        </Grid>
+      </Grid>
+    </Border>
+    <Grid x:Name="LoadingGrid" Background="#55555555" Visibility="Hidden">
+      <animation:LoadingAnimation VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState Name="NonLoading">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference LoadingGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Loading">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference LoadingGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</UserControl>

@@ -1,0 +1,195 @@
+<UserControl x:Class="SmartView2.Views.RemoteControlPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:SmartView2.Common"
+             xmlns:controls="clr-namespace:SmartView2.Controls"
+             common:RemoteControlVisualStateHelper.State="{Binding TargetDevice.CurrentSource.RemoteControl.RemoteControlType}">
+  <FrameworkElement.Resources>
+    <DataTemplate x:Key="TvControlTemplate">
+      <controls:TvRemoteControl/>
+    </DataTemplate>
+    <DataTemplate x:Key="BdControlTemplate">
+      <controls:BdRemoteControl/>
+    </DataTemplate>
+    <DataTemplate x:Key="HtsControlTemplate">
+      <controls:HtsRemoteControl/>
+    </DataTemplate>
+    <DataTemplate x:Key="StbControlTemplate">
+      <controls:StbRemoteControl/>
+    </DataTemplate>
+    <DataTemplate x:Key="HdmiControlTemplate">
+      <controls:HdmiRemoteControl/>
+    </DataTemplate>
+    <DataTemplate x:Key="UnknownControlTemplate">
+      <controls:UnknownRemoteControl/>
+    </DataTemplate>
+    <common:RemoteControlTemplateSelector x:Key="RemoteControlTemplateSelector" TvControlTemplate="{StaticResource TvControlTemplate}"
+                                          BdControlTemplate="{StaticResource BdControlTemplate}"
+                                          HtsControlTemplate="{StaticResource HtsControlTemplate}"
+                                          StbControlTemplate="{StaticResource StbControlTemplate}"
+                                          HdmiControlTemplate="{StaticResource HdmiControlTemplate}"
+                                          UnknownControlTemplate="{StaticResource UnknownControlTemplate}"/>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Panel.Background>
+      <ImageBrush ImageSource="{StaticResource BackRemoteControlBackgroundImage}"/>
+    </Panel.Background>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1*"/>
+      <RowDefinition Height="6*"/>
+    </Grid.RowDefinitions>
+    <Image/>
+    <Grid>
+      <Panel.Background>
+        <ImageBrush ImageSource="{StaticResource RemoteControlHeaderBackgroundImage}"/>
+      </Panel.Background>
+      <ComboBox SelectionChanged="_comboBox_SelectionChanged" x:Name="_comboBox"
+                Style="{StaticResource RemoteControlComboBoxStyle}"
+                ItemContainerStyle="{StaticResource RemoteControlComboBoxItemStyle}" Margin="50,0,0,0"
+                VerticalAlignment="Center" HorizontalAlignment="Left"
+                SelectedItem="{Binding TargetDevice.CurrentSource, Mode=OneWay}"
+                ItemsSource="{Binding TargetDevice.SourceList}">
+        <FrameworkElement.Tag>
+          <TextBlock Padding="15,0" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"
+                     TextTrimming="CharacterEllipsis" Text="{Binding TargetDevice.CurrentSource.Title, Mode=OneWay}"/>
+        </FrameworkElement.Tag>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding Title}"/>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ComboBox>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <Button x:Name="TvPowerButton" Margin="0,0,10,0" Style="{StaticResource PowerButton}" Content="TV"
+                Command="{Binding TvPowerCommand}"/>
+        <Button x:Name="BdPowerButton" Margin="0,0,10,0" Style="{StaticResource PowerButton}" Content="BD"
+                Visibility="Collapsed" Command="{Binding TargetDevice.CurrentSource.RemoteControl.MbrPower}"/>
+        <Button x:Name="StbPowerButton" Margin="0,0,10,0" Style="{StaticResource PowerButton}" Content="STB"
+                Visibility="Collapsed" Command="{Binding TargetDevice.CurrentSource.RemoteControl.MbrPower}"/>
+        <Button x:Name="HtsPowerButton" Margin="0,0,10,0" Style="{StaticResource PowerButton}" Content="HTS"
+                Visibility="Collapsed" Command="{Binding TargetDevice.CurrentSource.RemoteControl.MbrPower}"/>
+        <TextBlock Margin="0,0,40,0"/>
+      </StackPanel>
+    </Grid>
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                  Style="{StaticResource RemoteControlScrollViewerStyle}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Column="1" Row="1" MinWidth="400" MinHeight="300">
+          <Panel.Background>
+            <ImageBrush ImageSource="{StaticResource RemoteControlBackgroundImage}"/>
+          </Panel.Background>
+          <Grid Style="{StaticResource RemoteControlBodyGrid}">
+            <ContentPresenter ContentTemplateSelector="{StaticResource RemoteControlTemplateSelector}"
+                              Content="{Binding TargetDevice.CurrentSource.RemoteControl}"/>
+          </Grid>
+        </Grid>
+      </Grid>
+    </ScrollViewer>
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup Name="Common">
+        <VisualState Name="Tv">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference TvPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference BdPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference StbPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference HtsPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Bd">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference TvPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference BdPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference StbPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference HtsPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Hts">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference TvPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference BdPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference StbPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference HtsPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Stb">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference TvPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference BdPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference StbPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference HtsPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Unknown">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference TvPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference BdPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference StbPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference HtsPowerButton}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</UserControl>

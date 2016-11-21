@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SmartView2.Controls">
+  <Style TargetType="{x:Type local:ScrollPageBar}">
+    <Setter Property="UIElement.Focusable" Value="false"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <StackPanel x:Name="PART_TemplateRoot" Orientation="Horizontal"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

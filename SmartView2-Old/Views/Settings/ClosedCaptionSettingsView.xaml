@@ -1,0 +1,207 @@
+﻿
+<UserControl x:Class="SmartView2.Views.Settings.ClosedCaptionSettingsView" Height="540" VerticalAlignment="Top" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:enumsConverters="clr-namespace:SmartView2.Common.EnumsConverters" xmlns:common="clr-namespace:SmartView2.Common">
+  <UserControl.Resources>
+    <enumsConverters:OpacityItemConverter x:Key="_opacityItemConverter" />
+    <enumsConverters:OpacityListConverter x:Key="_opacityListConverter" />
+    <enumsConverters:FontStyleItemConverter x:Key="_fontStyleItemConverter" />
+    <enumsConverters:FontStyleListConverter x:Key="_fontStyleListConverter" />
+    <enumsConverters:EdgeTypeItemConverter x:Key="_edgeTypeItemConverter" />
+    <enumsConverters:EdgeTypeListConverter x:Key="_edgeTypeListConverter" />
+    <common:CharacterSizeToStringConverter x:Key="_characterSizeItemConverter" />
+    <common:CharacterSizeToListConverter x:Key="_characterSizeListConverter" />
+  </UserControl.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid Height="35" Grid.Row="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <TextBlock Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextBlock.FontSize="14" TextBlock.Foreground="#FFFFFFFF" Text="{Binding MAPP_SID_CLOSED_CAPTION_MODE, Source={StaticResource LocalizationSource}}" />
+      <CheckBox Name="_ccCheckBox" Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center" Grid.Row="0" IsChecked="{Binding SettingsModel.ClosedCaption}" />
+    </Grid>
+    <Grid Name="_ccSetting" Grid.Row="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Grid Name="_charactersGrid" Grid.Row="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="#FF000000" Grid.ColumnSpan="3" BorderThickness=" 0 0 0 1">
+          <TextBlock TextBlock.Foreground="#FFFFFFFF" Style="{StaticResource SettingsHeaderTextBlockStyle}" Text="{Binding MAPP_SID_CHARACTERS, Source={StaticResource LocalizationSource}}" />
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding MAPP_SID_CHARACTER_COLOR, Source={StaticResource LocalizationSource}}" />
+          <ComboBox Width="45" Height="30" Style="{StaticResource ColorComboBoxStyle}" ItemContainerStyle="{DynamicResource ColorComboBoxItemStyle}" ItemTemplate="{DynamicResource ColorItemTemplate}" ItemsPanel="{DynamicResource ColorItemsPanelTemplate}" VerticalAlignment="Center" ItemsSource="{Binding Colors, Mode=OneWay}" SelectedItem="{Binding SettingsModel.CharacterColor}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding MAPP_SID_CHARACTTER_OPACITY, Source={StaticResource LocalizationSource}}" />
+          <ComboBox VerticalAlignment="Center" Style="{StaticResource SettingsComboBoxStyle}" Width="120" ItemsSource="{Binding Opacities, Converter={StaticResource _opacityListConverter}}" SelectedItem="{Binding SettingsModel.CharacterOpacity, Converter={StaticResource _opacityItemConverter}}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextBlock.TextAlignment="Center" Text="{Binding Key}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding MAPP_SID_CHARACTER_SIZE, Source={StaticResource LocalizationSource}}" />
+          <ComboBox VerticalAlignment="Center" Style="{StaticResource SettingsComboBoxStyle}" Width="80" ItemsSource="{Binding Sizes, Converter={StaticResource _characterSizeListConverter}}" SelectedItem="{Binding SettingsModel.CharacterSize, Converter={StaticResource _characterSizeItemConverter}}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextBlock.TextAlignment="Center" Text="{Binding Key}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+      </Grid>
+      <Grid Name="_fontGrid" Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#FF000000" BorderThickness=" 0 0 0 1">
+          <TextBlock TextBlock.Foreground="#FFFFFFFF" Style="{StaticResource SettingsHeaderTextBlockStyle}" Text="{Binding COM_IDS_FONT_TEXT, Source={StaticResource LocalizationSource}}" />
+        </Border>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding COM_SID_FONT_STYLE_KR_STYLE, Source={StaticResource LocalizationSource}}" />
+          <ComboBox VerticalAlignment="Center" Style="{StaticResource SettingsComboBoxStyle}" Width="100" ItemsSource="{Binding FontStyles, Converter={StaticResource _fontStyleListConverter}}" SelectedItem="{Binding SettingsModel.FontStyle, Converter={StaticResource _fontStyleItemConverter}}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextBlock.TextAlignment="Center" Text="{Binding Key}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+      </Grid>
+      <Grid Name="_captionBackgroundGrid" Grid.Row="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="#FF000000" Grid.ColumnSpan="2" BorderThickness=" 0 0 0 1">
+          <TextBlock TextBlock.Foreground="#FFFFFFFF" Style="{StaticResource SettingsHeaderTextBlockStyle}" Text="{Binding MAPP_SID_CAPTION_BACKGROUND, Source={StaticResource LocalizationSource}}" />
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding MAPP_SID_CAPTION_BACKGROUND_COLOR, Source={StaticResource LocalizationSource}}" />
+          <ComboBox Width="45" Height="30" Style="{StaticResource ColorComboBoxStyle}" ItemContainerStyle="{DynamicResource ColorComboBoxItemStyle}" ItemTemplate="{DynamicResource ColorItemTemplate}" ItemsPanel="{DynamicResource ColorItemsPanelTemplate}" VerticalAlignment="Center" ItemsSource="{Binding Colors, Mode=OneWay}" SelectedItem="{Binding SettingsModel.CaptionBackgroundColor}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding MAPP_SID_CAPTION_BACKGROUND_OPACITY, Source={StaticResource LocalizationSource}}" />
+          <ComboBox VerticalAlignment="Center" Style="{StaticResource SettingsComboBoxStyle}" Width="120" ItemsSource="{Binding AllOpacities, Converter={StaticResource _opacityListConverter}}" SelectedItem="{Binding SettingsModel.CaptionBackgroundOpacity, Converter={StaticResource _opacityItemConverter}}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextBlock.TextAlignment="Center" Text="{Binding Key}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+      </Grid>
+      <Grid Name="_edgeGrid" Grid.Row="3">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="#FF000000" Grid.ColumnSpan="2" BorderThickness=" 0 0 0 1">
+          <TextBlock TextBlock.Foreground="#FFFFFFFF" Style="{StaticResource SettingsHeaderTextBlockStyle}" Text="{Binding MAPP_SID_EDGE, Source={StaticResource LocalizationSource}}" />
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding COM_TV_SID_EDGE_TYPE, Source={StaticResource LocalizationSource}}" />
+          <ComboBox VerticalAlignment="Center" Style="{StaticResource SettingsComboBoxStyle}" Width="120" ItemsSource="{Binding EdgeTypes, Converter={StaticResource _edgeTypeListConverter}}" SelectedItem="{Binding SettingsModel.EdgeType, Converter={StaticResource _edgeTypeItemConverter}}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextBlock.TextAlignment="Center" Text="{Binding Key}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding COM_TV_SID_EDGE_COLOR, Source={StaticResource LocalizationSource}}" />
+          <ComboBox Width="45" Height="30" Style="{StaticResource ColorComboBoxStyle}" ItemContainerStyle="{DynamicResource ColorComboBoxItemStyle}" ItemTemplate="{DynamicResource ColorItemTemplate}" ItemsPanel="{DynamicResource ColorItemsPanelTemplate}" VerticalAlignment="Center" ItemsSource="{Binding Colors, Mode=OneWay}" SelectedItem="{Binding SettingsModel.EdgeColor}" />
+        </StackPanel>
+      </Grid>
+      <Grid Name="captionWindowGrid" Grid.Row="4">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="#FF000000" Grid.ColumnSpan="2" BorderThickness=" 0 0 0 1">
+          <TextBlock TextBlock.Foreground="#FFFFFFFF" Style="{StaticResource SettingsHeaderTextBlockStyle}" Text="{Binding MAPP_SID_CAPTION_WINDOW, Source={StaticResource LocalizationSource}}" />
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding MAPP_SID_CAPTION_WINDOW_COLOR, Source={StaticResource LocalizationSource}}" />
+          <ComboBox Width="45" Height="30" Style="{StaticResource ColorComboBoxStyle}" ItemContainerStyle="{DynamicResource ColorComboBoxItemStyle}" ItemTemplate="{DynamicResource ColorItemTemplate}" ItemsPanel="{DynamicResource ColorItemsPanelTemplate}" VerticalAlignment="Center" ItemsSource="{Binding Colors, Mode=OneWay}" SelectedItem="{Binding SettingsModel.CaptionWindowColor}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="10">
+          <TextBlock Style="{StaticResource WhiteTextBlockStyle}" VerticalAlignment="Center" Margin="0 0 8 0" Text="{Binding MAPP_SID_CAPTION_WINDOW_OPACITY, Source={StaticResource LocalizationSource}}" />
+          <ComboBox VerticalAlignment="Center" Style="{StaticResource SettingsComboBoxStyle}" Width="120" ItemsSource="{Binding AllOpacities, Converter={StaticResource _opacityListConverter}}" SelectedItem="{Binding SettingsModel.CaptionWindowOpacity, Converter={StaticResource _opacityItemConverter}}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextBlock.TextAlignment="Center" Text="{Binding Key}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+      </Grid>
+      <Grid Name="_additionalOptionsGrid" Grid.Row="5">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="120" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="#FF000000" Grid.ColumnSpan="2" BorderThickness=" 0 0 0 1">
+          <TextBlock TextBlock.Foreground="#FFFFFFFF" Style="{StaticResource SettingsHeaderTextBlockStyle}" Text="{Binding MAPP_SID_ADDITIONAL_OPTIONS, Source={StaticResource LocalizationSource}}" />
+        </Border>
+        <Button Grid.Row="1" Grid.Column="0" Margin="15" Style="{StaticResource TheMostCommonButtonStyle}" Content="{Binding COM_SID_PREVIEW, Source={StaticResource LocalizationSource}}" Command="{Binding PreviewCommand}" />
+        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource WhiteTextBlockStyle}" Margin="5" VerticalAlignment="Center" />
+        <Button Grid.Row="2" Grid.Column="0" Margin="15" Style="{StaticResource TheMostCommonButtonStyle}" Content="{Binding COM_IDS_TXT_RESET_ALL, Source={StaticResource LocalizationSource}}" Command="{Binding ResetAllCommand}" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource WhiteTextBlockStyle}" Margin="5" VerticalAlignment="Center" Text="{Binding MAPP_SID_RESET_ALL_CLOSED_CAPTION_OPTIONS_DEFAULT, Source={StaticResource LocalizationSource}}" />
+      </Grid>
+    </Grid>
+    <Grid Grid.Row="1" Background="#FF000000" Opacity="0.5">
+      <Grid.Style>
+        <Style TargetType="{x:Type Grid}">
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding IsChecked, ElementName=_ccCheckBox}" Value="False">
+              <Setter Property="UIElement.Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsChecked, ElementName=_ccCheckBox}" Value="True">
+              <Setter Property="UIElement.Visibility" Value="Collapsed" />
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </Grid.Style>
+    </Grid>
+  </Grid>
+</UserControl>

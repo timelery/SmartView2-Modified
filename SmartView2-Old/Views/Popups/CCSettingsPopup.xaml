@@ -1,0 +1,44 @@
+<UserControl x:Class="SmartView2.Views.Popups.CCSettingsPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vs="clr-namespace:SmartView2.Views.Settings"
+             Width="1108" Height="630">
+  <Grid>
+    <Border BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="5">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0" Background="{StaticResource HeaderBackgroundBrush}" Height="30">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <TextBlock Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource WindowHeaderStyle}"
+                     Text="{Binding MAPP_SID_CLOSE_CAPTION_SETTINGS, Source={StaticResource LocalizationSource}}"/>
+          <Button Grid.Column="1" HorizontalAlignment="Right" Style="{StaticResource HeaderCloseButton}"
+                  Margin="0 0 0 5" Command="{Binding CloseCommand}"/>
+        </Grid>
+        <Grid Row="1" Style="{StaticResource Background}">
+          <vs:ClosedCaptionSettingsView DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+        </Grid>
+        <Grid Row="2" Background="{StaticResource LightPopupBackgroundBrush}">
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="120" Height="30" IsDefault="true" Margin="10"
+                    Style="{StaticResource TheMostCommonButtonStyle}"
+                    Content="{Binding COM_TV_SID_OK, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding OkCommand}"/>
+            <Button Width="120" Height="30" IsDefault="true" Margin="10"
+                    Style="{StaticResource TheMostCommonButtonStyle}"
+                    Content="{Binding COM_TV_SID_CANCEL, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding CloseCommand}"/>
+          </StackPanel>
+        </Grid>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

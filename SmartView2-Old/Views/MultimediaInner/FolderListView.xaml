@@ -1,0 +1,122 @@
+﻿
+<UserControl x:Class="SmartView2.Views.MultimediaInner.FolderListView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:b="clr-namespace:SmartView2.Behaviors" xmlns:views="clr-namespace:SmartView2.Views" xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <Grid>
+    <ListView Name="folderGeneral" Style="{StaticResource ListViewNoHeaderStyle}" Background="#00FFFFFF" AllowDrop="True" SelectionMode="Single" ItemsSource="{Binding ItemsList}" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type views:MultimediaPage}}}">
+      <Interaction.Behaviors>
+        <b:ListBoxExtendedSelectionBehavior IsEnabled="False" ExtendedSelectionEnabled="{Binding DataContext.IsSelectionMode, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type views:MultimediaPage}}}" SelectedItems="{Binding DataContext.SelectedItems, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type views:MultimediaPage}}}" />
+      </Interaction.Behaviors>
+      <ListView.ItemsPanel>
+        <ItemsPanelTemplate>
+          <VirtualizingTilePanel ItemWidth="230" ItemHeight="228" Margin="8,0,38,38" />
+        </ItemsPanelTemplate>
+      </ListView.ItemsPanel>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Background="#00FFFFFF" Height="190" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Margin="0,10,0,0">
+              <Image Width="124" Height="112" Source="pack://application:,,,/Resources/Images/folder.png" />
+              <Grid Margin="0,10,0,0">
+                <Image Width="124" Height="112" Source="pack://application:,,,/Resources/Images/folder.png" />
+                <Image Source="pack://application:,,,/Resources/Images/indicator_music_nor.png">
+                  <Image.Style>
+                    <Style TargetType="{x:Type Image}" BasedOn="{StaticResource FolderIndecatorImageStyle}">
+                      <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding DataContext.ContentType, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Value="Track">
+                          <Setter Property="UIElement.Visibility" Value="Visible" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </Image.Style>
+                </Image>
+                <Image Source="pack://application:,,,/Resources/Images/indicator_video_nor.png">
+                  <Image.Style>
+                    <Style TargetType="{x:Type Image}" BasedOn="{StaticResource FolderIndecatorImageStyle}">
+                      <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding DataContext.ContentType, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Value="Video">
+                          <Setter Property="UIElement.Visibility" Value="Visible" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </Image.Style>
+                </Image>
+                <Image Source="pack://application:,,,/Resources/Images/Indicator_photo_nor.png">
+                  <Image.Style>
+                    <Style TargetType="{x:Type Image}" BasedOn="{StaticResource FolderIndecatorImageStyle}">
+                      <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding DataContext.ContentType, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" Value="Image">
+                          <Setter Property="UIElement.Visibility" Value="Visible" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </Image.Style>
+                </Image>
+              </Grid>
+            </Grid>
+            <TextBlock Margin="16,19,16,5" Width="168" TextBlock.FontSize="20pt" TextBlock.FontFamily="Arial" TextBlock.FontWeight="Bold" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" Height="44" TextBlock.TextAlignment="Center" ToolTip="{Binding Name}" Text="{Binding Name}" TextBlock.Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
+            <StackPanel.Style>
+              <Style TargetType="{x:Type StackPanel}">
+                <Setter Property="FrameworkElement.ContextMenu">
+                  <Setter.Value>
+                    <ContextMenu Foreground="#FF000000" DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                      <MenuItem Header="{Binding COM_SID_OPEN, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.ItemDoubleClickCommand}" CommandParameter="{Binding DataContext}" />
+                      <MenuItem Header="{Binding MAPP_SID_ADD_TO_QUEUE, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.SendToQueueCommand}" CommandParameter="{Binding DataContext}" />
+                      <MenuItem Header="{Binding MAPP_SID_REMOVE_FOLDER, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.RemoveFolderCommand}" CommandParameter="{Binding DataContext}" />
+                    </ContextMenu>
+                  </Setter.Value>
+                </Setter>
+                <Setter Property="FrameworkElement.Tag" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" />
+              </Style>
+            </StackPanel.Style>
+          </StackPanel>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+      <ListView.ItemContainerStyle>
+        <Style TargetType="{x:Type ListViewItem}">
+          <Setter Property="Control.Foreground" Value="#FF808080" />
+          <Setter Property="FrameworkElement.Margin" Value="30,38,0,0" />
+          <Setter Property="Control.Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type ListViewItem}">
+                <Border Name="_layoutRoot" BorderThickness="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#00FFFFFF" AllowDrop="True">
+                  <Interaction.Behaviors>
+                    <b:ItemsControlDragItemBehavior Command="{Binding DataContext.DragItem, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" IsSelectionMode="{Binding Tag.IsSelectionMode, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" SelectedItems="{Binding Tag.SelectedItems, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" />
+                    <b:DoubleClickBehavior Command="{Binding DataContext.ItemDoubleClickCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
+                    <b:ListBoxItemSelectionByClickBehavior IsEnabled="{Binding (b:ListBoxExtendedSelectionBehavior.ExtendedSelectionEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}" />
+                  </Interaction.Behaviors>
+                  <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AllowDrop="True">
+                    <ContentPresenter />
+                    <CheckBox Name="_checkBox" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Visibility="Hidden" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
+                  </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                    <Setter TargetName="_layoutRoot" Property="Border.BorderBrush" Value="#FF4FB2F6" />
+                    <Setter Property="Control.Foreground" Value="#FF4FB2F6" />
+                  </Trigger>
+                  <Trigger Property="UIElement.IsMouseOver" Value="True">
+                    <Setter TargetName="_layoutRoot" Property="Border.BorderBrush" Value="#FF4FB2F6" />
+                    <Setter TargetName="_layoutRoot" Property="Border.Background" Value="#FF4FB2F6" />
+                    <Setter Property="Control.Foreground" Value="#FFFFFFFF" />
+                  </Trigger>
+                  <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                      <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                      <Condition Binding="{Binding (b:ListBoxExtendedSelectionBehavior.ExtendedSelectionEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}" Value="false" />
+                      <Condition Binding="{Binding (b:ListBoxExtendedSelectionBehavior.IsEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}" Value="True" />
+                    </MultiDataTrigger.Conditions>
+                  </MultiDataTrigger>
+                  <DataTrigger Value="True" Binding="{Binding (b:ListBoxExtendedSelectionBehavior.ExtendedSelectionEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}">
+                    <Setter TargetName="_checkBox" Property="UIElement.Visibility" Value="Visible" />
+                  </DataTrigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </ListView.ItemContainerStyle>
+    </ListView>
+  </Grid>
+</UserControl>

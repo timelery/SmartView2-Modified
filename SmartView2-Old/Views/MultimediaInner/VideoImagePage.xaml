@@ -1,0 +1,256 @@
+﻿
+<UserControl x:Class="SmartView2.Views.MultimediaInner.VideoImagePage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ml="clr-namespace:SmartView2.Native.MediaLibrary" xmlns:common="clr-namespace:SmartView2.Common" xmlns:b="clr-namespace:SmartView2.Behaviors" xmlns:converter="clr-namespace:SmartView2.Converters" xmlns:animation="clr-namespace:SmartView2.Resources.Animation" xmlns:views="clr-namespace:SmartView2.Views" xmlns:innerViews="clr-namespace:SmartView2.Views.MultimediaInner">
+  <Interaction.Behaviors>
+    <VisualStateBehavior VisualStateSource="{Binding ViewType}" />
+  </Interaction.Behaviors>
+  <UserControl.Resources>
+    <CollectionViewSource x:Key="ItemByName" Source="{Binding ItemsList}">
+      <CollectionViewSource.GroupDescriptions>
+        <PropertyGroupDescription PropertyName="FirstLetter" />
+      </CollectionViewSource.GroupDescriptions>
+    </CollectionViewSource>
+    <common:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <Color x:Key="ArtistTitle">#8A8E97</Color>
+    <SolidColorBrush x:Key="ArtistTitleBrush" Color="{StaticResource ArtistTitle}" />
+    <Color x:Key="ArtistTitleBgr">#29303A</Color>
+    <SolidColorBrush x:Key="ArtistTitleBgrBrush" Color="{StaticResource ArtistTitleBgr}" />
+  </UserControl.Resources>
+  <Grid AllowDrop="True" Background="#00FFFFFF">
+    <Grid.Style>
+      <Style TargetType="{x:Type Grid}">
+        <Setter Property="FrameworkElement.ContextMenu">
+          <Setter.Value>
+            <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+              <MenuItem Header="{Binding COM_SID_ADD_FILE, Source={StaticResource LocalizationSource}}" Command="{Binding DataContext.AddFilesCommand}" />
+              <MenuItem Header="{Binding COM_SID_ADD_FOLDER, Source={StaticResource LocalizationSource}}" Command="{Binding DataContext.AddFolderCommand}" />
+            </ContextMenu>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="FrameworkElement.Tag" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" />
+      </Style>
+    </Grid.Style>
+    <Interaction.Behaviors>
+      <b:GridDragAndDropBehavior Command="{Binding ContentDropCommand}" />
+    </Interaction.Behaviors>
+    <Grid Name="DateListView" Visibility="Collapsed">
+      <innerViews:TileFileListView />
+    </Grid>
+    <Grid Name="TitleListView" Visibility="Collapsed">
+      <ListView Style="{StaticResource ListViewNoHeaderStyle}" Background="#00FFFFFF" BorderThickness="0" AllowDrop="True" HorizontalContentAlignment="Stretch" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.IsVirtualizingWhenGrouping="True" ScrollViewer.CanContentScroll="False" ItemsSource="{Binding Source={StaticResource ItemByName}}" Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type views:MultimediaPage}}}">
+        <Interaction.Behaviors>
+          <b:ListBoxExtendedSelectionBehavior ExtendedSelectionEnabled="{Binding DataContext.IsSelectionMode, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type views:MultimediaPage}}}" SelectedItems="{Binding DataContext.SelectedItems, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type views:MultimediaPage}}}" />
+        </Interaction.Behaviors>
+        <ListView.GroupStyle>
+          <GroupStyle>
+            <GroupStyle.HeaderTemplate>
+              <DataTemplate>
+                <Grid Style="{StaticResource SubHeaderGridStyle}">
+                  <TextBlock Style="{StaticResource SubHeaderTitileStyle}" />
+                </Grid>
+              </DataTemplate>
+            </GroupStyle.HeaderTemplate>
+            <GroupStyle.ContainerStyle>
+              <Style TargetType="{x:Type GroupItem}">
+                <Setter Property="Control.Template">
+                  <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                      <StackPanel>
+                        <ContentPresenter />
+                        <ItemsPresenter Margin="0,0,0,0" />
+                      </StackPanel>
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </GroupStyle.ContainerStyle>
+          </GroupStyle>
+        </ListView.GroupStyle>
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <Grid Background="#00FFFFFF" Margin="0,3,0,3">
+              <Interaction.Behaviors>
+                <b:DoubleClickBehavior Command="{Binding DataContext.ItemDoubleClickCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}" />
+              </Interaction.Behaviors>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border Name="_border" Margin="0">
+                  <Image Margin="35,0,0,0" Height="103" Width="103" Stretch="Fill" Source="{Binding Preview}" />
+                </Border>
+                <TextBlock Margin="40,0,35,0" Grid.Column="1" VerticalAlignment="Center" TextBlock.FontFamily="Arial" TextBlock.FontWeight="Bold" TextBlock.FontSize="20pt" Height="30" TextTrimming="CharacterEllipsis" Text="{Binding Name}" />
+              </Grid>
+              <Grid.Style>
+                <Style TargetType="{x:Type Grid}">
+                  <Setter Property="FrameworkElement.ContextMenu">
+                    <Setter.Value>
+                      <ContextMenu Foreground="#FF000000" DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="{Binding COM_SID_OPEN, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.ItemDoubleClickCommand}" CommandParameter="{Binding DataContext}">
+                          <MenuItem.Style>
+                            <Style TargetType="{x:Type MenuItem}">
+                              <Style.Triggers>
+                                <DataTrigger Binding="{Binding DataContext.ContentType}" Value="Video">
+                                  <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                              </Style.Triggers>
+                            </Style>
+                          </MenuItem.Style>
+                        </MenuItem>
+                        <MenuItem Header="{Binding COM_SID_PLAY, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.ItemDoubleClickCommand}" CommandParameter="{Binding DataContext}">
+                          <MenuItem.Style>
+                            <Style TargetType="{x:Type MenuItem}">
+                              <Style.Triggers>
+                                <DataTrigger Binding="{Binding DataContext.ContentType}" Value="Image">
+                                  <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                              </Style.Triggers>
+                            </Style>
+                          </MenuItem.Style>
+                        </MenuItem>
+                        <MenuItem Header="{Binding MAPP_SID_ADD_TO_QUEUE, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.SendToQueueCommand}" CommandParameter="{Binding DataContext}" />
+                        <MenuItem Header="{Binding MAPP_SID_PLAY_ON_TV, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.PlayOnTvCommand}" CommandParameter="{Binding DataContext}" />
+                        <MenuItem Header="{Binding MAPP_SID_REMOVE_FILES, Source={StaticResource LocalizationSource}}" Command="{Binding Tag.RemoveFilesCommand}" CommandParameter="{Binding DataContext}" />
+                      </ContextMenu>
+                    </Setter.Value>
+                  </Setter>
+                  <Setter Property="FrameworkElement.Tag" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" />
+                </Style>
+              </Grid.Style>
+            </Grid>
+            <DataTemplate.Triggers>
+              <DataTrigger Value="true" Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}">
+                <Setter TargetName="_border" Property="Border.BorderBrush" Value="#FF4FB2F6" />
+              </DataTrigger>
+            </DataTemplate.Triggers>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.ItemContainerStyle>
+          <Style TargetType="{x:Type ListViewItem}">
+            <Setter Property="Control.Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                  <Border Name="_layoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#00FFFFFF" AllowDrop="True">
+                    <Interaction.Behaviors>
+                      <b:ItemsControlDragItemBehavior Command="{Binding DataContext.DragItem, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" IsSelectionMode="{Binding Tag.IsSelectionMode, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" SelectedItems="{Binding Tag.SelectedItems, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" />
+                      <b:ListBoxItemSelectionByClickBehavior IsEnabled="{Binding (b:ListBoxExtendedSelectionBehavior.ExtendedSelectionEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    </Interaction.Behaviors>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                      <ContentPresenter />
+                      <CheckBox Name="_checkBox" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,25,0" Visibility="Hidden" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
+                    </Grid>
+                  </Border>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="ListBoxItem.IsSelected" Value="True">
+                      <Setter TargetName="_layoutRoot" Property="Border.Background" Value="#FF1F252D" />
+                      <Setter Property="Control.Foreground" Value="#FF4FB2F6" />
+                    </Trigger>
+                    <Trigger Property="UIElement.IsMouseOver" Value="True">
+                      <Setter TargetName="_layoutRoot" Property="Border.BorderBrush" Value="#FF4FB2F6" />
+                      <Setter TargetName="_layoutRoot" Property="Border.Background" Value="#FF4FB2F6" />
+                      <Setter Property="Control.Foreground" Value="#FFFFFFFF" />
+                    </Trigger>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
+                        <Condition Binding="{Binding (b:ListBoxExtendedSelectionBehavior.ExtendedSelectionEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}" Value="false" />
+                        <Condition Binding="{Binding (b:ListBoxExtendedSelectionBehavior.IsEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}" Value="True" />
+                      </MultiDataTrigger.Conditions>
+                    </MultiDataTrigger>
+                    <DataTrigger Value="True" Binding="{Binding (b:ListBoxExtendedSelectionBehavior.ExtendedSelectionEnabledAttached), RelativeSource={RelativeSource AncestorType=ListView}}">
+                      <Setter TargetName="_checkBox" Property="UIElement.Visibility" Value="Visible" />
+                    </DataTrigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </ListView.ItemContainerStyle>
+      </ListView>
+    </Grid>
+    <Grid Name="FolderListView" Visibility="Collapsed">
+      <Grid Visibility="{Binding IsInRootFolder, Converter={StaticResource _visibilityConverter}}">
+        <innerViews:FolderListView />
+      </Grid>
+      <Grid Visibility="{Binding IsInsideFolder, Converter={StaticResource _visibilityConverter}}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <innerViews:NavigationTitle Grid.Row="0" BackCommand="{Binding VideoImageBackCommand}" TitleText="{Binding CurrentFolder.Name}" />
+        <innerViews:TileFileListView Grid.Row="1" />
+      </Grid>
+    </Grid>
+    <Grid Name="NoContentList" Visibility="Collapsed">
+      <TextBlock Style="{StaticResource MultimediaGuidTextBlockStyle}" TextTrimming="CharacterEllipsis" Text="{Binding MAPP_SID_CLICK_PLUS_BUTTON_ADD_CONTENT, Source={StaticResource LocalizationSource}}" />
+    </Grid>
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup Name="VideoImageView">
+        <VisualState Name="Title">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="TitleListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DateListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="FolderListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="NoContentList"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Date">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="TitleListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DateListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="FolderListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="NoContentList"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Folder">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="TitleListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DateListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="FolderListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="NoContentList"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="NoContent">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="TitleListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DateListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="FolderListView"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="NoContentList"  Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</UserControl>

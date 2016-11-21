@@ -1,0 +1,35 @@
+<UserControl x:Class="SmartView2.Views.Popups.PreviewPopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             Width="350">
+  <Border Style="{StaticResource PopupBorderStyle}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid Column="0" Background="{StaticResource HeaderBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource WindowHeaderStyle}" Text="{Binding Caption}"/>
+        <Button Grid.Column="1" IsCancel="true" Height="22" Width="22" Style="{StaticResource HeaderCloseButton}"
+                Command="{Binding CloseCommand}"/>
+      </Grid>
+      <Grid Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Message}" Style="{Binding TextStyle}"/>
+        <Button Style="{StaticResource TheMostCommonButtonStyle}" Grid.Row="1" IsDefault="true" Height="30"
+                Width="150" Command="{Binding CloseCommand}"
+                Content="{Binding COM_TV_SID_OK, Source={StaticResource LocalizationSource}}"/>
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

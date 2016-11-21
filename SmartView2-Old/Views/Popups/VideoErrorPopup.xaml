@@ -1,0 +1,19 @@
+<UserControl x:Class="SmartView2.Views.Popups.VideoErrorPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <UIElement.InputBindings>
+    <KeyBinding Key="Escape" Command="{Binding OkCommand}"/>
+  </UIElement.InputBindings>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Foreground="{StaticResource TextBlock.Static.ForegroundBrush}" Text="{Binding Text}"/>
+    <Button Grid.Row="1" Command="{Binding OkCommand}"
+            Content="{Binding COM_TV_SID_OK, Source={StaticResource LocalizationSource}}"/>
+  </Grid>
+</UserControl>

@@ -1,0 +1,13 @@
+﻿
+<Window x:Class="SmartView2.MainWindow" Title="Smart View 2.0" Height="724" Width="1366" Style="{StaticResource WindowStyle}" MinHeight="724" MinWidth="1366" Icon="./Resources/Images/SmartView.ico" WindowStartupLocation="CenterScreen" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" SourceInitialized="OnSourceInitialized">
+  <Window.CommandBindings>
+    <CommandBinding Command="{x:Static ApplicationCommands.Close}" Executed="CommandBinding_Executed" />
+  </Window.CommandBindings>
+  <Grid Background="{StaticResource commonGradientBackground}">
+    <FrameExt Name="frameExt" Controller="{Binding}" />
+    <Grid>
+      <PopupHost ItemsSource="{Binding Controller.PopupsCollection, ElementName=frameExt}" />
+      <NotificationHost Margin="200 0 0 50" NotificationSource="{Binding NotificationsCollection}" />
+    </Grid>
+  </Grid>
+</Window>

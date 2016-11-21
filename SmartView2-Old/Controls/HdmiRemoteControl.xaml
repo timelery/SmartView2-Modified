@@ -1,0 +1,82 @@
+<UserControl x:Class="SmartView2.Controls.HdmiRemoteControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:SmartView2.Controls"
+             xmlns:views="clr-namespace:SmartView2.Views"
+             Width="850" Height="570">
+  <Grid Margin="50">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="40"/>
+      <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <Grid Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition Height="80"/>
+      </Grid.RowDefinitions>
+      <controls:TouchPadControl Grid.Row="0"/>
+      <Grid Row="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Style="{StaticResource RemoteControlKeypadButtonStyle}" Grid.Column="0" Content="Keypad"
+                CommandParameter="NONE"
+                Command="{Binding DataContext.ShowKeypadCommand, RelativeSource={RelativeSource AncestorType=views:RemoteControlPage}}"/>
+        <Button Style="{StaticResource RemoteControlBackButtonStyle}" Grid.Column="1" Content="Back"
+                CommandParameter="NONE" Command="{Binding Return}"/>
+        <Button Style="{StaticResource RemoteControlExitButtonStyle}" Grid.Column="2" Content="Exit"
+                CommandParameter="NONE" Command="{Binding Exit}"/>
+      </Grid>
+    </Grid>
+    <Grid Column="2">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition Height="3"/>
+        <RowDefinition Height="120"/>
+        <RowDefinition Height="3"/>
+        <RowDefinition/>
+        <RowDefinition Height="3"/>
+        <RowDefinition/>
+        <RowDefinition Height="3"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Button Grid.Row="0" Style="{StaticResource RemoteControlWideButtonStyle}" Width="320"
+              Content="{Binding COM_TV_SID_SMART_HUB_UPPER, Source={StaticResource LocalizationSource}}"
+              Command="{Binding SmartHub}"/>
+      <Image Grid.Row="1" Style="{StaticResource PlayerDividerStyle}"/>
+      <Grid Row="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                Content="{Binding COM_SID_MENU, Source={StaticResource LocalizationSource}}"
+                Command="{Binding Menu}"/>
+        <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                Content="{Binding COM_BUTTON_SEARCH_UPPER, Source={StaticResource LocalizationSource}}"
+                Command="{Binding Search}"/>
+        <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                Content="{Binding COM_SID_INFO_UPPER, Source={StaticResource LocalizationSource}}"
+                Command="{Binding Info}"/>
+        <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource RemoteControlStandartButtonStyle}"
+                Content="{Binding COM_SID_TOOLS_UPPER, Source={StaticResource LocalizationSource}}"
+                Command="{Binding Tools}"/>
+      </Grid>
+      <Image Grid.Row="3" Style="{StaticResource PlayerDividerStyle}"/>
+      <controls:AbcdControl Grid.Row="4"/>
+      <Image Grid.Row="5" Style="{StaticResource PlayerDividerStyle}"/>
+      <controls:RewindControl Grid.Row="6"/>
+      <Image Grid.Row="7" Style="{StaticResource PlayerDividerStyle}"/>
+      <controls:PlayControl Grid.Row="9" RecordingAvailable="false"/>
+    </Grid>
+  </Grid>
+</UserControl>

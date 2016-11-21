@@ -1,0 +1,21 @@
+<UserControl x:Class="SmartView2.Controls.RewindControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+      <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+    <Button Grid.Column="0" Style="{StaticResource RemoteControlFirstButtonStyle}"
+            Command="{Binding FastRewind}"/>
+    <Button Grid.Column="1" Style="{StaticResource RemoteControlPreviousButtonStyle}"
+            Command="{Binding Rewind}"/>
+    <Button Grid.Column="2" Style="{StaticResource RemoteControlNextButtonStyle}" Command="{Binding Forward}"/>
+    <Button Grid.Column="3" Style="{StaticResource RemoteControlLastButtonStyle}"
+            Command="{Binding FastForward}"/>
+  </Grid>
+</UserControl>

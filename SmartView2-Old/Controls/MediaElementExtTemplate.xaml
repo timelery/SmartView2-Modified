@@ -1,0 +1,116 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SmartView2.Controls"
+                    xmlns:animations="clr-namespace:SmartView2.Resources.Animation">
+  <Style TargetType="{x:Type local:MediaElementExt}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:MediaElementExt}">
+          <Border x:Name="PART_LayoutHost">
+            <Grid x:Name="PART_LayoutRoot" Background="Black">
+              <Grid x:Name="PART_ClickListener" Background="Transparent">
+                <Border x:Name="PART_LoadingAnimation">
+                  <animations:LoadingAnimation HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <FrameworkElement.Style>
+                      <Style TargetType="{x:Type animations:LoadingAnimation}">
+                        <Style.Triggers>
+                          <DataTrigger Binding="{Binding IsLoadingVisible, RelativeSource={RelativeSource TemplatedParent}}" Value="false">
+                            <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </FrameworkElement.Style>
+                  </animations:LoadingAnimation>
+                </Border>
+                <MediaElement x:Name="PART_MediaElement" Volume="{TemplateBinding local:MediaElementExt.Volume}"/>
+                <ContentPresenter x:Name="PART_NotificationContent"
+                                  Content="{TemplateBinding local:MediaElementExt.NotificationContent}" Visibility="Hidden"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+              </Grid>
+              <ContentPresenter x:Name="PART_OnVideoContentControl" Content="{TemplateBinding ContentControl.Content}"/>
+              <Grid x:Name="PART_CCDataLayout" VerticalAlignment="Center" Visibility="Collapsed"
+                    HorizontalAlignment="Center" Height="{Binding ActualHeight, ElementName=PART_MediaElement}"
+                    Width="{Binding ActualWidth, ElementName=PART_MediaElement}"/>
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup Name="GROUP_OnVideoContentVisibility">
+                <VisualState x:Name="STATE_Visible">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="00:00:00.3"
+                                     Storyboard.Target="{x:Reference PART_OnVideoContentControl}"/>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Duration="00:00:00"
+                                                   Storyboard.Target="{x:Reference PART_OnVideoContentControl}">
+                      <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="STATE_Hidden">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="00:00:00.3"
+                                     Storyboard.Target="{x:Reference PART_OnVideoContentControl}"/>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" BeginTime="00:00:00.3" Duration="00:00:00"
+                                                   Storyboard.Target="{x:Reference PART_OnVideoContentControl}">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup Name="GROUP_VideoLoading">
+                <VisualState x:Name="STATE_Loading">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_LoadingAnimation" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MediaElement" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="STATE_NonLoading">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_LoadingAnimation" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MediaElement" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+              <VisualStateGroup Name="GROUP_NotificationVisibility">
+                <VisualState x:Name="STATE_NotificationVisible">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_NotificationContent" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MediaElement" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="STATE_NotificationNonVisible">
+                  <Storyboard>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_NotificationContent" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_MediaElement" Storyboard.TargetProperty="Visibility"
+                                                   BeginTime="00:00:00" Duration="00:00:00">
+                      <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+                    </ObjectAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

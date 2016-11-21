@@ -1,0 +1,19 @@
+﻿
+<UserControl x:Class="SmartView2.Views.MultimediaInner.NavigationTitle" Name="this" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <UserControl.Resources>
+    <Color x:Key="ArtistTitle">#8A8E97</Color>
+    <Color x:Key="ArtistTitleBgr">#29303A</Color>
+    <SolidColorBrush x:Key="ArtistTitleBrush" Color="{StaticResource ArtistTitle}" />
+    <SolidColorBrush x:Key="ArtistTitleBgrBrush" Color="{StaticResource ArtistTitleBgr}" />
+  </UserControl.Resources>
+  <Grid Background="{StaticResource ArtistTitleBgrBrush}" Visibility="{Binding IsBackVisible, Converter={StaticResource _visibilityConverter}}">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Button Grid.Column="0" Style="{StaticResource TransparentButtonStyle}" Width="40" Height="40" Margin="6,0,0,0" Command="{Binding BackCommand, ElementName=this}">
+      <Path Height="22" Width="14" Data="{StaticResource BackButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+    </Button>
+    <TextBlock Grid.Column="1" HorizontalAlignment="Center" TextBlock.FontSize="15pt" TextBlock.FontFamily="Arial" TextBlock.FontWeight="Bold" TextBlock.Foreground="{StaticResource ArtistTitleBrush}" VerticalAlignment="Center" MaxWidth="998" TextTrimming="CharacterEllipsis" Text="{Binding TitleText, ElementName=this}" />
+  </Grid>
+</UserControl>

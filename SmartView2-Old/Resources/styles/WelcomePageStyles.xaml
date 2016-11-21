@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style x:Key="GuidListBoxStyle" TargetType="{x:Type ListBox}">
+    <Setter Property="FrameworkElement.Margin" Value="30,0,30,0" />
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.BorderThickness" Value="0" />
+  </Style>
+  <Style x:Key="WelcomeHeaderTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CommonHeaderTextBlockStyle}">
+    <Setter Property="TextBlock.FontSize" Value="24pt" />
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+  </Style>
+  <Style x:Key="WelcomeDescriptionTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CommonHeaderTextBlockStyle}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource TextBlock.Static.ForegroundBrush}" />
+    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+    <Setter Property="TextBlock.FontSize" Value="18pt" />
+    <Setter Property="TextBlock.FontFamily" Value="Arial" />
+  </Style>
+  <Style x:Key="GuidItemImageBorderStyle" TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Top" />
+  </Style>
+  <Style x:Key="GuidItemTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WelcomeDescriptionTextBlockStyle}">
+    <Setter Property="TextBlock.Foreground" Value="{StaticResource TextBlock.Static.ForegroundBrush}" />
+    <Setter Property="TextBlock.FontStyle" Value="Normal" />
+    <Setter Property="TextBlock.FontSize" Value="20pt" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Margin" Value="5,15,5,0" />
+    <Setter Property="TextBlock.FontFamily" Value="Arial" />
+  </Style>
+  <Style x:Key="ConnectButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource TheMostCommonButtonStyle}">
+    <Setter Property="FrameworkElement.Width" Value="220" />
+    <Setter Property="FrameworkElement.Height" Value="50" />
+    <Setter Property="Button.IsDefault" Value="True" />
+    <Setter Property="Control.FontSize" Value="18pt" />
+    <Setter Property="Control.FontFamily" Value="Arial" />
+  </Style>
+</ResourceDictionary>

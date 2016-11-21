@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <BitmapImage x:Key="PinAreaStyle" UriSource="/Resources/Images/pin_area_nor.png" />
+  <BitmapImage x:Key="PinAreaSelectedStyle" UriSource="/Resources/Images/pin_area_sel.png" />
+  <Style x:Key="PinBackStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+    <Setter Property="FrameworkElement.Margin" Value="10,5,0,5" />
+    <Setter Property="Control.BorderThickness" Value="0" />
+  </Style>
+  <Style x:Key="PinCodeMessageTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Bottom" />
+    <Setter Property="TextBlock.Foreground" Value="#FFD3D3D3" />
+    <Setter Property="FrameworkElement.Margin" Value="0,0,0,10" />
+  </Style>
+  <Style x:Key="PinCodeImageStyle" TargetType="{x:Type Image}">
+    <Setter Property="FrameworkElement.Width" Value="50" />
+    <Setter Property="FrameworkElement.Height" Value="50" />
+    <Setter Property="FrameworkElement.Margin" Value="10" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="Image.Source" Value="{StaticResource PinAreaSelectedStyle}" />
+  </Style>
+  <Style x:Key="PinCodeInputStyle" TargetType="{x:Type TextBox}">
+    <Setter Property="FrameworkElement.Width" Value="50" />
+    <Setter Property="FrameworkElement.Height" Value="50" />
+    <Setter Property="FrameworkElement.Margin" Value="10" />
+    <Setter Property="TextBox.TextAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="Control.Background" Value="{StaticResource DarkBackgroundBrush}" />
+    <Setter Property="Control.BorderBrush" Value="#00FFFFFF" />
+    <Setter Property="Control.Foreground" Value="#FFFFFFFF" />
+    <Setter Property="Control.FontFamily" Value="20" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TextBox}">
+          <Border Name="border" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True" CornerRadius="5">
+            <ScrollViewer Name="PART_ContentHost" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter TargetName="border" Property="UIElement.Opacity" Value="0.56" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="border" Property="Border.BorderBrush" Value="#FFABADB3" />
+            </Trigger>
+            <Trigger Property="UIElement.IsKeyboardFocused" Value="True">
+              <Setter TargetName="border" Property="Border.BorderBrush" Value="#FFABADB3" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="PinNotificationTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Top" />
+    <Setter Property="TextBlock.Foreground" Value="#FFFF5256" />
+    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+  </Style>
+</ResourceDictionary>

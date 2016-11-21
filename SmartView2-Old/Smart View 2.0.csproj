@@ -1,0 +1,1672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{A22CE07A-EF60-4607-A237-561C28E05D69}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <AssemblyName>SmartView2</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>false</DebugSymbols>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>SmartView2</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SmartView2\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="SPCApi">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\SmartView2\SPCApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ObjectModel">
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.ObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="UIFoundation">
+      <HintPath>.\Smart View 2.0References\UIFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System" />
+    <Reference Include="SmartView2.Core">
+      <HintPath>.\Smart View 2.0References\SmartView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="taglib-sharp">
+      <HintPath>.\Smart View 2.0References\taglib-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="multiscreen-windows-api-csharp">
+      <HintPath>.\Smart View 2.0References\multiscreen-windows-api-csharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartView2.Devices">
+      <HintPath>.\Smart View 2.0References\SmartView2.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="UPnP">
+      <HintPath>.\Smart View 2.0References\UPnP.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaLibrary">
+      <HintPath>.\Smart View 2.0References\MediaLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Networking">
+      <HintPath>.\Smart View 2.0References\Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="Networking.Native">
+      <HintPath>.\Smart View 2.0References\Networking.Native.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>.\Smart View 2.0References\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Smart View 2.0References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CMAuthServer.cs" />
+    <Compile Include="IMAuthServer.cs" />
+    <Compile Include="Views\MultimediaInner\MediaPlayerPage.xaml.cs">
+      <DependentUpon>MediaPlayerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\ChangeDevice.xaml.cs">
+      <DependentUpon>ChangeDevice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <None Include="App.config" />
+    <Compile Include="Common\Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\EdgeTypeListConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Wlan\WlanConnectionMode.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\EntryPage.xaml.cs">
+      <DependentUpon>EntryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MultimediaPage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MultimediaPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeviceSettingProvider.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\BindableRadioButton.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\FontStyleItemConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\AlternativePopupEventArgs.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\ComboBoxSelectionChangedBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Log4NetLogger.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\DeviceResult_T_.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\MultimediaAddingContentPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\FontStyleListConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\LamguageListConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\LanguageItemConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\OpacityItemConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\OpacityListConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\ItemIndexIncrementConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\MenuItemConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\MenuListConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Models\BaseModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\HttpHandler\CoverHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\DLNAFlags.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\ItemListToBoolConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\MillisecondsTimeToStringConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Wlan\WlanApiWrapper.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\DLNAMaps.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Wlan\WlanConnectionInfo.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\DLNAMime.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Wlan\WlanInterfaceInfo.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\DoubleClickBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\HttpHandler\FileHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\EnumConverters_T_.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\MusicFolderFileTemplateSelector.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\FocusExtension.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\DlnaServer.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\HTTP\IHttpHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MediaContent.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MediaPanel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\Handler\ContentDirectoryHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PinPage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>PinPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Popups\OkCancelPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MediaQueueItem.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\RectConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MediaQueuePlayer.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\GridDragAndDropBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MediaTimeInfo.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\BindableRichTextBox.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\RemoteControlTemplateSelector.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MediaUser.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\SecondsTimeToStringConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\Enums\Language.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\Enums\SettingsMenu.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\Enums\SettingsType.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\ItemsControlAddItemBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\GuideSettingsTemplateSelector.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\RemoteControlVisualStateHelper.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\SettingsTemplateSelector.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\TimeSpanToDoubleConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\TimeSpanToStringConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\CCSettingsPopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>CCSettingsPopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\ItemsControlRemoveOrReplaceItemBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\ViewTypeAndIsBackVisibleToBoolConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\CCSettingsViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\CaptionWindow.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>CaptionWindow.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\ListBoxItemSelectionByClickBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\ChangeTVPopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>ChangeTVPopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\ScrollViewerNotificationBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\CurrentVMToBollConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\AbcdControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>AbcdControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\DeviceSmartPanel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\ItemsControlMoveItemBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\Handler\ControlHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\ItemsControlDragItemBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\Handler\CoverHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\Handler\DescriptionHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\DisconnectPopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>DisconnectPopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\ListBoxDisableChangeSelectionBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\Handler\FileHandler.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\BdRemoteControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>BdRemoteControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\ImageMouseRightButtonClickBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\ChangeTVViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\HTTP\Headers.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\HTTP\HttpCode.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\GlobalMenu.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\HTTP\HttpPhrases.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\DisconnectPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\GuideViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\HTTP\HttpRequest.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\GlobalMenuItemCollection.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\LicenseViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\GuidePopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>GuidePopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Native\HTTP\HttpResponse.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\ResourcesModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\BdVideoControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>BdVideoControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Popups\MessagePopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\LicensePopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>LicensePopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Popups\MultimediaIntroductionPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\HdmiRemoteControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>HdmiRemoteControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Popups\PreviewPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\ListBoxDragSelectionBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\QueueSettingsViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\TextInputPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\MessagePopupView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MessagePopupView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\Popups\UpdateMessagePopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\ListBoxExtendedSelectionBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\HtsRemoteControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>HtsRemoteControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\UnknownRemoteControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>UnknownRemoteControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\ListBoxSelectedItemScrollBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\VersionViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\VideoErrorPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\HTTP\HttpServer.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\VolumeChannelControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>VolumeChannelControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Behaviors\PinInputBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\ImageWithDefaultSourceConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\SSDP\Datagram.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\MultimediaAddingContentPopupView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MultimediaAddingContentPopupView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\HtsVideoControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>HtsVideoControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\MediaElementState.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\ReloadPreviewIfNotExistConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\ScrollViewerMouseWheelHorizontalScrollingBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\Popups\YesNoPopupViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\SliderDragBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\dlna\SSDP\SsdpServer.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\TextInputBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\MultimediaIntroductionPopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MultimediaIntroductionPopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Native\dlna\UPnP\UPnPDevice.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MultiScreenController.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\TouchPadBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\MultiScreenResult_T_.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\QueueConfig.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MultiScreen\StateObject.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Behaviors\UserControlDragAndDropBehavior.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\OkCancelPopupView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>OkCancelPopupView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\BoolToBoolNegativeConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\BoolToVisibilityConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Player\Caption.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\CharacterSizeToListConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Player\CaptionEventArgs.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Player\CCDataCodeTable.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\CharacterSizeToStringConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\EnumToStringConverter_T_.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\EdgeTypeItemConverter.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Common\EnumsConverters\EnumToListConverter_T_.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\QueueSettingsPopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>QueueSettingsPopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeviceController.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Player\CCDataDecoder.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resources\Animation\LoadingAnimation.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>LoadingAnimation.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeviceFactory.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTimeSharedInput>true</DesignTimeSharedInput>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controls\MediaElementExt.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\TextInputPopupView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>TextInputPopupView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\VisualState\SavedPlayerState.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\VisualState\SavedVideoPhotoVisualstate.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\TvVideoViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resources\Animation\Block.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>Block.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Popups\UpdateMessagePopupView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>UpdateMessagePopupView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaNowPlayingViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\MediaElementExtFullscreenWindow.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MediaElementExtFullscreenWindow.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Settings\SettingsModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\VersionPopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>VersionPopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Popups\VideoErrorPopup.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>VideoErrorPopup.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Resources\Animation\MultimediaLoadingAnimation.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MultimediaLoadingAnimation.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Resources\Styles\LocalExtensions.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\WelcomeViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resources\Styles\WindowStyle.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>WindowStyle.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Popups\PreviewPopupView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>PreviewPopupView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ThreadSafeCollection_T_.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>App.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\MediaPlayerExt.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Player\PlayerNotificationProvider.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\Popups\YesNoPopupView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>YesNoPopupView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Native\SpcApiWrapper.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\EDataFlow.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\ERole.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MMDeviceEnumerator.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\IMMDeviceEnumerator.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\IMMDevice.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\IAudioSessionManager2.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\ISimpleAudioVolume.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\IAudioSessionEnumerator.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\IAudioSessionControl2.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\Wlan\WlanInterfaceState.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\DeviceListPage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>DeviceListPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TvDiscovery.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\MediaView.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UpdateController.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\RemoteControlPage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>RemoteControlPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MultimediaInner\FolderListView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>FolderListView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\NumPadControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>NumPadControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Settings\ClosedCaptionSettingsView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>ClosedCaptionSettingsView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\EntryViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\PlayControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>PlayControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\TvVideoPage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>TvVideoPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MultimediaInner\MusicPage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MusicPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\RewindControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>RewindControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MultimediaInner\NavigationTitle.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>NavigationTitle.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\ScrollPageBar.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MediaLibrary\DataLibrary.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\DeviceListViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MediaLibrary\MidiFile.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MainViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MediaLibrary\MidiTag.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\RemoteControlViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MediaLibrary\FolderFileTemplateSelector.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\MultimediaInner\TileFileListView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>TileFileListView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\StbRemoteControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>StbRemoteControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Native\MediaLibrary\FileList.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Native\MediaLibrary\TrackList.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\MultimediaInner\TrackDetailsView.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>TrackDetailsView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\StbVideoControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>StbVideoControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Native\MultiScreen\ChannelListner.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="CurrentMultimediaHeader.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\MultimediaInner\VideoImagePage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>VideoImagePage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\TemplatedAdorner.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\MediaPlayerViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Settings.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\MultimediaNowPlayingPage.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>MultimediaNowPlayingPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\TouchPadControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>TouchPadControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\PinViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Controls\TvRemoteControl.xaml.cs">
+      <AutoGen>false</AutoGen>
+      <DependentUpon>TvRemoteControl.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\MusicViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\VideoImageViewModel.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\VisualState\BaseSavedVisualState.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\VisualState\SavedMultimediaVisualState.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\MultimediaInner\VisualState\SavedMusicVisualState.cs">
+      <AutoGen>false</AutoGen>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Views\EntryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MultimediaInner\MediaPlayerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MultimediaPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PinPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\CCSettingsPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CaptionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\ChangeTVPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AbcdControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\DisconnectPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BdRemoteControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Popups\GuidePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BdVideoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\LicensePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\HdmiRemoteControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\MessagePopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\HtsRemoteControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\UnknownRemoteControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VolumeChannelControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\MultimediaAddingContentPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\HtsVideoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\MultimediaIntroductionPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\OkCancelPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\QueueSettingsPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Animation\LoadingAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\TextInputPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Animation\Block.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\UpdateMessagePopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MediaElementExtFullscreenWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\VersionPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\VideoErrorPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Animation\MultimediaLoadingAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\WindowStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\PreviewPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\YesNoPopupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DeviceListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RemoteControlPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultimediaInner\FolderListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NumPadControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Settings\ChangeDevice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\ClosedCaptionSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PlayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TvVideoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultimediaInner\MusicPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RewindControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultimediaInner\NavigationTitle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultimediaInner\TileFileListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StbRemoteControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultimediaInner\TrackDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\StbVideoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultimediaInner\VideoImagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MultimediaNowPlayingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TouchPadControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TvRemoteControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WelcomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="resources\images\rc_btn_c_normal.png" />
+    <Resource Include="resources\images\title_icon.png" />
+    <Resource Include="resources\images\music_artist_default.png" />
+    <Resource Include="resources\images\rc_nav_top_hover.png" />
+    <Resource Include="resources\images\rc_nav_left_normal.png" />
+    <Resource Include="resources\images\rc_top_panel.png" />
+    <Resource Include="resources\images\rc_enter_but_normal.png" />
+    <Resource Include="resources\images\album_cd_dis.png" />
+    <Resource Include="resources\images\indicator_music_nor.png" />
+    <Resource Include="resources\images\folder_cd_dis.png" />
+    <Resource Include="resources\images\rc_player_divider.png" />
+    <Resource Include="resources\images\logo_icon_196.png" />
+    <Page Include="Resources\Styles\MbrVideoControlStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_source_list_bottom_pressed.png" />
+    <Resource Include="resources\images\rc_btn_pause_hover.png" />
+    <Resource Include="resources\images\rc_btn_b_hover.png" />
+    <Resource Include="resources\images\rc_btn_exit_pressed.png" />
+    <Resource Include="resources\images\rc_btn_rec_normal.png" />
+    <Resource Include="resources\images\indicator_video_nor.png" />
+    <Resource Include="resources\images\date_cb.png" />
+    <Resource Include="resources\images\rc_bg.png" />
+    <Resource Include="resources\images\introduction_image_01.png" />
+    <Resource Include="resources\images\introduction_image_02.png" />
+    <Resource Include="resources\images\rc_btn_prech_normal.png" />
+    <Resource Include="resources\images\rc_nav_left_tab_normal.png" />
+    <Resource Include="resources\images\rc_btn_rec_pressed.png" />
+    <Resource Include="resources\images\rc_btn_previous_normal.png" />
+    <Resource Include="resources\images\indicator_music_sel.png" />
+    <Resource Include="resources\images\rc_btn_b_normal.png" />
+    <Resource Include="resources\images\rc_tab_icon_right_normal.png" />
+    <Resource Include="resources\images\rc_nav_bottom_normal.png" />
+    <Resource Include="resources\images\rc_round_btn_plus_hover.png" />
+    <Page Include="Resources\Styles\MenuStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_btn_exit_normal.png" />
+    <Resource Include="resources\images\rc_numbers_divider.png" />
+    <Resource Include="resources\images\indicator_video_sel.png" />
+    <Resource Include="resources\images\shuffle_on.png" />
+    <Resource Include="resources\images\rc_round_btn_plus_pressed.png" />
+    <Resource Include="resources\images\rc_btn_d_pressed.png" />
+    <Resource Include="resources\images\rc_metal_plate.png" />
+    <Resource Include="resources\images\rc_btn_return_pressed.png" />
+    <Resource Include="resources\images\rc_btn_9_hover.png" />
+    <Resource Include="resources\images\rc_hdmi_rectangle_btn_hover.png" />
+    <Page Include="Resources\Styles\PopupStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_round_btn_minus_normal.png" />
+    <Resource Include="resources\images\guide_01.png" />
+    <Resource Include="resources\images\folder.png" />
+    <Resource Include="resources\images\guide_02.png" />
+    <Page Include="Controls\MediaPlayerExtTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\music_track_default.png" />
+    <Resource Include="resources\images\rc_btn_d_normal.png" />
+    <Resource Include="resources\images\default_track.png" />
+    <Resource Include="resources\images\rc_btn_3_hover.png" />
+    <Resource Include="resources\images\rc_nav_right_tab_selected.png" />
+    <Resource Include="resources\images\rc_btn_7_hover.png" />
+    <Resource Include="resources\images\rc_btn_7_normal.png" />
+    <Resource Include="resources\images\rc_source_list_top_hover.png" />
+    <Resource Include="resources\images\rc_source_list_top_normal.png" />
+    <Resource Include="resources\images\rc_btn_play_hover.png" />
+    <Resource Include="resources\images\rc_btn_next_normal.png" />
+    <Resource Include="resources\images\rc_btn_4_normal.png" />
+    <Page Include="Resources\Styles\MainPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_btn_pause_normal.png" />
+    <Resource Include="resources\images\rc_btn_keyboard_normal.png" />
+    <Resource Include="resources\images\rc_nav_right_tab_normal.png" />
+    <Resource Include="resources\images\rc_round_btn_down_pressed.png" />
+    <Page Include="Resources\Styles\SettingsPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_btn_play_normal.png" />
+    <Resource Include="resources\images\rc_btn_play_pressed.png" />
+    <Resource Include="resources\images\pin_area_sel.png" />
+    <Resource Include="resources\images\rc_nav_right_normal.png" />
+    <Resource Include="resources\images\rc_source_list_top_pressed.png" />
+    <Resource Include="resources\images\rc_menu_but_divider.png" />
+    <Resource Include="resources\images\rc_source_list_bottom_hover.png" />
+    <Resource Include="resources\images\rc_btn_8_hover.png" />
+    <Resource Include="resources\images\rc_btn_previous_hover.png" />
+    <Resource Include="resources\images\rc_btn_a_hover.png" />
+    <Resource Include="resources\images\rc_source_ar_down_pressed.png" />
+    <Resource Include="resources\images\title_arrow.png" />
+    <Resource Include="resources\images\rc_btn_2_hover.png" />
+    <Resource Include="resources\images\rc_btn_6_hover.png" />
+    <Resource Include="resources\images\rc_tab_icon_left_norm.png" />
+    <Resource Include="resources\images\rc_btn_3_pressed.png" />
+    <Resource Include="resources\images\rc_radio_normal.png" />
+    <Resource Include="resources\images\rc_btn_9_normal.png" />
+    <Resource Include="resources\images\rc_btn_6_normal.png" />
+    <Resource Include="resources\images\rc_mute_btn_pressed.png" />
+    <Resource Include="resources\images\fullscreen_icon_normal.png" />
+    <Resource Include="Native\dlna\resources\error.xml" />
+    <Resource Include="resources\images\rc_rectangle_btn_pressed.png" />
+    <Resource Include="resources\images\music_genre_default.png" />
+    <Resource Include="resources\images\rc_radio_checked.png" />
+    <Resource Include="resources\images\rc_btn_1_normal.png" />
+    <Resource Include="resources\images\music_album_default.png" />
+    <Page Include="Resources\Styles\TvVideoPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_round_btn_up_hover.png" />
+    <Resource Include="resources\images\repeat_one.png" />
+    <Resource Include="resources\images\rc_nav_bottom_pressed.png" />
+    <Resource Include="resources\images\image_indicator.png" />
+    <Resource Include="resources\images\rc_btn_2_pressed.png" />
+    <Resource Include="resources\images\rc_round_btn_down_hover.png" />
+    <Resource Include="resources\images\default_image.png" />
+    <Resource Include="resources\images\rc_round_btn_minus_pressed.png" />
+    <Resource Include="resources\images\default_video.png" />
+    <Resource Include="resources\images\music_indicator.png" />
+    <Resource Include="resources\images\rc_btn_1_pressed.png" />
+    <Resource Include="resources\images\rc_btn_0_pressed.png" />
+    <Resource Include="resources\images\rc_source_ar_up_hover.png" />
+    <Resource Include="resources\images\rc_round_btn_plus_normal.png" />
+    <Resource Include="resources\images\repeat_off.png" />
+    <Resource Include="resources\images\rc_enter_but_hover.png" />
+    <Resource Include="resources\images\shuffle_off.png" />
+    <Resource Include="resources\images\rc_btn_stop_hover.png" />
+    <Resource Include="resources\images\title_cb.png" />
+    <Resource Include="resources\images\icon_network.png" />
+    <Page Include="Controls\ScrollPageBarTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\folder_cb.png" />
+    <Resource Include="resources\images\rc_btn_d_hover.png" />
+    <Resource Include="resources\images\rc_nav_left_hover.png" />
+    <Page Include="Resources\Styles\PinPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\genre_cd_dis.png" />
+    <Resource Include="resources\images\indicator_photo_sel.png" />
+    <Resource Include="resources\images\genre_cb.png" />
+    <Resource Include="resources\images\artist_cb.png" />
+    <Resource Include="resources\images\date_cd_dis.png" />
+    <Resource Include="resources\images\rc_nav_right_pressed.png" />
+    <Resource Include="resources\images\repeat_all.png" />
+    <Resource Include="resources\images\rc_btn_stop_normal.png" />
+    <Resource Include="resources\images\rc_source_ar_down_normal.png" />
+    <Resource Include="resources\images\rc_btn_first_normal.png" />
+    <Page Include="Controls\GlobalMenuTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_hdmi_rectangle_btn_pressed.png" />
+    <Resource Include="resources\images\rc_btn_minus_normal.png" />
+    <Resource Include="resources\images\pin_area_nor.png" />
+    <Resource Include="resources\images\rc_btn_last_normal.png" />
+    <Resource Include="resources\images\settings_logo.png" />
+    <Page Include="Controls\MediaElementExtTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_source_ar_up_normal.png" />
+    <Resource Include="resources\images\rc_btn_keyboard_hover.png" />
+    <Resource Include="resources\images\rc_btn_previous_pressed.png" />
+    <Resource Include="resources\images\indicator_image_nor.png" />
+    <Resource Include="resources\images\volume_mute.png" />
+    <Resource Include="resources\images\rc_source_list_center_pressed.png" />
+    <Resource Include="resources\images\indicator_photo_nor.png" />
+    <Resource Include="resources\images\rc_nav_area_bg.png" />
+    <Resource Include="resources\images\rc_tab_icon_left_press.png" />
+    <Resource Include="resources\images\tv_icon_big.png" />
+    <Resource Include="resources\images\rc_btn_keyboard_pressed.png" />
+    <Resource Include="resources\images\rc_btn_7_pressed.png" />
+    <Page Include="Controls\MediaViewTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_btn_minus_hover.png" />
+    <Resource Include="resources\images\rc_btn_return_hover.png" />
+    <Resource Include="resources\images\rc_power_btn_normal.png" />
+    <Resource Include="resources\images\track_cb.png" />
+    <Resource Include="resources\images\rc_mute_btn_normal.png" />
+    <Page Include="Resources\Styles\MusicPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\2nd_exception_icon.png" />
+    <Resource Include="resources\images\rc_power_btn_hover.png" />
+    <Page Include="Resources\Styles\WelcomePageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_btn_first_pressed.png" />
+    <Resource Include="resources\images\rc_btn_prech_pressed.png" />
+    <Page Include="Resources\Styles\MultimediaPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_btn_exit_hover.png" />
+    <Resource Include="resources\images\artist_cd_dis.png" />
+    <Resource Include="resources\images\rc_btn_return_normal.png" />
+    <Resource Include="resources\images\rc_btn_6_pressed.png" />
+    <Resource Include="resources\images\rc_btn_stop_pressed.png" />
+    <Resource Include="resources\images\rc_btn_c_pressed.png" />
+    <Resource Include="resources\images\rc_btn_1_hover.png" />
+    <Resource Include="resources\images\album_cb.png" />
+    <Resource Include="resources\images\rc_btn_5_hover.png" />
+    <Resource Include="resources\images\rc_btn_8_normal.png" />
+    <Resource Include="resources\images\rc_btn_3_normal.png" />
+    <Page Include="Resources\Styles\CommonStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_btn_last_hover.png" />
+    <Resource Include="resources\images\volume_on.png" />
+    <Resource Include="resources\images\rc_btn_b_pressed.png" />
+    <Resource Include="resources\images\rc_btn_first_hover.png" />
+    <Resource Include="resources\images\rc_btn_next_hover.png" />
+    <Resource Include="resources\images\rc_nav_right_hover.png" />
+    <Resource Include="resources\images\rc_btn_5_pressed.png" />
+    <Resource Include="resources\images\rc_btn_4_pressed.png" />
+    <Resource Include="resources\images\rc_btn_a_pressed.png" />
+    <Resource Include="resources\images\rc_btn_0_normal.png" />
+    <Resource Include="resources\images\rc_rectangle_btn_normal.png" />
+    <Resource Include="resources\images\rc_mute_btn_hover.png" />
+    <Page Include="Resources\Styles\MediaPlayerPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\icon_tv_on.png" />
+    <Resource Include="resources\images\rc_nav_top_normal.png" />
+    <Resource Include="resources\images\rc_btn_c_hover.png" />
+    <Resource Include="resources\images\loading_ani_01.png" />
+    <Resource Include="resources\images\rc_rectangle_btn_hover.png" />
+    <Resource Include="resources\images\rc_hdmi_rectangle_btn_normal.png" />
+    <Resource Include="resources\images\rc_btn_rec_hover.png" />
+    <Resource Include="resources\images\rc_btn_a_normal.png" />
+    <Resource Include="resources\images\rc_round_btn_up_normal.png" />
+    <Resource Include="resources\images\rc_btn_pause_pressed.png" />
+    <Resource Include="resources\images\rc_tab_icon_right_press.png" />
+    <Resource Include="resources\images\rc_power_btn_pressed.png" />
+    <Resource Include="resources\images\smartview.ico" />
+    <Page Include="Resources\Styles\RemoteControlPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_nav_top_pressed.png" />
+    <Resource Include="resources\images\rc_source_list_bottom_normal.png" />
+    <Resource Include="resources\images\exit_fullscreen_icon.png" />
+    <Resource Include="resources\images\rc_btn_prech_hover.png" />
+    <Resource Include="resources\images\rc_nav_bottom_hover.png" />
+    <Resource Include="resources\images\rc_round_btn_up_pressed.png" />
+    <Resource Include="resources\images\rc_nav_left_tab_selected.png" />
+    <Resource Include="resources\images\rc_btn_next_pressed.png" />
+    <Resource Include="resources\images\track_cd_dis.png" />
+    <Resource Include="resources\images\rc_btn_minus_pressed.png" />
+    <Resource Include="resources\images\rc_btn_last_pressed.png" />
+    <Page Include="Resources\Styles\DeviceListPageStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_round_btn_bg.png" />
+    <Resource Include="resources\images\settings_guide_03.png" />
+    <Resource Include="resources\images\settings_guide_01.png" />
+    <Resource Include="resources\images\rc_round_btn_down_normal.png" />
+    <Resource Include="resources\images\indicator_image_sel.png" />
+    <Resource Include="resources\images\rc_source_list_center_normal.png" />
+    <Resource Include="resources\images\rc_btn_5_normal.png" />
+    <Resource Include="resources\images\title_cd_dis.png" />
+    <Resource Include="resources\images\rc_btn_2_normal.png" />
+    <Resource Include="resources\images\rc_btn_9_pressed.png" />
+    <Resource Include="resources\images\rc_btn_8_pressed.png" />
+    <Resource Include="resources\images\1depth_title_bg_l.png" />
+    <Resource Include="resources\images\video_indicator.png" />
+    <Resource Include="resources\images\rc_enter_but_pressed.png" />
+    <Resource Include="resources\images\rc_source_list_center_hover.png" />
+    <Resource Include="resources\images\rc_btn_0_hover.png" />
+    <Resource Include="resources\images\rc_source_ar_up_pressed.png" />
+    <Resource Include="resources\images\rc_nav_left_pressed.png" />
+    <Resource Include="resources\images\rc_btn_4_hover.png" />
+    <Resource Include="resources\images\rc_source_ar_down_hover.png" />
+    <Page Include="Resources\Styles\QueueSettingsPopupStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="resources\images\rc_round_btn_minus_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

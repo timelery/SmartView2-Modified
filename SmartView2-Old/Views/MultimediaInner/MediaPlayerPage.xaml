@@ -1,0 +1,533 @@
+﻿<UserControl x:Class="SmartView2.Views.MultimediaInner.MediaPlayerPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartView2.Views.MultimediaInner"
+             xmlns:controls="clr-namespace:SmartView2.Controls" 
+             xmlns:converter="clr-namespace:SmartView2.Converters" 
+             xmlns:common="clr-namespace:SmartView2" 
+             xmlns:b="clr-namespace:SmartView2.Behaviors" 
+             xmlns:lists="clr-namespace:SmartView2.Views.MultimediaInner">
+    <UserControl.Resources>
+        <!--<common:TimeSpanToStringConverter x:Key="timeSpanConverter" />-->
+    </UserControl.Resources>
+    <Interaction.Behaviors>
+        <VisualStateBehavior VisualStateSource="{Binding ContentType}" />
+    </Interaction.Behaviors>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Style="{StaticResource TransparentButtonStyle}" Width="25" Height="25" VerticalAlignment="Center" Margin="10 0" HorizontalAlignment="Left" Command="{Binding GoBack}">
+                    <Path Data="{StaticResource BackButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+                </Button>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextBlock.FontSize="20pt" TextBlock.TextAlignment="Center">
+                    <TextBlock.Style>
+                        <Style BasedOn="{StaticResource WhiteTextBlockStyle}" TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsVideoOrImage}" Value="True">
+                                    <Setter Property="TextBlock.Text" Value="{Binding SelectedFile.Name}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsVideoOrImage}" Value="False">
+                                    <Setter Property="TextBlock.Text">
+                                        <Setter.Value>
+                                            <MultiBinding>
+                                                <Binding Path="SelectedFile.Name" />
+                                                <Binding Path="SelectedFile.Artist.Name" />
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource TheMostCommonButtonStyle}" Padding="1 1" Margin="21 18 5 20" FontSize="17pt" VerticalAlignment="Center" Width="176" Height="42" HorizontalAlignment="Stretch" Command="{Binding AddToQl}" CommandParameter="{Binding SelectedFile}">
+                        <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding MAPP_SID_ADD_TO_QUEUE, Source={StaticResource LocalizationSource}}" />
+                    </Button>
+                    <Button Style="{StaticResource TheMostCommonButtonStyle}" Padding="1 1" Margin="5 18 10 20" FontSize="17pt" VerticalAlignment="Center" Width="176" Height="42" HorizontalAlignment="Stretch" Command="{Binding PlayOnTv}" CommandParameter="{Binding SelectedFile}">
+                        <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding MAPP_SID_PLAY_ON_TV, Source={StaticResource LocalizationSource}}" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <controls:MediaPlayerExt x:Name="_mediaElement" MediaEnded="_mediaElement_MediaEnded" Grid.Row="1" Grid.ColumnSpan="3" SourceUri="{Binding Uri}" IsContentFades="{Binding IsVideoOrImage}" CanFullscreen="{Binding IsVideoOrImage}" HasDuration="{Binding HasDuration}" Position="{Binding Position, Mode=OneWayToSource}" MediaElementState="{Binding MediaElementState, Mode=TwoWay}" Volume="{Binding Volume, Mode=OneWay}" DefaultPosition="{Binding DefaultPosition, Mode=OneWay}" ContentType="{Binding ContentType, Mode=OneWay}" Preview="{Binding SelectedFile.Preview, Mode=OneWay}" NotificationSource="{Binding Controller.NotificationsCollection}" PopupSource="{Binding Controller.PopupsCollection}">
+            <controls:MediaPlayerExt.ContextMenu>
+                <ContextMenu Name="_contextMenuMediaElement">
+                    <MenuItem Header="{Binding COM_SID_FULL_SCREEN, Source={StaticResource LocalizationSource}}" Click="_fullScreenButton_Click">
+                        <MenuItem.Style>
+                            <Style TargetType="{x:Type MenuItem}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Tag.IsFullScreen, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" Value="True">
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ContentType}" Value="Track">
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                    <MenuItem Header="{Binding MAPP_SID_EXIT_FULL_SCREE, Source={StaticResource LocalizationSource}}" Click="_fullScreenButton_Click">
+                        <MenuItem.Style>
+                            <Style TargetType="{x:Type MenuItem}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Tag.IsFullScreen, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}" Value="False">
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ContentType}" Value="Track">
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                    <MenuItem Name="_pauseMenuItem" Header="{Binding COM_SID_PAUSE, Source={StaticResource LocalizationSource}}" Command="{Binding PlayOrPause}" CommandParameter="{Binding SelectedFile}">
+                        <MenuItem.Style>
+                            <Style TargetType="{x:Type MenuItem}">
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ContentType}" Value="Video" />
+                                            <Condition Binding="{Binding MediaElementState}" Value="Pause" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ContentType}" Value="Video" />
+                                            <Condition Binding="{Binding MediaElementState}" Value="Stop" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ContentType}" Value="Video" />
+                                            <Condition Binding="{Binding MediaElementState}" Value="Default" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ContentType}" Value="Video" />
+                                            <Condition Binding="{Binding MediaElementState}" Value="Stop" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ContentType}" Value="Video" />
+                                            <Condition Binding="{Binding MediaElementState}" Value="Close" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <DataTrigger Binding="{Binding ContentType}" Value="Image">
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                    <MenuItem Name="_playMenuItem" Header="{Binding COM_SID_PLAY, Source={StaticResource LocalizationSource}}" Command="{Binding PlayOrPause}" CommandParameter="{Binding SelectedFile}">
+                        <MenuItem.Style>
+                            <Style TargetType="{x:Type MenuItem}">
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ContentType}" Value="Video" />
+                                            <Condition Binding="{Binding MediaElementState}" Value="Play" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                    <DataTrigger Binding="{Binding ContentType}" Value="Image">
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                    <MenuItem Header="{Binding MAPP_SID_ADD_TO_QUEUE, Source={StaticResource LocalizationSource}}" Command="{Binding AddToQl}" CommandParameter="{Binding SelectedFile}" />
+                    <MenuItem Header="{Binding MAPP_SID_PLAY_ON_TV, Source={StaticResource LocalizationSource}}" Command="{Binding PlayOnTv}" CommandParameter="{Binding SelectedFile}" />
+                </ContextMenu>
+            </controls:MediaPlayerExt.ContextMenu>
+            <controls:MediaPlayerExt.BottomBar>
+                <Grid>
+                    <ListBox Name="_photoListBox" Grid.Row="1" Height="150" Grid.ColumnSpan="2" ItemContainerStyle="{DynamicResource PhotoListBoxItemStyle}" Style="{StaticResource PhotoListBoxStyle}" SelectionMode="Single" AllowDrop="True" ItemsSource="{Binding Files}" SelectedItem="{Binding SelectedFile}" ManipulationBoundaryFeedback="_photoListBox_ManipulationBoundaryFeedback">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal" Focusable="False" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image Height="150" Width="150" Stretch="UniformToFill" AllowDrop="True" Source="{Binding Preview}">
+                                    <Interaction.Behaviors>
+                                        <b:ImageMouseRightButtonClickBehavior />
+                                        <b:ItemsControlMoveItemBehavior DragDropEffect="Copy" />
+                                    </Interaction.Behaviors>
+                                </Image>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <Interaction.Behaviors>
+                            <b:ListBoxSelectedItemScrollBehavior />
+                        </Interaction.Behaviors>
+                    </ListBox>
+                    <Grid Name="_musicVideoStackPanel" Background="#FF101620" Height="60">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <DockPanel Name="_musicTitleStackPanel" Grid.Row="0" Margin="18 2">
+                                <TextBlock DockPanel.Dock="Left" Style="{StaticResource WhiteTextBlockStyle}" TextTrimming="CharacterEllipsis" TextBlock.FontSize="16pt" Text="{Binding SelectedFile.Name}" />
+                                <TextBlock TextTrimming="CharacterEllipsis" Style="{StaticResource WhiteTextBlockStyle}" TextBlock.FontSize="16pt" Text="{Binding SelectedFile.Artist.Name, StringFormat= - {0}}" />
+                            </DockPanel>
+                            <DockPanel VerticalAlignment="Center" Margin="18 2" HorizontalAlignment="Left" Grid.Row="1">
+                                <TextBlock DockPanel.Dock="Left" Style="{StaticResource BlueTextBlockStyle}" TextTrimming="CharacterEllipsis" TextBlock.FontSize="16pt" Visibility="{Binding HasDuration, Converter={StaticResource _visibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type controls:MediaPlayerExt}}}" Text="{Binding Position, RelativeSource={RelativeSource AncestorType={x:Type controls:MediaPlayerExt}}, Converter={StaticResource _timeConverter}}" />
+                                <TextBlock Style="{StaticResource WhiteTextBlockStyle}" TextTrimming="CharacterEllipsis" TextBlock.FontSize="16pt" Visibility="{Binding HasDuration, Converter={StaticResource _visibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type controls:MediaPlayerExt}}}" Text="{Binding Duration, RelativeSource={RelativeSource AncestorType={x:Type controls:MediaPlayerExt}}, Converter={StaticResource _timeConverter}, StringFormat= / {0}}" />
+                            </DockPanel>
+                        </Grid>
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Button Height="42" Width="58" Style="{StaticResource MediaPlayerFastRewindButtonStyle}" Margin="9" Command="{Binding GetPreviousFile}" />
+                            <Button Height="42" Width="58" Margin="9" Command="{Binding Play}">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MediaPlayerPlayButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Default">
+                                                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Play">
+                                                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Stop">
+                                                <Setter Property="UIElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Pause">
+                                                <Setter Property="UIElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Height="42" Width="58" Margin="9" Command="{Binding Pause}">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MediaPlayerPauseButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Default">
+                                                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Play">
+                                                <Setter Property="UIElement.Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Stop">
+                                                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding MediaElementState}" Value="Pause">
+                                                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Height="42" Width="58" Style="{StaticResource MediaPlayerFastForwardButtonStyle}" Margin="9" Command="{Binding GetNextFile}" />
+                        </StackPanel>
+                        <Grid Grid.Column="2" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="{StaticResource VolumeOnImage}" Height="28" Margin="9 7" />
+                                <Slider Minimum="0" Maximum="1" Width="170" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource VolumeSliderStyle}" IsMoveToPointEnabled="True" Value="{Binding Volume, Mode=TwoWay}" />
+                            </StackPanel>
+                            <StackPanel Name="_musicButtonsStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5 0">
+                                <ToggleButton Style="{StaticResource RandomToggleButtonStyle}" Width="58" Height="42" Margin="3 9" Command="{Binding RandomFile}" IsChecked="{Binding IsRandom}" />
+                                <CheckBox IsThreeState="True" Style="{StaticResource RepeatChekBoxStyle}" Width="58" Height="42" Margin="3 9" IsChecked="{Binding IsRepeat}" />
+                            </StackPanel>
+                            <Button Name="_fullScreenButton" Grid.Column="2" Height="42" Width="58" Margin="3 9 25 9" Click="_fullScreenButton_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource FullScreenButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsVideoOrImage}" Value="False">
+                                                <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsFullScreen, ElementName=_mediaElement, Mode=OneWay}" Value="True">
+                                                <Setter Property="ContentControl.Content">
+                                                    <Setter.Value>
+                                                        <Image Source="{StaticResource ExitFullScreenImage}" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </controls:MediaPlayerExt.BottomBar>
+            <controls:MediaPlayerExt.ImageLeftContent>
+                <Grid>
+                    <Button Name="_photoPreviousButton" Command="{Binding GetPreviousFile}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource PreviousOpacityButtonStyle}">
+                                <Style.Triggers>
+                                    <Trigger Property="UIElement.IsMouseOver" Value="False">
+                                        <Setter Property="UIElement.Opacity" Value="0" />
+                                    </Trigger>
+                                    <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                        <Setter Property="UIElement.Opacity" Value="0.5" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </controls:MediaPlayerExt.ImageLeftContent>
+            <controls:MediaPlayerExt.ImageRightContent>
+                <Grid>
+                    <Button Name="_photoNextButton" Visibility="Hidden" Command="{Binding GetNextFile}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NextOpacityButtonStyle}">
+                                <Style.Triggers>
+                                    <Trigger Property="UIElement.IsMouseOver" Value="False">
+                                        <Setter Property="UIElement.Opacity" Value="0" />
+                                    </Trigger>
+                                    <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                        <Setter Property="UIElement.Opacity" Value="0.5" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </controls:MediaPlayerExt.ImageRightContent>
+            <Grid Name="_content">
+                <ListView Name="_musicListBox" Style="{StaticResource TrackListViewStyle}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource CustomItemContainerStyle}" AllowDrop="True" SelectionMode="Single" ItemsSource="{Binding Files}" SelectedItem="{Binding SelectedFile}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource CustomColumnHeaderStyle}">
+                            <GridViewColumn Width="145">
+                                <GridViewColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Visibility="Hidden" Text="{Binding COM_SID_PREVIEW, Source={StaticResource LocalizationSource}}" />
+                                    </DataTemplate>
+                                </GridViewColumn.HeaderTemplate>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Name="_border" Margin="29,4,0,4">
+                                            <Image Width="70" Height="70" Source="{Binding Preview}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="444">
+                                <GridViewColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <ToggleButton Style="{StaticResource TrackByNameToggleButtonStyle}" IsChecked="{Binding DataContext.SortByTitle, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                                    </DataTemplate>
+                                </GridViewColumn.HeaderTemplate>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="-2,0,0,0" Style="{StaticResource MusicListGridViewCellTextBlockStyle}" Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="260" HeaderContainerStyle="{StaticResource MusicListViewHeaderStyle}" Header="{Binding COM_SID_ARTIST_TITLE, Source={StaticResource LocalizationSource}}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <TextBlock Style="{StaticResource MusicListGridViewCellTextBlockStyle}" Text="{Binding Artist.Name}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="260" HeaderContainerStyle="{StaticResource MusicListViewHeaderStyle}" Header="{Binding COM_SID_ALBUM_TITLE, Source={StaticResource LocalizationSource}}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <TextBlock Style="{StaticResource MusicListGridViewCellTextBlockStyle}" Text="{Binding Album.Name}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="143" HeaderContainerStyle="{StaticResource MusicListViewHeaderStyle}" Header="{Binding COM_SID_TIME, Source={StaticResource LocalizationSource}}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <TextBlock Style="{StaticResource MusicListGridViewCellTextBlockStyle}" Text="{Binding Duration, Converter={StaticResource timeSpanConverter}}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                    <Interaction.Behaviors>
+                        <b:ListBoxSelectedItemScrollBehavior />
+                        <b:ListBoxDisableChangeSelectionBehavior />
+                    </Interaction.Behaviors>
+                </ListView>
+                <Border HorizontalAlignment="Stretch" Height="60" VerticalAlignment="Top" Background="#88000000">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsFullScreen, RelativeSource={RelativeSource AncestorType={x:Type controls:MediaPlayerExt}}}" Value="True">
+                                    <Setter Property="UIElement.Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Grid>
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Style="{StaticResource WhiteTextBlockStyle}" TextTrimming="CharacterEllipsis" TextBlock.FontSize="16" Text="{Binding SelectedFile.Name}" />
+                            <TextBlock TextTrimming="CharacterEllipsis" Style="{StaticResource WhiteTextBlockStyle}" TextBlock.FontSize="16" Text="{Binding SelectedFile.Artist.Name, StringFormat= - {0}}" />
+                        </DockPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource CustomButtonStyle}" Padding="10 3" Margin="5 15" Content="{Binding MAPP_SID_ADD_TO_QUEUE, Source={StaticResource LocalizationSource}}" Command="{Binding AddToQl}" CommandParameter="{Binding SelectedFile}" />
+                            <Button Style="{StaticResource CustomButtonStyle}" Padding="10 3" Margin="5 15" Content="{Binding MAPP_SID_PLAY_ON_TV, Source={StaticResource LocalizationSource}}" Command="{Binding PlayOnTv}" CommandParameter="{Binding SelectedFile}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </controls:MediaPlayerExt>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState Name="Image">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"  Storyboard.TargetName="_musicListBox">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"  Storyboard.TargetName="_musicVideoStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"  Storyboard.TargetName="_musicButtonsStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"  Storyboard.TargetName="_musicTitleStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"  Storyboard.TargetName="_photoPreviousButton">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"  Storyboard.TargetName="_photoNextButton">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_contextMenuMediaElement">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState Name="Track">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicListBox">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicVideoStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicButtonsStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicTitleStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_photoPreviousButton">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_photoNextButton">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_contextMenuMediaElement">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState Name="Video">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicListBox">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicVideoStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicButtonsStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_musicTitleStackPanel">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_photoPreviousButton">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_photoNextButton">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.TargetName="_contextMenuMediaElement">
+
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</UserControl>

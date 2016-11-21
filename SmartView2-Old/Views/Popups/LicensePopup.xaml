@@ -1,0 +1,41 @@
+<UserControl x:Class="SmartView2.Views.Popups.LicensePopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:SmartView2.Controls"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="714" Height="448">
+  <Grid>
+    <Border BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="5">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0" Background="{StaticResource HeaderBackgroundBrush}">
+          <TextBlock HorizontalAlignment="Left" Style="{StaticResource WindowHeaderStyle}"
+                     Text="{Binding COM_SID_OPEN_SOURCE_LICENSE, Source={StaticResource LocalizationSource}}"/>
+          <Button Grid.Column="1" IsCancel="true" HorizontalAlignment="Right"
+                  Style="{StaticResource HeaderCloseButton}" Margin="0 0 0 5" Command="{Binding CloseCommand}"/>
+        </Grid>
+        <Grid Row="1" Background="{StaticResource LightBackgroundBrush}">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <Grid DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+              <controls:BindableRichTextBox Background="Transparent" IsReadOnly="true" Foreground="White" Document="{Binding LicenseDocument}"/>
+            </Grid>
+          </ScrollViewer>
+          <Grid Row="1" Background="{StaticResource LightPopupBackgroundBrush}">
+            <Button HorizontalAlignment="Center" Width="140" Height="40" IsDefault="true" Margin="15"
+                    Style="{StaticResource TheMostCommonButtonStyle}"
+                    Content="{Binding COM_SID_CLOSE, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding CloseCommand}"/>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

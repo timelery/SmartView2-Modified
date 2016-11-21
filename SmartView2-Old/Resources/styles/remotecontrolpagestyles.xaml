@@ -1,0 +1,1678 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <BitmapImage x:Key="RemoteControlBackgroundImage" UriSource="/Resources/Images/RC_metal_plate.png" />
+  <BitmapImage x:Key="BackRemoteControlBackgroundImage" UriSource="/Resources/Images/RC_bg.png" />
+  <BitmapImage x:Key="RemoteControlHeaderBackgroundImage" UriSource="/Resources/Images/RC_top_panel.png" />
+  <BitmapImage x:Key="PowerImage" UriSource="/Resources/Images/RC_power_btn_normal.png" />
+  <BitmapImage x:Key="PowerPressedImage" UriSource="/Resources/Images/RC_power_btn_pressed.png" />
+  <BitmapImage x:Key="PowerOverImage" UriSource="/Resources/Images/RC_power_btn_hover.png" />
+  <BitmapImage x:Key="MuteImage" UriSource="/Resources/Images/RC_mute_btn_normal.png" />
+  <BitmapImage x:Key="MutePressedImage" UriSource="/Resources/Images/RC_mute_btn_pressed.png" />
+  <BitmapImage x:Key="MuteOverImage" UriSource="/Resources/Images/RC_mute_btn_hover.png" />
+  <BitmapImage x:Key="VolUpImage" UriSource="/Resources/Images/RC_round_btn_plus_normal.png" />
+  <BitmapImage x:Key="VolUpPressedImage" UriSource="/Resources/Images/RC_round_btn_plus_pressed.png" />
+  <BitmapImage x:Key="VolUpOverImage" UriSource="/Resources/Images/RC_round_btn_plus_hover.png" />
+  <BitmapImage x:Key="VolDownImage" UriSource="/Resources/Images/RC_round_btn_minus_normal.png" />
+  <BitmapImage x:Key="VolDownPressedImage" UriSource="/Resources/Images/RC_round_btn_minus_pressed.png" />
+  <BitmapImage x:Key="VolDownOverImage" UriSource="/Resources/Images/RC_round_btn_minus_hover.png" />
+  <BitmapImage x:Key="ChUpImage" UriSource="/Resources/Images/RC_round_btn_up_normal.png" />
+  <BitmapImage x:Key="ChUpPressedImage" UriSource="/Resources/Images/RC_round_btn_up_pressed.png" />
+  <BitmapImage x:Key="ChUpOverImage" UriSource="/Resources/Images/RC_round_btn_up_hover.png" />
+  <BitmapImage x:Key="ChDownImage" UriSource="/Resources/Images/RC_round_btn_down_normal.png" />
+  <BitmapImage x:Key="ChDownPressedImage" UriSource="/Resources/Images/RC_round_btn_down_pressed.png" />
+  <BitmapImage x:Key="ChDownOverImage" UriSource="/Resources/Images/RC_round_btn_down_hover.png" />
+  <BitmapImage x:Key="NumOneImage" UriSource="/Resources/Images/RC_btn_1_normal.png" />
+  <BitmapImage x:Key="NumOnePressedImage" UriSource="/Resources/Images/RC_btn_1_pressed.png" />
+  <BitmapImage x:Key="NumOneOverImage" UriSource="/Resources/Images/RC_btn_1_hover.png" />
+  <BitmapImage x:Key="NumTwoImage" UriSource="/Resources/Images/RC_btn_2_normal.png" />
+  <BitmapImage x:Key="NumTwoPressedImage" UriSource="/Resources/Images/RC_btn_2_pressed.png" />
+  <BitmapImage x:Key="NumTwoOverImage" UriSource="/Resources/Images/RC_btn_2_hover.png" />
+  <BitmapImage x:Key="NumThreeImage" UriSource="/Resources/Images/RC_btn_3_normal.png" />
+  <BitmapImage x:Key="NumThreePressedImage" UriSource="/Resources/Images/RC_btn_3_pressed.png" />
+  <BitmapImage x:Key="NumThreeOverImage" UriSource="/Resources/Images/RC_btn_3_hover.png" />
+  <BitmapImage x:Key="NumFourImage" UriSource="/Resources/Images/RC_btn_4_normal.png" />
+  <BitmapImage x:Key="NumFourPressedImage" UriSource="/Resources/Images/RC_btn_4_pressed.png" />
+  <BitmapImage x:Key="NumFourOverImage" UriSource="/Resources/Images/RC_btn_4_hover.png" />
+  <BitmapImage x:Key="NumFiveImage" UriSource="/Resources/Images/RC_btn_5_normal.png" />
+  <BitmapImage x:Key="NumFivePressedImage" UriSource="/Resources/Images/RC_btn_5_pressed.png" />
+  <BitmapImage x:Key="NumFiveOverImage" UriSource="/Resources/Images/RC_btn_5_hover.png" />
+  <BitmapImage x:Key="NumSixImage" UriSource="/Resources/Images/RC_btn_6_normal.png" />
+  <BitmapImage x:Key="NumSixPressedImage" UriSource="/Resources/Images/RC_btn_6_pressed.png" />
+  <BitmapImage x:Key="NumSixOverImage" UriSource="/Resources/Images/RC_btn_6_hover.png" />
+  <BitmapImage x:Key="NumSevenImage" UriSource="/Resources/Images/RC_btn_7_normal.png" />
+  <BitmapImage x:Key="NumSevenPressedImage" UriSource="/Resources/Images/RC_btn_7_pressed.png" />
+  <BitmapImage x:Key="NumSevenOverImage" UriSource="/Resources/Images/RC_btn_7_hover.png" />
+  <BitmapImage x:Key="NumEightImage" UriSource="/Resources/Images/RC_btn_8_normal.png" />
+  <BitmapImage x:Key="NumEightPressedImage" UriSource="/Resources/Images/RC_btn_8_pressed.png" />
+  <BitmapImage x:Key="NumEightOverImage" UriSource="/Resources/Images/RC_btn_8_hover.png" />
+  <BitmapImage x:Key="NumNineImage" UriSource="/Resources/Images/RC_btn_9_normal.png" />
+  <BitmapImage x:Key="NumNinePressedImage" UriSource="/Resources/Images/RC_btn_9_pressed.png" />
+  <BitmapImage x:Key="NumNineOverImage" UriSource="/Resources/Images/RC_btn_9_hover.png" />
+  <BitmapImage x:Key="NumZeroImage" UriSource="/Resources/Images/RC_btn_0_normal.png" />
+  <BitmapImage x:Key="NumZeroPressedImage" UriSource="/Resources/Images/RC_btn_0_pressed.png" />
+  <BitmapImage x:Key="NumZeroOverImage" UriSource="/Resources/Images/RC_btn_0_hover.png" />
+  <BitmapImage x:Key="MinusImage" UriSource="/Resources/Images/RC_btn_minus_normal.png" />
+  <BitmapImage x:Key="MinusPressedImage" UriSource="/Resources/Images/RC_btn_minus_pressed.png" />
+  <BitmapImage x:Key="MinusOverImage" UriSource="/Resources/Images/RC_btn_minus_hover.png" />
+  <BitmapImage x:Key="PreChImage" UriSource="/Resources/Images/RC_btn_preCH_normal.png" />
+  <BitmapImage x:Key="PreChPressedImage" UriSource="/Resources/Images/RC_btn_preCH_pressed.png" />
+  <BitmapImage x:Key="PreChOverImage" UriSource="/Resources/Images/RC_btn_preCH_hover.png" />
+  <BitmapImage x:Key="RecImage" UriSource="/Resources/Images/RC_btn_rec_normal.png" />
+  <BitmapImage x:Key="RecPressedImage" UriSource="/Resources/Images/RC_btn_rec_pressed.png" />
+  <BitmapImage x:Key="RecOverImage" UriSource="/Resources/Images/RC_btn_rec_hover.png" />
+  <BitmapImage x:Key="PauseImage" UriSource="/Resources/Images/RC_btn_pause_normal.png" />
+  <BitmapImage x:Key="PausePressedImage" UriSource="/Resources/Images/RC_btn_pause_pressed.png" />
+  <BitmapImage x:Key="PauseOverImage" UriSource="/Resources/Images/RC_btn_pause_hover.png" />
+  <BitmapImage x:Key="PlayImage" UriSource="/Resources/Images/RC_btn_play_normal.png" />
+  <BitmapImage x:Key="PlayPressedImage" UriSource="/Resources/Images/RC_btn_play_pressed.png" />
+  <BitmapImage x:Key="PlayOverImage" UriSource="/Resources/Images/RC_btn_play_hover.png" />
+  <BitmapImage x:Key="StopImage" UriSource="/Resources/Images/RC_btn_stop_normal.png" />
+  <BitmapImage x:Key="StopPressedImage" UriSource="/Resources/Images/RC_btn_stop_pressed.png" />
+  <BitmapImage x:Key="StopOverImage" UriSource="/Resources/Images/RC_btn_stop_hover.png" />
+  <BitmapImage x:Key="KeypadImage" UriSource="/Resources/Images/RC_btn_keyboard_normal.png" />
+  <BitmapImage x:Key="KeypadPressedImage" UriSource="/Resources/Images/RC_btn_keyboard_pressed.png" />
+  <BitmapImage x:Key="KeypadOverImage" UriSource="/Resources/Images/RC_btn_keyboard_hover.png" />
+  <BitmapImage x:Key="BackImage" UriSource="/Resources/Images/RC_btn_return_normal.png" />
+  <BitmapImage x:Key="BackPressedImage" UriSource="/Resources/Images/RC_btn_return_pressed.png" />
+  <BitmapImage x:Key="BackOverImage" UriSource="/Resources/Images/RC_btn_return_hover.png" />
+  <BitmapImage x:Key="ExitImage" UriSource="/Resources/Images/RC_btn_exit_normal.png" />
+  <BitmapImage x:Key="ExitPressedImage" UriSource="/Resources/Images/RC_btn_exit_pressed.png" />
+  <BitmapImage x:Key="ExitOverImage" UriSource="/Resources/Images/RC_btn_exit_hover.png" />
+  <BitmapImage x:Key="AImage" UriSource="/Resources/Images/RC_btn_a_normal.png" />
+  <BitmapImage x:Key="APressedImage" UriSource="/Resources/Images/RC_btn_a_pressed.png" />
+  <BitmapImage x:Key="AOverImage" UriSource="/Resources/Images/RC_btn_a_hover.png" />
+  <BitmapImage x:Key="BImage" UriSource="/Resources/Images/RC_btn_b_normal.png" />
+  <BitmapImage x:Key="BPressedImage" UriSource="/Resources/Images/RC_btn_b_pressed.png" />
+  <BitmapImage x:Key="BOverImage" UriSource="/Resources/Images/RC_btn_b_hover.png" />
+  <BitmapImage x:Key="CImage" UriSource="/Resources/Images/RC_btn_c_normal.png" />
+  <BitmapImage x:Key="CPressedImage" UriSource="/Resources/Images/RC_btn_c_pressed.png" />
+  <BitmapImage x:Key="COverImage" UriSource="/Resources/Images/RC_btn_c_hover.png" />
+  <BitmapImage x:Key="DImage" UriSource="/Resources/Images/RC_btn_d_normal.png" />
+  <BitmapImage x:Key="DPressedImage" UriSource="/Resources/Images/RC_btn_d_pressed.png" />
+  <BitmapImage x:Key="DOverImage" UriSource="/Resources/Images/RC_btn_d_hover.png" />
+  <BitmapImage x:Key="FirstImage" UriSource="/Resources/Images/RC_btn_first_normal.png" />
+  <BitmapImage x:Key="FirstPressedImage" UriSource="/Resources/Images/RC_btn_first_pressed.png" />
+  <BitmapImage x:Key="FirstOverImage" UriSource="/Resources/Images/RC_btn_first_hover.png" />
+  <BitmapImage x:Key="PreviousImage" UriSource="/Resources/Images/RC_btn_previous_normal.png" />
+  <BitmapImage x:Key="PreviousPressedImage" UriSource="/Resources/Images/RC_btn_previous_pressed.png" />
+  <BitmapImage x:Key="PreviousOverImage" UriSource="/Resources/Images/RC_btn_previous_hover.png" />
+  <BitmapImage x:Key="NextImage" UriSource="/Resources/Images/RC_btn_next_normal.png" />
+  <BitmapImage x:Key="NextPressedImage" UriSource="/Resources/Images/RC_btn_next_pressed.png" />
+  <BitmapImage x:Key="NextOverImage" UriSource="/Resources/Images/RC_btn_next_hover.png" />
+  <BitmapImage x:Key="LastImage" UriSource="/Resources/Images/RC_btn_last_normal.png" />
+  <BitmapImage x:Key="LastPressedImage" UriSource="/Resources/Images/RC_btn_last_pressed.png" />
+  <BitmapImage x:Key="LastOverImage" UriSource="/Resources/Images/RC_btn_last_hover.png" />
+  <BitmapImage x:Key="SmartHubImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="SmartHubPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="SmartHubOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="SmartHubWideImage" UriSource="/Resources/Images/RC_HDMI_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="SmartHubWidePressedImage" UriSource="/Resources/Images/RC_HDMI_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="SmartHubWideOverImage" UriSource="/Resources/Images/RC_HDMI_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="MenuImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="MenuPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="MenuOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="SearchImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="SearchPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="SearchOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="ChListImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="ChListPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="ChListOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="GuideImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="GuidePressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="GuideOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="InfoImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="InfoPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="InfoOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="ToolsImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="ToolsPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="ToolsOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="StdMenuImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="StbMenuPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="StbMenuOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="DiscMenuImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="DiscMenuPressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="DiscMenuOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="SubTitleImage" UriSource="/Resources/Images/RC_rectangle_btn_normal.png" />
+  <BitmapImage x:Key="SubTitlePressedImage" UriSource="/Resources/Images/RC_rectangle_btn_pressed.png" />
+  <BitmapImage x:Key="SubTitleOverImage" UriSource="/Resources/Images/RC_rectangle_btn_hover.png" />
+  <BitmapImage x:Key="EnterImage" UriSource="/Resources/Images/RC_enter_but_normal.png" />
+  <BitmapImage x:Key="EnterPressedImage" UriSource="/Resources/Images/RC_enter_but_pressed.png" />
+  <BitmapImage x:Key="EnterOverImage" UriSource="/Resources/Images/RC_enter_but_hover.png" />
+  <BitmapImage x:Key="UpImage" UriSource="/Resources/Images/RC_nav_top_normal.png" />
+  <BitmapImage x:Key="UpPressedImage" UriSource="/Resources/Images/RC_nav_top_pressed.png" />
+  <BitmapImage x:Key="UpOverImage" UriSource="/Resources/Images/RC_nav_top_hover.png" />
+  <BitmapImage x:Key="DownImage" UriSource="/Resources/Images/RC_nav_bottom_normal.png" />
+  <BitmapImage x:Key="DownPressedImage" UriSource="/Resources/Images/RC_nav_bottom_pressed.png" />
+  <BitmapImage x:Key="DownOverImage" UriSource="/Resources/Images/RC_nav_bottom_hover.png" />
+  <BitmapImage x:Key="LeftImage" UriSource="/Resources/Images/RC_nav_left_normal.png" />
+  <BitmapImage x:Key="LeftPressedImage" UriSource="/Resources/Images/RC_nav_left_pressed.png" />
+  <BitmapImage x:Key="LeftOverImage" UriSource="/Resources/Images/RC_nav_left_hover.png" />
+  <BitmapImage x:Key="RightImage" UriSource="/Resources/Images/RC_nav_right_normal.png" />
+  <BitmapImage x:Key="RightPressedImage" UriSource="/Resources/Images/RC_nav_right_pressed.png" />
+  <BitmapImage x:Key="RightOverImage" UriSource="/Resources/Images/RC_nav_right_hover.png" />
+  <BitmapImage x:Key="SourceListBackgroundImage" UriSource="/Resources/Images/RC_source_ar_down_normal.png" />
+  <BitmapImage x:Key="SourceListBackgroundPressedImage" UriSource="/Resources/Images/RC_source_ar_down_pressed.png" />
+  <BitmapImage x:Key="SourceListBackgroundOverImage" UriSource="/Resources/Images/RC_source_ar_down_hover.png" />
+  <BitmapImage x:Key="SourceListOpenBackgroundImage" UriSource="/Resources/Images/RC_source_ar_up_normal.png" />
+  <BitmapImage x:Key="SourceListOpenBackgroundPressedImage" UriSource="/Resources/Images/RC_source_ar_up_pressed.png" />
+  <BitmapImage x:Key="SourceListOpenBackgroundOverImage" UriSource="/Resources/Images/RC_source_ar_up_hover.png" />
+  <BitmapImage x:Key="RadioImage" UriSource="/Resources/Images/RC_radio_normal.png" />
+  <BitmapImage x:Key="RadioCheckedImage" UriSource="/Resources/Images/RC_radio_checked.png" />
+  <Style x:Key="RemoteControlBodyGrid" TargetType="{x:Type Grid}">
+    <Setter Property="FrameworkElement.Margin" Value="10" />
+  </Style>
+  <Style x:Key="PowerButton" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource PowerImage}" />
+            </Grid.Background>
+            <TextBlock Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-10,0" TextBlock.Foreground="#FFD3D3D3" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PowerOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PowerPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Top" />
+  </Style>
+  <Style x:Key="RemoteControlMuteButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource MuteImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource MuteOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource MutePressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="75" />
+    <Setter Property="FrameworkElement.Height" Value="75" />
+  </Style>
+  <Style x:Key="RemoteControlVolUpButtonStyle" TargetType="{x:Type RepeatButton}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RepeatButton}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource VolUpImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource VolUpOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource VolUpPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="95" />
+    <Setter Property="FrameworkElement.Height" Value="95" />
+  </Style>
+  <Style x:Key="RemoteControlVolDownButtonStyle" TargetType="{x:Type RepeatButton}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RepeatButton}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource VolDownImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource VolDownOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource VolDownPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="95" />
+    <Setter Property="FrameworkElement.Height" Value="95" />
+  </Style>
+  <Style x:Key="RemoteControlChUpButtonStyle" TargetType="{x:Type RepeatButton}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RepeatButton}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource ChUpImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource ChUpOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource ChUpPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="95" />
+    <Setter Property="FrameworkElement.Height" Value="95" />
+  </Style>
+  <Style x:Key="RemoteControlChDownButtonStyle" TargetType="{x:Type RepeatButton}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RepeatButton}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource ChDownImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource ChDownOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource ChDownPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="95" />
+    <Setter Property="FrameworkElement.Height" Value="95" />
+  </Style>
+  <Style x:Key="RemoteControlNumOneButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumOneImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumOneOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumOnePressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumTwoButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumTwoImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumTwoOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumTwoPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumThreeButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumThreeImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumThreeOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumThreePressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumFourButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumFourImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumFourOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumFourPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumFiveButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumFiveImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumFiveOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumFivePressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumSixButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumSixImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumSixOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumSixPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumSevenButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumSevenImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumSevenOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumSevenPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumEightButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumEightImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumEightOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumEightPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumNineButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumNineImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumNineOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumNinePressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNumZeroButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NumZeroImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumZeroOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NumZeroPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlMinusButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource MinusImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource MinusOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource MinusPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlPreChButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource PreChImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PreChOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PreChPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlRecButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource RecImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource RecOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource RecPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlPauseButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource PauseImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PauseOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PausePressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlPlayButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource PlayImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PlayOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PlayPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlStopButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource StopImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource StopOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource StopPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlKeypadButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource KeypadImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource KeypadOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource KeypadPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlBackButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource BackImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource BackOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource BackPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlExitButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource ExitImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource ExitOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource ExitPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlAButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource AImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource AOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource APressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlBButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource BImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource BOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource BPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlCButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource CImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource COverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource CPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlDButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource DImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource DOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource DPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlFirstButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource FirstImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource FirstOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource FirstPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlPreviousButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource PreviousImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PreviousOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource PreviousPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlNextButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource NextImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NextOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource NextPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlLastButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource LastImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource LastOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource LastPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlStandartButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource SmartHubImage}" />
+            </Grid.Background>
+            <TextBlock Name="textBlockName" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource SmartHubOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource SmartHubPressedImage}" />
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="textBlockName" Value="{StaticResource TextBlock.Selected.ForegroundBrush}" Property="TextBlock.Foreground" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Width" Value="160" />
+    <Setter Property="FrameworkElement.Height" Value="55" />
+  </Style>
+  <Style x:Key="RemoteControlWideButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource SmartHubWideImage}" />
+            </Grid.Background>
+            <TextBlock Name="textBlockName" Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16" TextBlock.FontWeight="Bold" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource SmartHubWideOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource SmartHubWidePressedImage}" />
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="textBlockName" Value="{StaticResource TextBlock.Selected.ForegroundBrush}" Property="TextBlock.Foreground" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Width" Value="338" />
+    <Setter Property="FrameworkElement.Height" Value="55" />
+  </Style>
+  <Style x:Key="RemoteControlEnterButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource EnterImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource EnterOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource EnterPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlUpButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource UpImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource UpOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource UpPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlDownButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource DownImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource DownOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource DownPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlLeftButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource LeftImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource LeftOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource LeftPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="RemoteControlRightButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid Name="gridName">
+            <Grid.Background>
+              <ImageBrush ImageSource="{StaticResource RightImage}" />
+            </Grid.Background>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource RightOverImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="gridName" Property="Panel.Background">
+                <Setter.Value>
+                  <ImageBrush ImageSource="{StaticResource RightPressedImage}" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Width" Value="70" />
+    <Setter Property="FrameworkElement.Height" Value="70" />
+  </Style>
+  <Style x:Key="ComboBoxFocusVisual">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Rectangle Margin="4,4,21,4" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <ImageBrush x:Key="ButtonNormalBackground" ImageSource="{StaticResource SourceListBackgroundImage}" />
+  <ImageBrush x:Key="ButtonPressedBackground" ImageSource="{StaticResource SourceListBackgroundPressedImage}" />
+  <ImageBrush x:Key="ButtonOverBackground" ImageSource="{StaticResource SourceListBackgroundOverImage}" />
+  <ImageBrush x:Key="ButtonOpenNormalBackground" ImageSource="{StaticResource SourceListOpenBackgroundImage}" />
+  <ImageBrush x:Key="ButtonOpenPressedBackground" ImageSource="{StaticResource SourceListOpenBackgroundPressedImage}" />
+  <ImageBrush x:Key="ButtonOpenOverBackground" ImageSource="{StaticResource SourceListOpenBackgroundOverImage}" />
+  <Style x:Key="ComboBoxReadonlyToggleButton" TargetType="{x:Type ToggleButton}">
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="Control.IsTabStop" Value="False" />
+    <Setter Property="UIElement.Focusable" Value="False" />
+    <Setter Property="ButtonBase.ClickMode" Value="Press" />
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Name="Chrome" BorderBrush="{TemplateBinding Control.BorderBrush}" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+            <ContentPresenter />
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+    <GradientStop Color="#ABADB3" Offset="0.05" />
+    <GradientStop Color="#E2E3EA" Offset="0.07" />
+    <GradientStop Color="#E3E9EF" Offset="1" />
+  </LinearGradientBrush>
+  <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="Control.IsTabStop" Value="False" />
+    <Setter Property="UIElement.Focusable" Value="False" />
+    <Setter Property="ButtonBase.ClickMode" Value="Press" />
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Name="Chrome" BorderBrush="{TemplateBinding Control.BorderBrush}" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="RemoteControlComboBoxStyle" TargetType="{x:Type ComboBox}">
+    <Setter Property="FrameworkElement.Width" Value="200" />
+    <Setter Property="FrameworkElement.Height" Value="50" />
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{StaticResource ComboBoxFocusVisual}" />
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Background" Value="{StaticResource ButtonNormalBackground}" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="Control.Padding" Value="15,0" />
+    <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+    <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ComboBox}">
+          <Grid Name="MainGrid" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0" />
+            </Grid.ColumnDefinitions>
+            <Popup Name="PART_Popup" AllowsTransparency="True" Grid.ColumnSpan="2" Margin="1" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+              <Border Name="Shdw" Background="#00FFFFFF" MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=MainGrid}">
+                <Border Name="DropDownBorder" CornerRadius="4" BorderBrush="#FF646464" BorderThickness="2" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                  <ScrollViewer Name="DropDownScrollViewer" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <Grid RenderOptions.ClearTypeHint="Enabled">
+                      <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                    </Grid>
+                  </ScrollViewer>
+                </Border>
+              </Border>
+            </Popup>
+            <ToggleButton Name="_toggleButton" BorderBrush="{TemplateBinding Control.BorderBrush}" Background="{TemplateBinding Control.Background}" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxReadonlyToggleButton}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+            <ContentPresenter ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemsControl.ItemTemplateSelector}" Content="{TemplateBinding ComboBox.SelectionBoxItem}" ContentStringFormat="{TemplateBinding ComboBox.SelectionBoxItemStringFormat}" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" IsHitTestVisible="False" Margin="{TemplateBinding Control.Padding}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Selector.SelectedIndex" Value="-1">
+              <Setter TargetName="_toggleButton" Value="{Binding Tag, RelativeSource={RelativeSource AncestorType=ComboBox}}" Property="ContentControl.Content" />
+            </Trigger>
+            <Trigger SourceName="PART_Popup" Property="Popup.HasDropShadow" Value="True">
+              <Setter TargetName="Shdw" Property="FrameworkElement.Margin" Value="0,0,5,5" />
+            </Trigger>
+            <Trigger Property="ItemsControl.HasItems" Value="False">
+              <Setter TargetName="DropDownBorder" Property="FrameworkElement.Height" Value="95" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter Value="{StaticResource ButtonOverBackground}" Property="Control.Background" />
+            </Trigger>
+            <Trigger SourceName="PART_Popup" Property="Popup.IsOpen" Value="True">
+              <Setter Value="{StaticResource ButtonOpenPressedBackground}" Property="Control.Background" />
+              <Setter Property="Control.Foreground" Value="#FFBCCEFF" />
+            </Trigger>
+            <Trigger Property="ItemsControl.IsGrouping" Value="True">
+              <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="RemoteControlComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
+    <Setter Property="Control.HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+    <Setter Property="Control.VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+    <Setter Property="Control.Background" Value="#FF535353" />
+    <Setter Property="Control.BorderBrush" Value="#FF434242" />
+    <Setter Property="Control.Foreground" Value="#FFCCCCCC" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+          <Border Name="Bd" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Padding="{TemplateBinding Control.Padding}" SnapsToDevicePixels="True">
+            <Grid Background="#00FFFFFF">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <Image Name="radioImage" Source="{StaticResource RadioImage}" />
+              <ContentPresenter Grid.Column="1" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ListBoxItem.IsSelected" Value="True">
+              <Setter TargetName="radioImage" Value="{StaticResource RadioCheckedImage}" Property="Image.Source" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="Bd" Property="Border.Background" Value="#FF464646" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="NumberButtonDividerStyle" TargetType="{x:Type Image}">
+    <Setter Property="Image.Source" Value="/Resources/Images/RC_numbers_divider.png" />
+    <Setter Property="FrameworkElement.Width" Value="305" />
+    <Setter Property="FrameworkElement.Height" Value="3" />
+  </Style>
+  <Style x:Key="PlayerDividerStyle" TargetType="{x:Type Image}">
+    <Setter Property="Image.Source" Value="/Resources/Images/RC_player_divider.png" />
+    <Setter Property="FrameworkElement.Height" Value="3" />
+  </Style>
+  <Style x:Key="MenuButtonDividerStyle" TargetType="{x:Type Image}">
+    <Setter Property="Image.Source" Value="/Resources/Images/RC_menu_but_divider.png" />
+    <Setter Property="FrameworkElement.Width" Value="160" />
+    <Setter Property="FrameworkElement.Height" Value="3" />
+  </Style>
+  <Style x:Key="FocusVisual">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <LinearGradientBrush x:Key="TabItem.Static.Background" EndPoint="0,1" StartPoint="0,0">
+    <GradientStop Color="#F0F0F0" Offset="0.0" />
+    <GradientStop Color="#E5E5E5" Offset="1.0" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="TabItem.Static.Border" Color="#ACACAC" />
+  <LinearGradientBrush x:Key="TabItem.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
+    <GradientStop Color="#ECF4FC" Offset="0.0" />
+    <GradientStop Color="#DCECFC" Offset="1.0" />
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#7EB4EA" />
+  <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#F0F0F0" />
+  <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="#D9D9D9" />
+  <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#ACACAC" />
+  <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FFFFFF" />
+  <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+    <Setter Property="Control.Foreground" Value="#FF000000" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource TabItem.Static.Border}" />
+    <Setter Property="FrameworkElement.Margin" Value="0" />
+    <Setter Property="Control.Padding" Value="6,2" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TabItem}">
+          <Grid Name="templateRoot" SnapsToDevicePixels="True" Width="180" Background="#7F000000">
+            <ContentPresenter Name="contentPresenter" ContentSource="Header" Focusable="False" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <DataTrigger Value="True" Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}">
+              <Setter TargetName="templateRoot" Property="Panel.Background" Value="#55000000" />
+            </DataTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="TabControlStyle1" TargetType="{x:Type TabControl}">
+    <Setter Property="Control.Padding" Value="2" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Background" Value="{StaticResource TabItem.Selected.Background}" />
+    <Setter Property="Control.BorderBrush" Value="{StaticResource TabItem.Selected.Border}" />
+    <Setter Property="Control.BorderThickness" Value="0" />
+    <Setter Property="Control.Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TabControl}">
+          <Grid Name="templateRoot" ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Name="ColumnDefinition0" />
+              <ColumnDefinition Name="ColumnDefinition1" Width="0" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Name="RowDefinition0" Height="Auto" />
+              <RowDefinition Name="RowDefinition1" Height="*" />
+            </Grid.RowDefinitions>
+            <TabPanel Name="headerPanel" Background="#00FFFFFF" Grid.Column="0" Grid.ColumnSpan="2" IsItemsHost="True" Margin="0" Grid.Row="0" KeyboardNavigation.TabIndex="1" ZIndex="1" />
+            <Border Name="contentPanel" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" Background="{TemplateBinding Control.Background}" Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+              <ContentPresenter Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Control.Padding}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="TabControl.TabStripPlacement" Value="Bottom">
+              <Setter TargetName="headerPanel" Property="Grid.Row" Value="1" />
+              <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+              <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+              <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="Auto" />
+              <Setter TargetName="headerPanel" Property="FrameworkElement.Margin" Value="2,0,2,2" />
+            </Trigger>
+            <Trigger Property="TabControl.TabStripPlacement" Value="Left">
+              <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+              <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+              <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
+              <Setter TargetName="contentPanel" Property="Grid.Column" Value="1" />
+              <Setter TargetName="ColumnDefinition0" Property="ColumnDefinition.Width" Value="Auto" />
+              <Setter TargetName="ColumnDefinition1" Property="ColumnDefinition.Width" Value="*" />
+              <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+              <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="0" />
+              <Setter TargetName="headerPanel" Property="FrameworkElement.Margin" Value="2,2,0,2" />
+            </Trigger>
+            <Trigger Property="TabControl.TabStripPlacement" Value="Right">
+              <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+              <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+              <Setter TargetName="headerPanel" Property="Grid.Column" Value="1" />
+              <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
+              <Setter TargetName="ColumnDefinition0" Property="ColumnDefinition.Width" Value="*" />
+              <Setter TargetName="ColumnDefinition1" Property="ColumnDefinition.Width" Value="Auto" />
+              <Setter TargetName="RowDefinition0" Property="RowDefinition.Height" Value="*" />
+              <Setter TargetName="RowDefinition1" Property="RowDefinition.Height" Value="0" />
+              <Setter TargetName="headerPanel" Property="FrameworkElement.Margin" Value="0,2,2,2" />
+            </Trigger>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter TargetName="templateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Property="TextElement.Foreground" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="SmartView2.Views.MainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartView2.Views"
+             xmlns:animation="clr-namespace:SmartView2.Resources.Animation"
+             xmlns:controls="clr-namespace:SmartView2.Controls"
+             xmlns:common="clr-namespace:SmartView2.Common">
+    <FrameworkElement.Resources>
+        <common:CurrentVMToBollConverter x:Key="currentVMToIsChecked"/>
+    </FrameworkElement.Resources>
+    <Interaction.Behaviors>
+        <VisualStateBehavior VisualStateSource="{Binding IsDataLoaded}">
+            <VisualStateTrigger Value="true" VisualState="NonLoading"/>
+            <VisualStateTrigger Value="false" VisualState="Loading"/>
+        </VisualStateBehavior>
+    </Interaction.Behaviors>
+    <Grid>
+        <controls:GlobalMenu.GlobalMenuItems>
+            <controls:GlobalMenuItemCollection>
+                <MenuItem Header="{Binding COM_HTS_SID_GUIDE, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding GuideCommand}"/>
+                <MenuItem Header="{Binding COM_LIST_TITLE_VERSION, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding VersionCommand}"/>
+                <MenuItem Header="{Binding COM_SID_OPEN_SOURCE_LICENSE, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding LicenseCommand}"/>
+                <Separator/>
+                <MenuItem Header="{Binding COM_SID_SLIDESHOW_SETTINGS, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding SlideshowSettingsCommand}"/>
+                <MenuItem Header="{Binding MAPP_SID_CLOSE_CAPTION_SETTINGS, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding CCSettingsCommand}">
+                    <FrameworkElement.Style>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAvailableCCData}" Value="False">
+                                    <Setter Property="UIElement.IsEnabled" Value="false"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </FrameworkElement.Style>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{Binding MAPP_SID_CHANGE_TV, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding ChangeTVCommand}"/>
+                <Separator/>
+                <MenuItem Command="{x:Static ApplicationCommands.Close}"
+                  Header="{Binding COM_EXIT_SMART_VIEW, Source={StaticResource LocalizationSource}}"/>
+            </controls:GlobalMenuItemCollection>
+        </controls:GlobalMenu.GlobalMenuItems>
+        <Grid>
+            <Grid Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="271"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch"
+                      Background="{StaticResource InnerPanelsBgrBrush}">
+                        <RadioButton GroupName="Menu" Style="{StaticResource TvMenuRadioButtonStyle}" Command="{Binding TvVideoCommand}"
+                         IsChecked="{Binding InnerController.CurrentVM, Converter={StaticResource currentVMToIsChecked}, ConverterParameter=0}"/>
+                        <RadioButton GroupName="Menu" Style="{StaticResource MultimediaMenuRadioButtonStyle}"
+                         Command="{Binding MultimediaCommand}"
+                         IsChecked="{Binding InnerController.CurrentVM, Converter={StaticResource currentVMToIsChecked}, ConverterParameter=1}"/>
+                        <RadioButton GroupName="Menu" Style="{StaticResource RemoteControlMenuRadioButtonStyle}"
+                         Command="{Binding RemoteControlCommand}"
+                         IsChecked="{Binding InnerController.CurrentVM, Converter={StaticResource currentVMToIsChecked}, ConverterParameter=2}"/>
+                    </StackPanel>
+                    <FrameExt Grid.Column="1" Controller="{Binding InnerController}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid>
+            <FrameworkElement.Style>
+                <Style TargetType="{x:Type Grid}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDataLoaded}" Value="false">
+                            <Setter Property="UIElement.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsDataLoaded}" Value="true">
+                            <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </FrameworkElement.Style>
+        </Grid>
+        <Grid x:Name="LoadingGrid" Background="#55555555" Visibility="Hidden">
+            <animation:LoadingAnimation VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState Name="NonLoading">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="LoadingGrid"  Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState Name="Loading">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="LoadingGrid"  Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</UserControl>

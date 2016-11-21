@@ -1,0 +1,27 @@
+<UserControl x:Class="SmartView2.Controls.HtsVideoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <Grid Background="#99000000">
+    <StackPanel Grid.Row="2" Orientation="Horizontal">
+      <ComboBox Style="{StaticResource TvViewNavigationComboBoxStyle}"/>
+      <Button Style="{StaticResource DiscMenuButtonStyle}" Margin="15 5 0 5"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.DiscMenu}"/>
+      <Button Margin="20 5 0 5" Style="{StaticResource PlayButtonStyle}"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.Play}"/>
+      <Button Margin="8 5 0 5" Style="{StaticResource PauseButtonStyle}"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.Pause}"/>
+      <Button Margin="8 5 0 5" Style="{StaticResource StopButtonStyle}"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.Stop}"/>
+      <Button Margin="20 5 0 5" Style="{StaticResource FastRewindButtonStyle}"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.FastRewind}"/>
+      <Button Margin="8 5 0 5" Style="{StaticResource FastForwardButtonStyle}"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.FastForward}"/>
+      <Button Margin="8 5 0 5" Style="{StaticResource RewindButtonStyle}"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.Rewind}"/>
+      <Button Margin="8 5 0 5" Style="{StaticResource ForwardButtonStyle}"
+              Command="{Binding TargetDevice.CurrentSource.RemoteControl.Forward}"/>
+    </StackPanel>
+  </Grid>
+</UserControl>

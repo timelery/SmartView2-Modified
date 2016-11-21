@@ -1,0 +1,118 @@
+<UserControl x:Class="SmartView2.Views.PinPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:animation="clr-namespace:SmartView2.Resources.Animation"
+             xmlns:behaviors="clr-namespace:SmartView2.Behaviors"
+             xmlns:properties="clr-namespace:SmartView2.Properties"
+             x:Name="pinCodePage" Focusable="true" Width="400" VerticalAlignment="Center">
+  <Interaction.Behaviors>
+    <VisualStateBehavior VisualStateSource="{Binding IsDataLoaded}">
+      <VisualStateTrigger Value="true" VisualState="NonLoading"/>
+      <VisualStateTrigger Value="false" VisualState="Loading"/>
+    </VisualStateBehavior>
+  </Interaction.Behaviors>
+  <Grid Style="{StaticResource Background}">
+    <Border BorderBrush="{StaticResource HeaderBackgroundBrush}" BorderThickness="5 5 5 5">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Row="0" Background="{StaticResource HeaderBackgroundBrush}">
+          <TextBlock Style="{StaticResource WindowHeaderStyle}"
+                     Text="{Binding COM_SID_ENTER_PIN, Source={StaticResource LocalizationSource}}"/>
+          <Button HorizontalAlignment="Right" Style="{StaticResource HeaderCloseButton}" Margin="0 0 0 5"
+                  Command="{Binding CloseCommand}"/>
+        </Grid>
+        <Grid Row="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+          </Grid.RowDefinitions>
+          <TextBlock Style="{StaticResource PinCodeMessageTextBlockStyle}" Grid.Row="0" Margin="5"
+                     Text="{Binding MAPP_SID_CHECK_PIN_TV_AND_TENTER_BELOW, Source={StaticResource LocalizationSource}}"/>
+          <Grid Row="1" HorizontalAlignment="Center" Height="80"
+                FocusManager.FocusedElement="{Binding ElementName=PinNumber1}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="PinNumber1" Grid.Column="0" Style="{StaticResource PinCodeInputStyle}"
+                     Text="{Binding PinNumber1, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsDataLoaded}"
+                     behaviors:FocusExtension.IsFocused="{Binding IsPinFocused}">
+              <Interaction.Behaviors>
+                <behaviors:PinInputBehavior PreviousControl="{x:Null}" NextControl="{Binding ElementName=PinNumber2}"
+                                            PairCommand="{Binding PairCommand}"/>
+              </Interaction.Behaviors>
+            </TextBox>
+            <TextBox x:Name="PinNumber2" Grid.Column="1" Style="{StaticResource PinCodeInputStyle}"
+                     Text="{Binding PinNumber2}" IsEnabled="{Binding IsDataLoaded}">
+              <Interaction.Behaviors>
+                <behaviors:PinInputBehavior PreviousControl="{Binding ElementName=PinNumber1}" NextControl="{Binding ElementName=PinNumber3}"
+                                            PairCommand="{Binding PairCommand}"/>
+              </Interaction.Behaviors>
+            </TextBox>
+            <TextBox x:Name="PinNumber3" Grid.Column="2" Style="{StaticResource PinCodeInputStyle}"
+                     Text="{Binding PinNumber3}" IsEnabled="{Binding IsDataLoaded}">
+              <Interaction.Behaviors>
+                <behaviors:PinInputBehavior PreviousControl="{Binding ElementName=PinNumber2}" NextControl="{Binding ElementName=PinNumber4}"
+                                            PairCommand="{Binding PairCommand}"/>
+              </Interaction.Behaviors>
+            </TextBox>
+            <TextBox x:Name="PinNumber4" Grid.Column="3" Style="{StaticResource PinCodeInputStyle}"
+                     Text="{Binding PinNumber4}" IsEnabled="{Binding IsDataLoaded}">
+              <Interaction.Behaviors>
+                <behaviors:PinInputBehavior PreviousControl="{Binding ElementName=PinNumber3}" NextControl="{x:Null}"
+                                            PairCommand="{Binding PairCommand}"/>
+              </Interaction.Behaviors>
+            </TextBox>
+          </Grid>
+          <Grid Row="2" Height="40">
+            <TextBlock Style="{StaticResource PinNotificationTextBlockStyle}" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding PinErrorMessage}"
+                       Visibility="{Binding PinErrorVisible, Converter={StaticResource _visibilityConverter}}"/>
+          </Grid>
+          <Grid Row="3">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition/>
+              <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource TheMostCommonButtonStyle}" Grid.Column="0" Width="150" Height="30"
+                    IsDefault="true" Content="{Binding COM_TV_SID_OK, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding PairCommand}"/>
+            <Button Style="{StaticResource TheMostCommonButtonStyle}" Grid.Column="1" Width="150" Height="30"
+                    IsCancel="true" Content="{Binding COM_TV_SID_CANCEL, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding CloseCommand}"/>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Border>
+    <Grid x:Name="LoadingGrid" Background="#55555555" Visibility="Hidden">
+      <animation:LoadingAnimation VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState Name="NonLoading">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference LoadingGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Loading">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0"  Storyboard.TargetProperty="Visibility" Storyboard.Target="{x:Reference LoadingGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</UserControl>

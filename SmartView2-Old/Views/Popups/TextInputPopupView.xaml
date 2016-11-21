@@ -1,0 +1,49 @@
+<UserControl x:Class="SmartView2.Views.Popups.TextInputPopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:behaviors="clr-namespace:SmartView2.Behaviors"
+             Loaded="UserControl_Loaded" Width="434" Height="257">
+  <Border Style="{StaticResource PopupBorderStyle}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid Column="0" Background="{StaticResource HeaderBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource WindowHeaderStyle}"
+                   Text="{Binding COM_SID_ENTER_TEXT, Source={StaticResource LocalizationSource}}"/>
+        <Button Grid.Column="1" IsCancel="true" Height="22" Width="22" Style="{StaticResource HeaderCloseButton}"
+                Command="{Binding CloseCommand}"/>
+      </Grid>
+      <Grid Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Margin="0,33,0,0" HorizontalAlignment="Center" TextWrapping="Wrap"
+                   Foreground="#ccced1" Height="40" FontSize="15pt" FontFamily="Arial"
+                   Text="{Binding MAPP_SID_USE_KEYBOARD_TO_ENTER_TEXT_TV, Source={StaticResource LocalizationSource}}"/>
+        <TextBox Name="textBox" Grid.Row="1" Margin="25,0,0,33" Style="{StaticResource PlaceHolderTextBoxStyle}"
+                 VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="40"
+                 TextWrapping="Wrap" Width="370"
+                 Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                 Tag="{Binding COM_TV_SID_TEXT_INPUT, Source={StaticResource LocalizationSource}}">
+          <Interaction.Behaviors>
+            <behaviors:TextInputBehavior CursorPosition="{Binding CursorPosition}"/>
+          </Interaction.Behaviors>
+        </TextBox>
+        <Button Grid.Row="2" IsDefault="true" Style="{StaticResource TheMostCommonButtonStyle}"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Height="40"
+                Content="{Binding COM_TV_SID_OK, Source={StaticResource LocalizationSource}}"
+                Command="{Binding EndInputCommand}"/>
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

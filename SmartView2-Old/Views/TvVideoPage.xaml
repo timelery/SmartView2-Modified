@@ -1,0 +1,649 @@
+<UserControl x:Class="SmartView2.Views.TvVideoPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="clr-namespace:SmartView2.Behaviors"
+             xmlns:controls="clr-namespace:SmartView2.Controls"
+             xmlns:common="clr-namespace:SmartView2.Common"
+             xmlns:local="clr-namespace:SmartView2.Views"
+             common:RemoteControlVisualStateHelper.State="{Binding TargetDevice.CurrentSource.RemoteControl.RemoteControlType}">
+  <Grid>
+    <controls:MediaElementExt x:Name="mediaElement" Grid.Column="0" IsContentFades="true"
+                              SourceUri="{Binding TargetDevice.VideoUrl}"
+                              PlayerNotificationProvider="{Binding PlayerNotification}"
+                              IsVideoStarted="{Binding TargetDevice.IsVideoStarted}"
+                              NotificationType="{Binding TargetDevice.VideoMessageInfoType}"
+                              Volume="{Binding Volume, Mode=TwoWay}" IsCcDataVisible="{Binding IsCcDataVisible}"
+                              NotificationSource="{Binding Controller.NotificationsCollection}"
+                              IsLoadingVisible="{Binding DataContext.IsDataLoaded, RelativeSource={RelativeSource AncestorType={x:Type local:MainPage}}}"
+                              PopupSource="{Binding Controller.PopupsCollection}">
+      <FrameworkElement.ContextMenu>
+        <ContextMenu>
+          <MenuItem Click="MenuItem_Click"
+                    Header="{Binding COM_SID_FULL_SCREEN, Source={StaticResource LocalizationSource}}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type MenuItem}">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding Tag.IsFullScreen, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                               Value="True">
+                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </MenuItem>
+          <MenuItem Click="MenuItem_Click"
+                    Header="{Binding MAPP_SID_EXIT_FULL_SCREE, Source={StaticResource LocalizationSource}}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type MenuItem}">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding Tag.IsFullScreen, RelativeSource={RelativeSource AncestorType=ContextMenu}, Mode=OneWay}"
+                               Value="False">
+                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </MenuItem>
+        </ContextMenu>
+      </FrameworkElement.ContextMenu>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="2*"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <ComboBox SelectionChanged="_comboBox_SelectionChanged" x:Name="_comboBox" Text=""
+                    Style="{StaticResource ComboBoxSourceStyle}" Width="210"
+                    ItemsSource="{Binding TargetDevice.SourceList}"
+                    SelectedItem="{Binding TargetDevice.CurrentSource, Mode=OneWay}">
+            <FrameworkElement.Tag>
+              <TextBlock Margin="10,0,0,0" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"
+                         TextTrimming="CharacterEllipsis" Text="{Binding TargetDevice.CurrentSource.Title, Mode=OneWay}"/>
+            </FrameworkElement.Tag>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <TextBlock TextTrimming="CharacterEllipsis" Text="{Binding Title}" IsEnabled="{Binding IsValid}"/>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+              <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource ComboBoxItemSourceStyle}">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsValid}" Value="False">
+                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </ItemsControl.ItemContainerStyle>
+          </ComboBox>
+          <Grid Column="1">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type Grid}">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding TargetDevice.VideoUrl}" Value="{x:Null}">
+                    <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Center" Margin="5" FontWeight="Bold" FontSize="15"
+                       Foreground="{StaticResource TextBlock.Static.ForegroundBrush}"
+                       Text="{Binding TargetDevice.CurrentSource.CurrentChannel.ProgramTitle, Mode=OneWay}"/>
+            <TextBlock HorizontalAlignment="Center" Grid.Row="1" Padding="5" Margin="5" FontSize="15"
+                       Foreground="{StaticResource TextBlock.Static.ForegroundBrush}">
+              <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} - {1} - {2}">
+                  <Binding Path="TargetDevice.CurrentSource.CurrentChannel.Name" Mode="OneWay"/>
+                  <Binding Path="TargetDevice.CurrentSource.CurrentChannel.DisplayNumber" Mode="OneWay"/>
+                  <Binding Path="TargetDevice.CurrentSource.CurrentChannel.Type" Mode="OneWay"/>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+          </Grid>
+          <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type StackPanel}">
+                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding TargetDevice.IsCloneView}" Value="True">
+                    <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </StackPanel>
+        </Grid>
+        <Grid x:Name="tvRightControls" Row="2" Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+              Margin="5">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Path Grid.RowSpan="3" Fill="{StaticResource DarkBackgroundBrush}"
+                Data="M 0,30 L 0,120 A 20,20 0 0 0 64,120 L 64,30 A 21,20 0 0 0 0,30 " HorizontalAlignment="Center"
+                Opacity="0.4"/>
+          <Button Grid.Row="0" Style="{StaticResource ChannelUpButtonStyle}" Command="{Binding ChannelUpCommand}"/>
+          <TextBlock Grid.Row="1" FontSize="16" FontFamily="Arial" HorizontalAlignment="Center"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type TextBlock}">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding TargetDevice.VideoUrl}" Value="{x:Null}">
+                    <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+            <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} - {1}">
+                <Binding Path="COM_TV_SID_CH_CAPITAL" Source="{StaticResource LocalizationSource}"/>
+                <Binding Path="TargetDevice.CurrentSource.CurrentChannel.DisplayNumber" Mode="OneWay"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+          <Button Grid.Row="2" Style="{StaticResource ChannelDownButtonStyle}" Command="{Binding ChannelDownCommand}"/>
+          <Button Grid.Row="3" Margin="0,3,0,3" HorizontalContentAlignment="Center"
+                  Style="{StaticResource RoundButtonStyle}"
+                  Content="{Binding COM_TV_SID_CH_LIST_LOWER, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding ChannelListCommand}"/>
+          <Button x:Name="ccDatabutton" Grid.Row="4" Margin="0,3,0,3" Style="{StaticResource CCDataButtonStyle}"
+                  Command="{Binding CcDataCommand}"/>
+        </Grid>
+        <Grid x:Name="stbRightControls" Row="2" Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+              Margin="5" Visibility="Collapsed">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Path Grid.RowSpan="3" Fill="{StaticResource DarkBackgroundBrush}"
+                Data="M 0,30 L 0,120 A 20,20 0 0 0 64,120 L 64,30 A 21,20 0 0 0 0,30 " HorizontalAlignment="Center"
+                Opacity="0.4"/>
+          <Button Grid.Row="0" Style="{StaticResource ChannelUpButtonStyle}"
+                  Command="{Binding TargetDevice.CurrentSource.RemoteControl.ChannelUp}"/>
+          <TextBlock Grid.Row="1" Text="" FontSize="16" FontFamily="Arial" HorizontalAlignment="Center"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}"/>
+          <Button Grid.Row="2" Style="{StaticResource ChannelDownButtonStyle}"
+                  Command="{Binding TargetDevice.CurrentSource.RemoteControl.ChannelDown}"/>
+          <Button Grid.Row="3" Margin="0,3,0,3" Content="CH List" Style="{StaticResource RoundButtonStyle}"
+                  Command="{Binding TargetDevice.CurrentSource.RemoteControl.ChannelList}"/>
+        </Grid>
+        <Grid x:Name="bdRightControls" Row="2" Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"
+              Margin="5" Visibility="Collapsed">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Path Grid.RowSpan="3" Fill="{StaticResource DarkBackgroundBrush}"
+                Data="M 0,30 L 0,120 A 20,20 0 0 0 64,120 L 64,30 A 21,20 0 0 0 0,30 " HorizontalAlignment="Center"
+                Opacity="0.4"/>
+          <Button Grid.Row="0" Style="{StaticResource ChannelUpButtonStyle}"
+                  Command="{Binding TargetDevice.CurrentSource.RemoteControl.ChannelUp}"/>
+          <TextBlock Grid.Row="1" Text="" FontSize="16" FontFamily="Arial" HorizontalAlignment="Center"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}"/>
+          <Button Grid.Row="2" Style="{StaticResource ChannelDownButtonStyle}"
+                  Command="{Binding TargetDevice.CurrentSource.RemoteControl.ChannelDown}"/>
+        </Grid>
+        <Grid x:Name="tvBottomControls" Row="4" VerticalAlignment="Bottom" Height="250">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <ComboBox HorizontalAlignment="Right" Margin="8" Style="{StaticResource TvViewVolumeComboBoxStyle}"/>
+          <Button Click="fullScreenButton_Click" x:Name="fullScreenButton" HorizontalAlignment="Right" Margin="8"
+                  Grid.Row="1">
+            <FrameworkElement.Style>
+              <Style BasedOn="{StaticResource RoundButtonStyle}" TargetType="{x:Type Button}">
+                <Setter Property="ContentControl.Content">
+                  <Setter.Value>
+                    <Image Source="{StaticResource FullScreenImage}" Stretch="None"/>
+                  </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsFullScreen, ElementName=mediaElement, Mode=OneWay}" Value="True">
+                    <Setter Property="ContentControl.Content">
+                      <Setter.Value>
+                        <Image Source="{StaticResource ExitFullScreenImage}" Stretch="None"/>
+                      </Setter.Value>
+                    </Setter>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </Button>
+          <ProgressBar Grid.Row="2" Maximum="{Binding TargetDevice.EndProgramTime, Mode=OneWay}"
+                       Minimum="{Binding TargetDevice.StartProgramTime, Mode=OneWay}"
+                       Value="{Binding TargetDevice.NowTime, Mode=OneWay}">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource ProgramProgressBarStyle}">
+                <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding TargetDevice.IsProgramTimeAvaliable}" Value="True">
+                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </ProgressBar>
+        </Grid>
+        <Grid x:Name="stbBottomControls" Row="4" VerticalAlignment="Bottom" Visibility="Collapsed">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <ComboBox HorizontalAlignment="Right" Margin="8" Style="{StaticResource TvViewVolumeComboBoxStyle}"/>
+          <Button Click="fullScreenButton_Click" HorizontalAlignment="Right" Margin="8" Grid.Row="1">
+            <FrameworkElement.Style>
+              <Style BasedOn="{StaticResource RoundButtonStyle}" TargetType="{x:Type Button}">
+                <Setter Property="ContentControl.Content">
+                  <Setter.Value>
+                    <Image Source="{StaticResource FullScreenImage}" Stretch="None"/>
+                  </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsFullScreen, ElementName=mediaElement, Mode=OneWay}" Value="True">
+                    <Setter Property="ContentControl.Content">
+                      <Setter.Value>
+                        <Image Source="{StaticResource ExitFullScreenImage}" Stretch="None"/>
+                      </Setter.Value>
+                    </Setter>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </Button>
+          <controls:StbVideoControl Grid.Row="2"/>
+        </Grid>
+        <Grid x:Name="bdBottomControls" Row="4" VerticalAlignment="Bottom" Visibility="Collapsed">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <ComboBox HorizontalAlignment="Right" Margin="8" Style="{StaticResource TvViewVolumeComboBoxStyle}"/>
+          <Button Click="fullScreenButton_Click" HorizontalAlignment="Right" Margin="8" Grid.Row="1">
+            <FrameworkElement.Style>
+              <Style BasedOn="{StaticResource RoundButtonStyle}" TargetType="{x:Type Button}">
+                <Setter Property="ContentControl.Content">
+                  <Setter.Value>
+                    <Image Source="{StaticResource FullScreenImage}" Stretch="None"/>
+                  </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsFullScreen, ElementName=mediaElement, Mode=OneWay}" Value="True">
+                    <Setter Property="ContentControl.Content">
+                      <Setter.Value>
+                        <Image Source="{StaticResource ExitFullScreenImage}" Stretch="None"/>
+                      </Setter.Value>
+                    </Setter>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </Button>
+          <controls:BdVideoControl Grid.Row="2"/>
+        </Grid>
+        <Grid x:Name="htsBottomControls" Row="4" VerticalAlignment="Bottom" Visibility="Collapsed">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <ComboBox HorizontalAlignment="Right" Margin="8" Style="{StaticResource TvViewVolumeComboBoxStyle}"/>
+          <Button Click="fullScreenButton_Click" HorizontalAlignment="Right" Margin="8" Grid.Row="1">
+            <FrameworkElement.Style>
+              <Style BasedOn="{StaticResource RoundButtonStyle}" TargetType="{x:Type Button}">
+                <Setter Property="ContentControl.Content">
+                  <Setter.Value>
+                    <Image Source="{StaticResource FullScreenImage}" Stretch="None"/>
+                  </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsFullScreen, ElementName=mediaElement, Mode=OneWay}" Value="True">
+                    <Setter Property="ContentControl.Content">
+                      <Setter.Value>
+                        <Image Source="{StaticResource ExitFullScreenImage}" Stretch="None"/>
+                      </Setter.Value>
+                    </Setter>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </Button>
+          <controls:HtsVideoControl Grid.Row="2"/>
+        </Grid>
+        <Grid x:Name="channelListGrid" HorizontalAlignment="Right" Column="2" Row="0" RowSpan="5">
+          <Grid>
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type Grid}" BasedOn="{StaticResource Background}">
+                <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsChannelListVisiable}" Value="True">
+                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Foreground="{StaticResource TextBlock.Static.ForegroundBrush}" FontFamily="Arial"
+                       Margin="20,0,0,0" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"
+                       Text="{Binding COM_SID_CHANNEL_LIST, Source={StaticResource LocalizationSource}}"/>
+            <Button Grid.Column="1" HorizontalAlignment="Right" Background="Transparent"
+                    Style="{StaticResource ChannelListCloseButtonStyle}" Content="X" Margin="15,15,15,15" FontSize="12"
+                    Command="{Binding ChannelListCommand}"/>
+            <ListView Name="channelList" ScrollViewer.CanContentScroll="false"
+                      Style="{StaticResource ChListListViewStyle}" Grid.ColumnSpan="2" Grid.Row="1"
+                      SelectionMode="Single" HorizontalContentAlignment="Center" VirtualizingPanel.IsVirtualizing="false"
+                      MinWidth="200" SelectedItem="{Binding TargetDevice.CurrentSource.CurrentChannel, Mode=OneWay}"
+                      ItemsSource="{Binding TargetDevice.CurrentSource.ChannelList}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Border Background="Transparent">
+                    <UIElement.InputBindings>
+                      <MouseBinding MouseAction="LeftDoubleClick"
+                                    Command="{Binding DataContext.SelectChannelCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}"/>
+                    </UIElement.InputBindings>
+                    <TextBlock Margin="15,5,15,5">
+                      <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} - {1}">
+                          <Binding Path="DisplayNumber"/>
+                          <Binding Path="Name"/>
+                        </MultiBinding>
+                      </TextBlock.Text>
+                    </TextBlock>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+              <Interaction.Behaviors>
+                <b:ListBoxSelectedItemScrollBehavior/>
+              </Interaction.Behaviors>
+            </ListView>
+          </Grid>
+        </Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3"
+                    Grid.Column="0" Grid.RowSpan="2">
+          <FrameworkElement.Style>
+            <Style TargetType="{x:Type StackPanel}">
+              <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding IsDebuggerAttached}" Value="True">
+                  <Setter Property="UIElement.Visibility" Value="Visible"/>
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkElement.Style>
+          <TextBlock Padding="5" Margin="5" FontWeight="Bold" FontSize="15"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="Stream Status: {0}">
+                <Binding Path="TargetDevice.StreamStatus" Mode="OneWay"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+          <TextBlock Text="Url status" Padding="5" Margin="5" FontWeight="Bold" FontSize="15">
+            <FrameworkElement.Style>
+              <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="TextBlock.Foreground" Value="Green"/>
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding TargetDevice.VideoUrl}" Value="{x:Null}">
+                    <Setter Property="TextBlock.Foreground" Value="Red"/>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </FrameworkElement.Style>
+          </TextBlock>
+          <TextBlock Padding="5" Margin="5" FontWeight="Bold" FontSize="15"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="ViewMode: {0}">
+                <Binding Path="TargetDevice.ViewMode" Mode="OneWay"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+          <TextBlock Padding="5" Margin="5" FontWeight="Bold" FontSize="15"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="Current Channel: {0}
+Number: {1}
+Program Title: {2}
+Type: {3}">
+                <Binding Path="TargetDevice.CurrentSource.CurrentChannel.Name" Mode="OneWay"/>
+                <Binding Path="TargetDevice.CurrentSource.CurrentChannel.DisplayNumber" Mode="OneWay"/>
+                <Binding Path="TargetDevice.CurrentSource.CurrentChannel.ProgramTitle" Mode="OneWay"/>
+                <Binding Path="TargetDevice.CurrentSource.CurrentChannel.Type" Mode="OneWay"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+          <TextBlock Padding="5" Margin="5" FontWeight="Bold" FontSize="15"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="Current source: {0}">
+                <Binding Path="TargetDevice.CurrentSource.Type" Mode="OneWay"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+          <TextBlock Padding="5" Margin="5" FontWeight="Bold" FontSize="15"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="Stream type: {0}">
+                <Binding Path="TargetDevice.StreamType" Mode="OneWay"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+        </StackPanel>
+      </Grid>
+    </controls:MediaElementExt>
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup Name="Common">
+        <VisualState Name="Tv">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference channelListGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference htsBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Bd">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference channelListGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference htsBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Hts">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference channelListGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference htsBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Stb">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference channelListGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference htsBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Unknown">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference channelListGrid}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbRightControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference tvBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference stbBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference bdBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Visibility"
+                                           Storyboard.Target="{x:Reference htsBottomControls}">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</UserControl>

@@ -1,0 +1,561 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:common="clr-namespace:SmartView2.Common">
+  <BitmapImage x:Key="ImageIconImage" UriSource="/Resources/Images/Image_indicator.png" />
+  <BitmapImage x:Key="MusicIconImage" UriSource="/Resources/Images/music_indicator.png" />
+  <BitmapImage x:Key="VideoIconImage" UriSource="/Resources/Images/video_indicator.png" />
+  <BitmapImage x:Key="MultimediaLoadingImage" UriSource="/Resources/Images/loading_ani_01.png" />
+  <Style x:Key="MultimediaGuidTextBlockStyle" TargetType="{x:Type TextBlock}">
+    <Setter Property="TextBlock.FontWeight" Value="Bold" />
+    <Setter Property="TextBlock.Background" Value="#4014171C" />
+    <Setter Property="TextBlock.Padding" Value="50" />
+    <Setter Property="TextBlock.Foreground" Value="#8CFFFFFF" />
+    <Setter Property="FrameworkElement.Margin" Value="5" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="TextBlock.FontFamily" Value="Arial" />
+    <Setter Property="TextBlock.FontSize" Value="22pt" />
+  </Style>
+  <Style x:Key="AddContentTextStyle" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="250" />
+    <Setter Property="FrameworkElement.Height" Value="120" />
+    <Setter Property="Control.FontWeight" Value="Bold" />
+    <Setter Property="Control.Background" Value="{StaticResource Button.Static.BackgroundBrush}" />
+    <Setter Property="Control.Foreground" Value="#FF808080" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Margin" Value="5" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <ControlTemplate.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+              <Setter Property="TextBlock.TextAlignment" Value="Center" />
+              <Setter Property="TextBlock.FontSize" Value="14" />
+            </Style>
+          </ControlTemplate.Resources>
+          <Grid>
+            <Border Name="border" BorderBrush="#FF171B1F" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True" BorderThickness="1" CornerRadius="5">
+              <TextBlock TextBlock.TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" Text="{TemplateBinding ContentControl.Content}" />
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="Control.Foreground" />
+              <Setter Value="{StaticResource Button.Static.BackgroundBrush}" Property="Control.Background" />
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter Value="{StaticResource Button.Pressed.BackgroundBrush}" Property="Control.Background" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.BorderBrush" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="MMRadioButtonStyle" TargetType="{x:Type RadioButton}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type RadioButton}">
+          <Border Name="_border" BorderBrush="#00FFFFFF" BorderThickness="0,0,0,4">
+            <Grid Background="#00FFFFFF" Margin="0,0,0,18">
+              <TextBlock Name="_textBlock" Text="{TemplateBinding ContentControl.Content}" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextBlock.TextAlignment="Center" TextBlock.Foreground="#55FFFFFF" TextBlock.FontFamily="Calibri" TextBlock.FontSize="18pt" TextBlock.FontWeight="Bold" />
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+              <Setter TargetName="_border" Property="Border.BorderBrush" Value="#FF4FB2F6" />
+              <Setter TargetName="_textBlock" Value="{StaticResource TextBlock.Static.ForegroundBrush}" Property="TextBlock.Foreground" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="_textBlock" Value="{StaticResource TextBlock.Static.ForegroundBrush}" Property="TextBlock.Foreground" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <SolidColorBrush x:Key="strokeBrush" Color="#171b1f" />
+  <SolidColorBrush x:Key="darkBackgroundBrush" Color="#151b25" />
+  <SolidColorBrush x:Key="radioButtonBackgroundBrush" Color="#ffffff" />
+  <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+    <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Setter Property="Control.IsTabStop" Value="False" />
+    <Setter Property="UIElement.Focusable" Value="False" />
+    <Setter Property="ButtonBase.ClickMode" Value="Press" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Name="helperBorder" BorderBrush="#00FFFFFF" Background="#00FFFFFF" BorderThickness="1 1 1 0" CornerRadius="10 10 0 0">
+            <Border Name="templateRoot" Background="#00FFFFFF" SnapsToDevicePixels="True" CornerRadius="10">
+              <ContentPresenter />
+            </Border>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+    <ControlTemplate.Resources>
+      <!--<common:RectConverter x:Key="rectConverter" Offset="0 0 -2 0" />
+      <common:RectConverter x:Key="rectConverterWithOffset" Offset="0 0 -2 -12" />-->
+    </ControlTemplate.Resources>
+    <Grid Name="templateRoot" SnapsToDevicePixels="True">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Popup Name="PART_Popup" AllowsTransparency="True" Width="148" Grid.ColumnSpan="2" Margin="1" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+        <ScrollViewer Name="DropDownScrollViewer">
+          <Grid Name="grid" RenderOptions.ClearTypeHint="Enabled">
+            <Border Name="dropDownBorder" BorderBrush="{StaticResource darkBackgroundBrush}" CornerRadius="10" BorderThickness="1" Background="{StaticResource InnerPanelsBgrBrush}" MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}" SnapsToDevicePixels="True" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+              <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}">
+                <ItemsPresenter.Clip>
+                  <RectangleGeometry RadiusX="11" RadiusY="11">
+                    <RectangleGeometry.Rect>
+                      <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding Path="ActualWidth" ElementName="dropDownBorder" />
+                        <Binding Path="ActualHeight" ElementName="dropDownBorder" />
+                      </MultiBinding>
+                    </RectangleGeometry.Rect>
+                  </RectangleGeometry>
+                </ItemsPresenter.Clip>
+              </ItemsPresenter>
+            </Border>
+          </Grid>
+        </ScrollViewer>
+      </Popup>
+      <ToggleButton Name="toggleButton" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Background="{TemplateBinding Control.Background}" Grid.ColumnSpan="2" Style="{StaticResource ComboBoxToggleButton}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+          </Grid.ColumnDefinitions>
+          <TextBlock Name="_contentPresenter" TextBlock.FontSize="18" TextBlock.Foreground="#FFFFFFFF" VerticalAlignment="Center" Grid.Column="0" TextBlock.TextAlignment="Right">
+            <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} - {1}">
+                <Binding Path="COM_IDS_REPORT_SORTBY" Source="{StaticResource LocalizationSource}" />
+                <Binding Path="SelectionBoxItem" RelativeSource="{RelativeSource TemplatedParent}" />
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+          <Border Grid.Column="1" Height="8" Width="10" Margin="14,0,0,0">
+            <Path Name="downArrow" Data="M0,0L10,0 5,10 0,0" Fill="{StaticResource Button.Static.ForegroundBrush}" RenderTransformOrigin="0.5,0.5" Stretch="Fill" />
+          </Border>
+        </Grid>
+      </ToggleButton>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="ItemsControl.HasItems" Value="False">
+        <Setter TargetName="dropDownBorder" Property="FrameworkElement.Height" Value="95" />
+      </Trigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="ItemsControl.IsGrouping" Value="True" />
+          <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False" />
+        </MultiTrigger.Conditions>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+      </MultiTrigger>
+      <Trigger Property="UIElement.IsEnabled" Value="False">
+        <Setter TargetName="_contentPresenter" Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="TextBlock.Foreground" />
+        <Setter TargetName="downArrow" Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="Shape.Fill" />
+      </Trigger>
+      <Trigger Property="ComboBox.IsDropDownOpen" Value="True">
+        <Setter TargetName="downArrow" Property="UIElement.RenderTransform">
+          <Setter.Value>
+            <RotateTransform Angle="180" />
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <GeometryGroup x:Key="MultimediaOkIcon">
+    <LineGeometry StartPoint="5,7" EndPoint="2.5,3.5" />
+    <LineGeometry StartPoint="4.7,7" EndPoint="7.5,2.5" />
+  </GeometryGroup>
+  <Style x:Key="ComboBoxStyle1" TargetType="{x:Type ComboBox}">
+    <Setter Property="Control.Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="Control.Padding" Value="6,3,5,3" />
+    <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+    <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+    <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+    <Setter Property="Control.Template" Value="{StaticResource ComboBoxTemplate}" />
+    <Setter Property="ItemsControl.ItemContainerStyle" Value="{DynamicResource ComboBoxItemStyle1}" />
+    <Setter Property="Control.FontFamily" Value="Arial" />
+    <Setter Property="Control.FontSize" Value="20pt" />
+    <Setter Property="FrameworkElement.Width" Value="150" />
+    <Setter Property="FrameworkElement.Height" Value="30" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Margin" Value="0,0,38,0" />
+  </Style>
+  <Style x:Key="ComboBoxItemStyle1" TargetType="{x:Type ComboBoxItem}">
+    <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+          <Grid>
+            <Border Name="Border" Background="#00FFFFFF" BorderThickness="0,0,0,1" BorderBrush="{StaticResource DarkButton.Static.BackgroundBrush}">
+              <Grid Height="40">
+                <TextBlock Name="_contentPresenter" Text="{TemplateBinding ContentControl.Content}" TextBlock.FontSize="15pt" Margin="20,0,0,0" TextBlock.Foreground="#FFFFFFFF" VerticalAlignment="Center" />
+              </Grid>
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ComboBoxItem.IsHighlighted" Value="True">
+              <Setter Value="{StaticResource selectedAndOverBrush}" TargetName="Border" Property="Border.Background" />
+            </Trigger>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter Value="{StaticResource darkBackgroundBrush}" Property="Control.Foreground" />
+              <Setter TargetName="_contentPresenter" Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="TextBlock.Foreground" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="DarkButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Background" Value="{StaticResource Button.Static.BackgroundBrush}" />
+    <Setter Property="Control.BorderBrush" Value="#FF171B1F" />
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Padding" Value="6" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Name="border" BorderBrush="{TemplateBinding Control.BorderBrush}" CornerRadius="3" BorderThickness="2" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+            <ContentPresenter Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="{TemplateBinding Control.Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.BorderBrush" />
+              <Setter TargetName="border" Property="Border.BorderThickness" Value="2" />
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.Pressed.BackgroundBrush}" Property="Border.Background" />
+            </Trigger>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter TargetName="contentPresenter" Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="TextElement.Foreground" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <GeometryGroup x:Key="NextIconGeometry">
+    <PathGeometry Figures="M 0 0 L 0 10 L 10 5 Z" />
+    <PathGeometry Figures="M 10 0 L 10 10 L 20 5 Z" />
+  </GeometryGroup>
+  <GeometryGroup x:Key="PlayIconGeometry">
+    <PathGeometry Figures="M 0 0 L 0 10 L 20 5 Z" />
+  </GeometryGroup>
+  <GeometryGroup x:Key="PauseIconGeometry">
+    <PathGeometry Figures="M 5 0 L 5 10 L 8 10 L 8 0 Z" />
+    <PathGeometry Figures="M 12 0 L 12 10 L 15 10 L 15 0 Z" />
+  </GeometryGroup>
+  <Style x:Key="QueueNextButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="52" />
+    <Setter Property="FrameworkElement.Height" Value="42" />
+    <Setter Property="Control.Background" Value="{StaticResource Button.Static.BackgroundBrush}" />
+    <Setter Property="Control.BorderBrush" Value="#FF171B1F" />
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Padding" Value="6" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Name="border" BorderBrush="{TemplateBinding Control.BorderBrush}" CornerRadius="3" BorderThickness="2" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+            <Path Name="path" Margin="2" Grid.Column="0" Data="{StaticResource NextIconGeometry}" Stretch="Uniform" StrokeThickness="2" VerticalAlignment="Center" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.BorderBrush" />
+              <Setter TargetName="border" Property="Border.BorderThickness" Value="2" />
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.Pressed.BackgroundBrush}" Property="Border.Background" />
+            </Trigger>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter TargetName="path" Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="Shape.Fill" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="QueuePrevButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="52" />
+    <Setter Property="FrameworkElement.Height" Value="42" />
+    <Setter Property="Control.Background" Value="{StaticResource Button.Static.BackgroundBrush}" />
+    <Setter Property="Control.BorderBrush" Value="#FF171B1F" />
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Padding" Value="6" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Name="border" BorderBrush="{TemplateBinding Control.BorderBrush}" CornerRadius="3" BorderThickness="2" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+            <Path Name="path" Grid.Column="0" Margin="2" Data="{StaticResource NextIconGeometry}" Stretch="Uniform" VerticalAlignment="Center" RenderTransformOrigin="0.5 0.5" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}">
+              <Path.RenderTransform>
+                <RotateTransform Angle="180" />
+              </Path.RenderTransform>
+            </Path>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.BorderBrush" />
+              <Setter TargetName="border" Property="Border.BorderThickness" Value="2" />
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.Pressed.BackgroundBrush}" Property="Border.Background" />
+            </Trigger>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter TargetName="path" Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="Shape.Fill" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="QueuePlayButtonStyle" BasedOn="{StaticResource DarkButtonStyle}" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="52" />
+    <Setter Property="FrameworkElement.Height" Value="42" />
+    <Setter Property="ContentControl.Content">
+      <Setter.Value>
+        <Grid Margin="8 0 4 0">
+          <Path Grid.Column="0" Data="{StaticResource PlayIconGeometry}" Stretch="Fill" VerticalAlignment="Center" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+        </Grid>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="QueuePauseButtonStyle" BasedOn="{StaticResource DarkButtonStyle}" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="52" />
+    <Setter Property="FrameworkElement.Height" Value="42" />
+    <Setter Property="ContentControl.Content">
+      <Setter.Value>
+        <Grid>
+          <Path Grid.Column="0" Data="{StaticResource PauseIconGeometry}" Margin="6,0" Stretch="Uniform" VerticalAlignment="Center" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+        </Grid>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <GeometryGroup x:Key="SettingsIconGeometry">
+    <CombinedGeometry GeometryCombineMode="Exclude">
+      <CombinedGeometry.Geometry1>
+        <EllipseGeometry Center="0.5 0.5" RadiusX="10" RadiusY="10" />
+      </CombinedGeometry.Geometry1>
+      <CombinedGeometry.Geometry2>
+        <GeometryGroup>
+          <EllipseGeometry Center="0.5 0.5" RadiusX="3" RadiusY="3" />
+          <RectangleGeometry Rect="8 0 14 2.5" RadiusX="1" RadiusY="4" />
+          <RectangleGeometry Rect="8 0 14 2.5" RadiusX="1" RadiusY="4">
+            <RectangleGeometry.Transform>
+              <RotateTransform Angle="45" />
+            </RectangleGeometry.Transform>
+          </RectangleGeometry>
+          <RectangleGeometry Rect="7.5 0 14 2.5" RadiusX="1" RadiusY="4">
+            <RectangleGeometry.Transform>
+              <RotateTransform Angle="90" />
+            </RectangleGeometry.Transform>
+          </RectangleGeometry>
+          <RectangleGeometry Rect="7 0 14 2.5" RadiusX="1" RadiusY="4">
+            <RectangleGeometry.Transform>
+              <RotateTransform Angle="135" />
+            </RectangleGeometry.Transform>
+          </RectangleGeometry>
+          <RectangleGeometry Rect="6.5 0 14 2.5" RadiusX="1" RadiusY="4">
+            <RectangleGeometry.Transform>
+              <RotateTransform Angle="180" />
+            </RectangleGeometry.Transform>
+          </RectangleGeometry>
+          <RectangleGeometry Rect="6.5 0 14 2.5" RadiusX="1" RadiusY="4">
+            <RectangleGeometry.Transform>
+              <RotateTransform Angle="225" />
+            </RectangleGeometry.Transform>
+          </RectangleGeometry>
+          <RectangleGeometry Rect="7 0 14 2.5" RadiusX="1" RadiusY="4">
+            <RectangleGeometry.Transform>
+              <RotateTransform Angle="270" />
+            </RectangleGeometry.Transform>
+          </RectangleGeometry>
+          <RectangleGeometry Rect="7 0 14 2.5" RadiusX="1" RadiusY="4">
+            <RectangleGeometry.Transform>
+              <RotateTransform Angle="315" />
+            </RectangleGeometry.Transform>
+          </RectangleGeometry>
+        </GeometryGroup>
+      </CombinedGeometry.Geometry2>
+    </CombinedGeometry>
+  </GeometryGroup>
+  <Style x:Key="QueueSettingsButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.BorderBrush" Value="#00FFFFFF" />
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.BorderThickness" Value="1" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Padding" Value="1" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Name="border" BorderBrush="{TemplateBinding Control.BorderBrush}" CornerRadius="3" BorderThickness="2" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+            <Path Name="settingsPath" Grid.Column="0" Data="{StaticResource SettingsIconGeometry}" Margin="0,0" Stretch="Uniform" VerticalAlignment="Center" RenderTransformOrigin="0.5 0.5" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}">
+              <Path.RenderTransform>
+                <RotateTransform Angle="20" />
+              </Path.RenderTransform>
+            </Path>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.BorderBrush" />
+              <Setter TargetName="border" Property="Border.BorderThickness" Value="2" />
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="border" Value="{StaticResource Button.Pressed.BackgroundBrush}" Property="Border.Background" />
+            </Trigger>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="Control.Foreground" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <GeometryGroup x:Key="MultiSelectionModeIconGeometry">
+    <CombinedGeometry GeometryCombineMode="Exclude">
+      <CombinedGeometry.Geometry1>
+        <RectangleGeometry Rect="0,0,10,10" />
+      </CombinedGeometry.Geometry1>
+      <CombinedGeometry.Geometry2>
+        <RectangleGeometry Rect="0.5,0.5,9,9" />
+      </CombinedGeometry.Geometry2>
+    </CombinedGeometry>
+    <GeometryGroup>
+      <LineGeometry StartPoint="5,7" EndPoint="2.5,3.5" />
+      <LineGeometry StartPoint="4.7,7" EndPoint="7.5,2.5" />
+    </GeometryGroup>
+  </GeometryGroup>
+  <Style x:Key="MultimediaMultiSelectionModeToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.Width" Value="28" />
+    <Setter Property="FrameworkElement.Height" Value="28" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Name="_border" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+            <Path Data="{StaticResource MultiSelectionModeIconGeometry}" StrokeThickness="2" Stretch="Uniform" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="Control.Foreground" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="_border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.BorderBrush" />
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="_border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.Background" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+              <Setter TargetName="_border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.Background" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="MultimediaWithoutBackgroundButtonStyle" TargetType="{x:Type Button}">
+    <Setter Property="Control.Background" Value="#00FFFFFF" />
+    <Setter Property="Control.Foreground" Value="{StaticResource Button.Static.ForegroundBrush}" />
+    <Setter Property="Control.HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Control.VerticalContentAlignment" Value="Center" />
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Name="_border" Background="{TemplateBinding Control.Background}" SnapsToDevicePixels="True">
+            <ContentPresenter />
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+              <Setter Value="{StaticResource Button.Disabled.ForegroundBrush}" Property="Control.Foreground" />
+            </Trigger>
+            <Trigger Property="ButtonBase.IsPressed" Value="True">
+              <Setter TargetName="_border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.Background" />
+            </Trigger>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+              <Setter TargetName="_border" Value="{StaticResource Button.MouseOver.BorderBrush}" Property="Border.BorderBrush" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <GeometryGroup x:Key="AddContentIconGeometry">
+    <LineGeometry StartPoint="0,10" EndPoint="20,10" />
+    <LineGeometry StartPoint="10,0" EndPoint="10,20" />
+  </GeometryGroup>
+  <Style x:Key="MultimediaAddContentButtonStyle" BasedOn="{StaticResource MultimediaWithoutBackgroundButtonStyle}" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="28" />
+    <Setter Property="FrameworkElement.Height" Value="28" />
+    <Setter Property="ContentControl.Content">
+      <Setter.Value>
+        <Path Data="{StaticResource AddContentIconGeometry}" StrokeThickness="3" Stretch="Uniform" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <GeometryGroup x:Key="SendToTvIconGeometry">
+    <RectangleGeometry Rect="0,3,14,10" />
+    <LineGeometry StartPoint="4.5,0" EndPoint="6,3" />
+    <LineGeometry StartPoint="9.5,0" EndPoint="8,3" />
+    <LineGeometry StartPoint="7,16" EndPoint="7,8" />
+    <PathGeometry>
+      <PathFigure StartPoint="5,10">
+        <LineSegment Point="7,8" />
+        <LineSegment Point="9,10" />
+      </PathFigure>
+    </PathGeometry>
+  </GeometryGroup>
+  <Style x:Key="MultimediaSendToTvButtonStyle" BasedOn="{StaticResource MultimediaWithoutBackgroundButtonStyle}" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="54" />
+    <Setter Property="FrameworkElement.Height" Value="54" />
+    <Setter Property="Control.Background" Value="#88000000" />
+    <Setter Property="FrameworkElement.ToolTip" Value="{Binding MAPP_SID_PLAY_ON_TV, Source={StaticResource LocalizationSource}}" />
+    <Setter Property="ContentControl.Content">
+      <Setter.Value>
+        <Path Margin="9" Data="{StaticResource ToTvGeometry}" StrokeThickness="2" Stretch="Uniform" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <GeometryGroup x:Key="SendToQueueIconGeometry">
+    <LineGeometry StartPoint="2,5" EndPoint="8,5" />
+    <LineGeometry StartPoint="5,2" EndPoint="5,8" />
+  </GeometryGroup>
+  <Style x:Key="MultimediaSendToQueueButtonStyle" BasedOn="{StaticResource MultimediaWithoutBackgroundButtonStyle}" TargetType="{x:Type Button}">
+    <Setter Property="FrameworkElement.Width" Value="54" />
+    <Setter Property="FrameworkElement.Height" Value="54" />
+    <Setter Property="Control.Background" Value="#88000000" />
+    <Setter Property="FrameworkElement.ToolTip" Value="{Binding MAPP_SID_ADD_TO_QUEUE, Source={StaticResource LocalizationSource}}" />
+    <Setter Property="ContentControl.Content">
+      <Setter.Value>
+        <Path Margin="9" Data="{StaticResource SendToQueueIconGeometry}" StrokeThickness="2" Stretch="Uniform" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="FolderIndecatorImageStyle" TargetType="{x:Type Image}">
+    <Setter Property="FrameworkElement.Width" Value="55" />
+    <Setter Property="FrameworkElement.Height" Value="55" />
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" />
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center" />
+  </Style>
+</ResourceDictionary>

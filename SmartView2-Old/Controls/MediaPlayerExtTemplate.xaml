@@ -1,0 +1,130 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SmartView2.Controls"
+                    xmlns:coverter="clr-namespace:SmartView2.Converters"
+                    xmlns:common="clr-namespace:SmartView2.Common">
+  <common:BoolToVisibilityConverter x:Key="_visibilityConverter"/>
+  <common:MillisecondsTimeToStringConverter x:Key="_timeConverter"/>
+  <ControlTemplate x:Key="_controlTemplate" TargetType="{x:Type local:MediaPlayerExt}">
+    <Border x:Name="PART_LayoutHost">
+      <Grid x:Name="PART_LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="PART_ClickListener" Background="Transparent">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="48"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="48"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Part_Image" Grid.ColumnSpan="3"
+                   Source="{Binding Preview, RelativeSource={RelativeSource TemplatedParent}}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type Image}">
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding HasDuration, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                      <Setter Property="UIElement.Visibility" Value="Visible"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasDuration, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                      <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </Image>
+            <MediaElement x:Name="PART_MediaElement" Grid.ColumnSpan="3" LoadedBehavior="Manual" UnloadedBehavior="Manual"
+                          Grid.RowSpan="3" Volume="{TemplateBinding local:MediaElementExt.Volume}"/>
+            <ContentPresenter x:Name="PART_ImageLeftContent" Grid.Column="0"
+                              Content="{Binding ImageLeftContent, RelativeSource={RelativeSource TemplatedParent}}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type ContentPresenter}">
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding HasDuration, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                      <Setter Property="UIElement.Visibility" Value="Visible"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasDuration, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                      <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </ContentPresenter>
+            <ContentPresenter x:Name="PART_ImageRightContent" Grid.Column="2"
+                              Content="{Binding ImageRightContent, RelativeSource={RelativeSource TemplatedParent}}">
+              <FrameworkElement.Style>
+                <Style TargetType="{x:Type ContentPresenter}">
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding HasDuration, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                      <Setter Property="UIElement.Visibility" Value="Visible"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasDuration, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                      <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </FrameworkElement.Style>
+            </ContentPresenter>
+          </Grid>
+        </Grid>
+        <ContentPresenter x:Name="PART_OnVideoContentControl" Content="{TemplateBinding ContentControl.Content}"/>
+        <Grid x:Name="PART_CCDataLayout" VerticalAlignment="Center" HorizontalAlignment="Center"
+              Height="{Binding ActualHeight, ElementName=PART_MediaElement}"
+              Width="{Binding ActualWidth, ElementName=PART_MediaElement}"/>
+        <Grid VerticalAlignment="Bottom">
+          <Grid.RowDefinitions>
+            <RowDefinition x:Name="ProgressBarRow" Height="Auto"/>
+            <RowDefinition x:Name="BottomBar" Height="Auto"/>
+          </Grid.RowDefinitions>
+          <Slider x:Name="PART_ProgressBar" Grid.Row="0" Minimum="0"
+                  Maximum="{TemplateBinding local:MediaPlayerExt.Duration}"
+                  Value="{TemplateBinding local:MediaPlayerExt.Position}" IsMoveToPointEnabled="true"
+                  Style="{StaticResource SliderStyle}"
+                  Visibility="{Binding HasDuration, Converter={StaticResource _visibilityConverter}}"/>
+          <ContentPresenter x:Name="PART_BottomBarContentControl" Grid.Row="1"
+                            Content="{Binding BottomBar, RelativeSource={RelativeSource TemplatedParent}}"/>
+          <FrameworkElement.Style>
+            <Style TargetType="{x:Type Grid}">
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding IsContentFades, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                  <Setter Property="Grid.Row" Value="0"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsContentFades, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                  <Setter Property="Grid.Row" Value="1"/>
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkElement.Style>
+        </Grid>
+      </Grid>
+      <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup Name="GROUP_OnVideoContentVisibility">
+          <VisualState x:Name="STATE_Visible">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="00:00:00.3"
+                               Storyboard.Target="{x:Reference PART_OnVideoContentControl}"/>
+              <DoubleAnimation Duration="00:00:00.3" Storyboard.TargetProperty="Opacity" To="1"
+                               Storyboard.Target="{x:Reference PART_ProgressBar}"/>
+              <DoubleAnimation Duration="00:00:00.3" Storyboard.TargetProperty="Opacity" To="1"
+                               Storyboard.Target="{x:Reference PART_BottomBarContentControl}"/>
+            </Storyboard>
+          </VisualState>
+          <VisualState x:Name="STATE_Hidden">
+            <Storyboard>
+              <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="00:00:00.3"
+                               Storyboard.Target="{x:Reference PART_OnVideoContentControl}"/>
+              <DoubleAnimation Duration="00:00:00.3" Storyboard.TargetProperty="Opacity" To="0"
+                               Storyboard.Target="{x:Reference PART_ProgressBar}"/>
+              <DoubleAnimation Duration="00:00:00.3" Storyboard.TargetProperty="Opacity" To="0"
+                               Storyboard.Target="{x:Reference PART_BottomBarContentControl}"/>
+            </Storyboard>
+          </VisualState>
+        </VisualStateGroup>
+      </VisualStateManager.VisualStateGroups>
+    </Border>
+  </ControlTemplate>
+  <Style TargetType="{x:Type local:MediaPlayerExt}">
+    <Setter Property="Control.Template" Value="{StaticResource _controlTemplate}"/>
+  </Style>
+</ResourceDictionary>

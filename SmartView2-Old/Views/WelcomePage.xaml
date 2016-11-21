@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="SmartView2.Views.WelcomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartView2.Views"
+             xmlns:animation="clr-namespace:SmartView2.Resources.Animation"
+             xmlns:controls="clr-namespace:SmartView2.Controls">
+    <Interaction.Behaviors>
+        <VisualStateBehavior VisualStateSource="{Binding IsDataLoaded}">
+            <VisualStateTrigger Value="true" VisualState="NonLoading"/>
+            <VisualStateTrigger Value="false" VisualState="Loading"/>
+        </VisualStateBehavior>
+    </Interaction.Behaviors>
+    <Grid x:Name="_layoutRoot">
+        <controls:GlobalMenu.GlobalMenuItems>
+            <controls:GlobalMenuItemCollection>
+                <MenuItem Header="{Binding COM_HTS_SID_GUIDE, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding GuideCommand}"/>
+                <MenuItem Header="{Binding COM_LIST_TITLE_VERSION, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding VersionCommand}"/>
+                <MenuItem Header="{Binding COM_SID_OPEN_SOURCE_LICENSE, Source={StaticResource LocalizationSource}}"
+                  Command="{Binding LicenseCommand}"/>
+                <Separator/>
+                <MenuItem Command="{x:Static ApplicationCommands.Close}"
+                  Header="{Binding COM_EXIT_SMART_VIEW, Source={StaticResource LocalizationSource}}"/>
+            </controls:GlobalMenuItemCollection>
+        </controls:GlobalMenu.GlobalMenuItems>
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="146"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="76"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource WelcomeHeaderTextBlockStyle}" Grid.Row="0" Margin=" 0 30"
+                   Text="{Binding MAPP_SID_SAMSUNG_SMART_VIEW_2_0, Source={StaticResource LocalizationSource}}"/>
+                <Grid Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="84"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="84"/>
+                    </Grid.ColumnDefinitions>
+                    <Border x:Name="firstForder" Grid.Row="0" Grid.Column="1" Background="#22000000" CornerRadius="10 10 0 0">
+                        <Image Source="/Resources/Images/guide_01.png"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="1" Background="#55000000" CornerRadius="0 0 10 10">
+                        <TextBlock Style="{StaticResource GuidItemTextBlockStyle}" TextWrapping="Wrap" Margin="30"
+                       Text="{Binding MAPP_SID_ENJOY_MULTIMEDIA_MUSIC_PC_TV, Source={StaticResource LocalizationSource}}"/>
+                    </Border>
+                    <Border x:Name="secondBorder" Grid.Row="0" Grid.Column="3" Background="#22000000" CornerRadius="10 10 0 0">
+                        <Image Source="/Resources/Images/guide_02.png"/>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="3" Background="#55000000" CornerRadius="0 0 10 10">
+                        <TextBlock Style="{StaticResource GuidItemTextBlockStyle}" TextWrapping="Wrap" Margin="30"
+                       Text="{Binding MAPP_SID_USE_PC_REMOTE_SECOND_TV, Source={StaticResource LocalizationSource}}"/>
+                    </Border>
+                </Grid>
+                <TextBlock Style="{StaticResource WelcomeDescriptionTextBlockStyle}" FontStyle="Normal" Grid.Row="2"
+                   Margin="0 0 0 0"
+                   Text="{Binding MAPP_SID_GET_STARTED_TURN_ON_TV_SELECT_BUTTON, Source={StaticResource LocalizationSource}}"/>
+                <Button Style="{StaticResource ConnectButtonStyle}" Grid.Row="3" Margin="0 0 0 40"
+                Content="{Binding ConnectToTv, Source={StaticResource LocalizationSource}}"
+                Command="{Binding ConnectCommand}" IsEnabled="{Binding ConnectEnabled}"/>
+            </Grid>
+            <Grid x:Name="LoadingGrid" Background="#55555555" Visibility="Hidden">
+                <animation:LoadingAnimation VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState Name="NonLoading">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="LoadingGrid"  Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState Name="Loading">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="LoadingGrid"  Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</UserControl>

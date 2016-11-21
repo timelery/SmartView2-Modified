@@ -1,0 +1,131 @@
+<UserControl x:Class="SmartView2.Views.Popups.MultimediaIntroductionPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:b="clr-namespace:SmartView2.Behaviors"
+             Width="724" Height="548">
+  <Border Style="{StaticResource PopupBorderStyle}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid Column="0" Background="{StaticResource HeaderBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource WindowHeaderStyle}"
+                   Text="{Binding COM_INTRODUCTION, Source={StaticResource LocalizationSource}}"/>
+        <Button Grid.Column="1" Height="22" Width="22" Style="{StaticResource HeaderCloseButton}"
+                Command="{Binding CloseCommand}"/>
+      </Grid>
+      <Grid Row="1" Background="{StaticResource LightBackgroundBrush}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="FirstGrid">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="70"/>
+          </Grid.ColumnDefinitions>
+          <Grid Column="1">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="18"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="1" Source="pack://application:,,,/Resources/Images/introduction_image_01.png"
+                   Stretch="Fill" Width="562" Height="246"/>
+            <TextBlock Grid.Row="3" Style="{StaticResource WindowHeaderStyle}" TextWrapping="Wrap"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Width="714"
+                       Height="60"
+                       Text="{Binding MAPP_SID_ENJOY_MULTIMEDIA_MUSIC_PC_TV, Source={StaticResource LocalizationSource}}"/>
+          </Grid>
+          <Button Grid.Column="2" Grid.RowSpan="2" Style="{StaticResource TransparentButtonStyle}" Height="60"
+                  Width="60" Padding="17" CommandTarget="{Binding ElementName=scrollviewer}"
+                  Command="{Binding GoToNextPage}">
+            <ContentControl.Content>
+              <Path Data="{StaticResource BackButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform"
+                    RenderTransformOrigin="0.5 0.5"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}">
+                <UIElement.RenderTransform>
+                  <RotateTransform Angle="180"/>
+                </UIElement.RenderTransform>
+              </Path>
+            </ContentControl.Content>
+          </Button>
+          <FrameworkElement.Style>
+            <Style TargetType="{x:Type Grid}">
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding Page}" Value="1">
+                  <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Page}" Value="0">
+                  <Setter Property="UIElement.Visibility" Value="Visible"/>
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkElement.Style>
+        </Grid>
+        <Grid x:Name="SecondGrid">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="70"/>
+          </Grid.ColumnDefinitions>
+          <Grid Column="1">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="18"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="1" Source="pack://application:,,,/Resources/Images/introduction_image_02.png"
+                   Stretch="Fill" Width="562" Height="246"/>
+            <TextBlock Grid.Row="3" Style="{StaticResource CommonHeaderTextBlockStyle}" FontSize="12pt"
+                       TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"
+                       Width="714" Height="80"
+                       Text="{Binding MAPP_SID_SEND_CONTENT_TV_DRAG_QUEUE_DISPLAY, Source={StaticResource LocalizationSource}}"/>
+          </Grid>
+          <Button Grid.Column="0" Style="{StaticResource TransparentButtonStyle}" Grid.RowSpan="2" Height="60"
+                  Width="60" Padding="17" CommandTarget="{Binding ElementName=scrollviewer}"
+                  Command="{Binding GoToPreviousPage}">
+            <ContentControl.Content>
+              <Path Data="{StaticResource BackButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform"
+                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+            </ContentControl.Content>
+          </Button>
+          <FrameworkElement.Style>
+            <Style TargetType="{x:Type Grid}">
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding Page}" Value="0">
+                  <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Page}" Value="1">
+                  <Setter Property="UIElement.Visibility" Value="Visible"/>
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </FrameworkElement.Style>
+        </Grid>
+        <CheckBox Grid.Row="1" Style="{StaticResource CommonCheckBoxStyle}" FontSize="12pt"
+                  HorizontalAlignment="Center" Margin="30" IsChecked="{Binding ShowAgain}"
+                  Content="{Binding COM_MAPP_DON_T_SHOW_AGAIN, Source={StaticResource LocalizationSource}}"/>
+      </Grid>
+      <Grid Row="2" Background="{StaticResource LightPopupBackgroundBrush}">
+        <Button HorizontalAlignment="Center" Width="140" Height="40" IsDefault="true" Margin="15"
+                Style="{StaticResource TheMostCommonButtonStyle}"
+                Content="{Binding COM_SID_CLOSE, Source={StaticResource LocalizationSource}}"
+                Command="{Binding CloseCommand}"/>
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

@@ -1,0 +1,47 @@
+<UserControl x:Class="SmartView2.Views.Popups.UpdateMessagePopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <Border Style="{StaticResource PopupBorderStyle}">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid Column="0" Background="{StaticResource HeaderBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource WindowHeaderStyle}"
+                   Text="{Binding COM_CHECK_FOR_UPDATES, Source={StaticResource LocalizationSource}}"/>
+        <Button Grid.Column="1" Height="22" Width="22" Style="{StaticResource HeaderCloseButton}"
+                Command="{Binding CloseCommand}"/>
+      </Grid>
+      <Grid Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0" VerticalAlignment="Center" Margin="20">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <TextBlock Grid.Row="0" Margin="20,0,0,0" HorizontalAlignment="Left" FontSize="16" TextWrapping="Wrap"
+                     Foreground="{StaticResource TextBlock.Static.ForegroundBrush}"
+                     Text="{Binding MAPP_SID_NEW_VERSION_SAMRT_VIEW_AVAILABLE_DOWNLOAD, Source={StaticResource LocalizationSource}}"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
+          <Button Style="{StaticResource TheMostCommonButtonStyle}" IsDefault="true" Height="30" Width="170"
+                  Command="{Binding OkCommand}"
+                  Content="{Binding COM_SID_DOWNLOAD_NOW, Source={StaticResource LocalizationSource}}"/>
+          <Button Style="{StaticResource TheMostCommonButtonStyle}" IsCancel="true" Height="30" Width="170"
+                  Command="{Binding CancelCommand}"
+                  Content="{Binding MAPP_SID_REMIND_ME_LATER, Source={StaticResource LocalizationSource}}"/>
+        </StackPanel>
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

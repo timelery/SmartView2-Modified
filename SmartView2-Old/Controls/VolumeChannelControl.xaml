@@ -1,0 +1,39 @@
+<UserControl x:Class="SmartView2.Controls.VolumeChannelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:common="clr-namespace:SmartView2.Common"
+             x:Name="_this" Height="210" Width="280">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="75"/>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="75"/>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="75"/>
+    </Grid.ColumnDefinitions>
+    <Grid Column="4"
+          Visibility="{Binding ElementName=_this, Path=ChannelAvailable, Converter={StaticResource _visibilityConverter}}">
+      <Image Source="/Resources/Images/RC_round_btn_bg.png"/>
+      <RepeatButton Style="{StaticResource RemoteControlChUpButtonStyle}" Content="UP" Delay="125" Margin="-10,-90,0,0"
+                    Command="{Binding ChannelUp}"/>
+      <RepeatButton Style="{StaticResource RemoteControlChDownButtonStyle}" Content="DOWN" Delay="125"
+                    Margin="-10,110,0,0" Command="{Binding ChannelDown}"/>
+      <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                 Text="{Binding COM_TV_SID_CH_CAPITAL, Source={StaticResource LocalizationSource}}"/>
+    </Grid>
+    <Grid Column="0"
+          Visibility="{Binding ElementName=_this, Path=VolumeAvailable, Converter={StaticResource _visibilityConverter}}">
+      <Image Source="/Resources/Images/RC_round_btn_bg.png"/>
+      <RepeatButton Style="{StaticResource RemoteControlVolUpButtonStyle}" Delay="125" Margin="-10,-90,0,0"
+                    Command="{Binding VolumeUp}"/>
+      <RepeatButton Style="{StaticResource RemoteControlVolDownButtonStyle}" Content="DOWN" Delay="125"
+                    Margin="-10,110,0,0" Command="{Binding VolumeDown}"/>
+      <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                 Text="{Binding COM_TV_SID_VOL_CAPITAL, Source={StaticResource LocalizationSource}}"/>
+    </Grid>
+    <Button Grid.Column="2" Style="{StaticResource RemoteControlMuteButtonStyle}" Command="{Binding Mute}"
+            Visibility="{Binding ElementName=_this, Path=VolumeAvailable, Converter={StaticResource _visibilityConverter}}"/>
+  </Grid>
+</UserControl>

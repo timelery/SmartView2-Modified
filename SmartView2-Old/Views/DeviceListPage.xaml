@@ -1,0 +1,366 @@
+<UserControl x:Class="SmartView2.Views.DeviceListPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:animation="clr-namespace:SmartView2.Resources.Animation"
+             xmlns:b="clr-namespace:SmartView2.Behaviors"
+             xmlns:controls="clr-namespace:SmartView2.Controls">
+  <Interaction.Behaviors>
+    <VisualStateBehavior VisualStateSource="{Binding IsDataLoaded}">
+      <VisualStateTrigger Value="true" VisualState="NonLoading"/>
+      <VisualStateTrigger Value="false" VisualState="Loading"/>
+    </VisualStateBehavior>
+  </Interaction.Behaviors>
+  <Grid x:Name="layoutRoot">
+    <Grid>
+      <controls:GlobalMenu.GlobalMenuItems>
+        <controls:GlobalMenuItemCollection>
+          <MenuItem Header="{Binding COM_HTS_SID_GUIDE, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding GuideCommand}"/>
+          <MenuItem Header="{Binding COM_LIST_TITLE_VERSION, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding VersionCommand}"/>
+          <MenuItem Header="{Binding COM_SID_OPEN_SOURCE_LICENSE, Source={StaticResource LocalizationSource}}"
+                    Command="{Binding LicenseCommand}"/>
+          <Separator/>
+          <MenuItem Command="{x:Static ApplicationCommands.Close}"
+                    Header="{Binding COM_EXIT_SMART_VIEW, Source={StaticResource LocalizationSource}}"/>
+        </controls:GlobalMenuItemCollection>
+      </controls:GlobalMenu.GlobalMenuItems>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid Row="0" Background="{StaticResource LightBackgroundBrush}" Height="74">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="0" Style="{StaticResource TransparentButtonStyle}" Width="60" Height="60" Padding="17"
+                Command="{Binding BackCommand}">
+          <Path Data="{StaticResource BackButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform"
+                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+        </Button>
+        <Button Grid.Column="2" Style="{StaticResource TransparentButtonStyle}" Width="60" Height="60"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="17"
+                Command="{Binding RefreshCommand}">
+          <Path Data="{StaticResource RefreshButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform"
+                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+        </Button>
+        <Grid Column="1">
+          <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold"
+                     FontSize="22pt" Foreground="{StaticResource TextBlock.Static.ForegroundBrush}"
+                     Text="{Binding COM_AUTO_DISCOVERY, Source={StaticResource LocalizationSource}}"/>
+        </Grid>
+      </Grid>
+      <Grid Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type Grid}">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding IsDeviceAvailable}" Value="False">
+                <Setter Property="UIElement.Visibility" Value="Hidden"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+        <Grid Row="0" Background="Transparent" Width="{Binding ActualWidth, ElementName=layoutRoot}">
+          <TextBlock Style="{StaticResource DeviceListNetworksNameTextBlockStyle}" TextWrapping="Wrap" FontSize="24pt"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock.Text>
+              <MultiBinding StringFormat="{}{0} - {1}">
+                <Binding Path="MAPP_SID_MIX_CONNECT_NETWORK" Source="{StaticResource LocalizationSource}"/>
+                <Binding Path="NetworkNames" Mode="OneWay"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+        </Grid>
+        <ListBox x:Name="_listView" Grid.Row="1" Background="Transparent" BorderThickness="0"
+                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.IsDeferredScrollingEnabled="true"
+                 MinHeight="150" MinWidth="400" Height="456" ItemsSource="{Binding Devices}"
+                 Width="{Binding ActualWidth, ElementName=layoutRoot}">
+          <FrameworkElement.Resources>
+            <BitmapImage x:Key="deviceIcon" UriSource="pack://application:,,,/Resources/Images/tv_icon_big.png"/>
+          </FrameworkElement.Resources>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Grid Background="Transparent" Height="396" Width="396">
+                <Interaction.Behaviors>
+                  <b:DoubleClickBehavior Command="{Binding DataContext.ConnectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                         CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=ListBox}}"/>
+                </Interaction.Behaviors>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="320"/>
+                  <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="{StaticResource deviceIcon}" Stretch="None"/>
+                <TextBlock Grid.Row="1" Width="250" Margin="5 0 0 0" TextAlignment="Center" HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center" FontSize="14pt" TextTrimming="CharacterEllipsis"
+                           Text="{Binding FriendlyName}"/>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <controls:DeviceSmartPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemContainerStyle>
+            <Style TargetType="{x:Type ListBoxItem}">
+              <Setter Property="Control.Template">
+                <Setter.Value>
+                  <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid>
+                      <Border x:Name="_border" VerticalAlignment="Center" BorderThickness="2" Margin="9 0 9 0">
+                        <ContentPresenter/>
+                      </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                      <Trigger Property="ListBoxItem.IsSelected" Value="true">
+                        <Setter TargetName="_border" Value="{StaticResource selectedAndOverBrush}" Property="Border.BorderBrush"/>
+                        <Setter Value="{StaticResource selectedAndOverBrush}" Property="Control.Foreground"/>
+                        <Setter TargetName="_border" Property="Border.Background" Value="#FF282F39"/>
+                      </Trigger>
+                      <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                          <Condition Property="UIElement.IsMouseOver" Value="true"/>
+                          <Condition Property="ListBoxItem.IsSelected" Value="false"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Value="{StaticResource selectedAndOverBrush}" TargetName="_border" Property="Border.Background"/>
+                        <Setter Property="Control.Foreground" Value="White"/>
+                      </MultiTrigger>
+                      <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                          <Condition Property="UIElement.IsMouseOver" Value="false"/>
+                          <Condition Property="ListBoxItem.IsSelected" Value="false"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="Control.Foreground" Value="White"/>
+                      </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+          </ItemsControl.ItemContainerStyle>
+          <Control.Template>
+            <ControlTemplate TargetType="{x:Type ListBox}">
+              <Border x:Name="Bd" BorderBrush="{TemplateBinding Control.BorderBrush}"
+                      BorderThickness="{TemplateBinding Control.BorderThickness}"
+                      Background="{TemplateBinding Control.Background}" Padding="1" SnapsToDevicePixels="true">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                  </Grid.ColumnDefinitions>
+                  <Button Grid.Column="0" Command="{x:Static ScrollBar.LineLeftCommand}" Height="60" Width="60" Padding="17"
+                          CommandTarget="{Binding ElementName=scrollviewer}"
+                          IsEnabled="{Binding CanScrollLeft, ElementName=scrollviewerNofitication}">
+                    <FrameworkElement.Style>
+                      <Style BasedOn="{StaticResource TransparentButtonStyle}" TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                          <DataTrigger Binding="{Binding ScrollableWidth, ElementName=scrollviewer}" Value="0">
+                            <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </FrameworkElement.Style>
+                    <Path Data="{StaticResource BackButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform"
+                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                  </Button>
+                  <ScrollViewer x:Name="scrollviewer" Grid.Column="1" Focusable="false" Padding="{TemplateBinding Control.Padding}">
+                    <Control.Template>
+                      <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid x:Name="Grid" Background="{TemplateBinding Control.Background}">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                          </Grid.RowDefinitions>
+                          <Rectangle x:Name="Corner" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                                     Grid.Row="1"/>
+                          <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                  CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}" CanHorizontallyScroll="false"
+                                                  CanVerticallyScroll="false" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                                                  Content="{TemplateBinding ContentControl.Content}" Grid.Column="0"
+                                                  Margin="{TemplateBinding Control.Padding}" Grid.Row="0"/>
+                          <Grid Row="1" Height="56">
+                            <controls:ScrollPageBar Maximum="{TemplateBinding ScrollViewer.ScrollableWidth}"
+                                                    ViewportSize="{TemplateBinding ScrollViewer.ViewportWidth}" HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}">
+                              <controls:ScrollPageBar.ItemTemplate>
+                                <DataTemplate>
+                                  <Ellipse x:Name="_ellipse" Height="20" Width="20" Fill="White" Opacity="0.5" Margin="10 0 10 0"/>
+                                  <DataTemplate.Triggers>
+                                    <DataTrigger Value="true" Binding="{Binding}">
+                                      <Setter TargetName="_ellipse" Property="UIElement.Opacity" Value="1"/>
+                                    </DataTrigger>
+                                  </DataTemplate.Triggers>
+                                </DataTemplate>
+                              </controls:ScrollPageBar.ItemTemplate>
+                            </controls:ScrollPageBar>
+                          </Grid>
+                        </Grid>
+                      </ControlTemplate>
+                    </Control.Template>
+                    <Interaction.Behaviors>
+                      <b:ScrollViewerMouseWheelHorizontalScrollingBehavior/>
+                      <b:ScrollViewerNotificationBehavior x:Name="scrollviewerNofitication"/>
+                    </Interaction.Behaviors>
+                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
+                  </ScrollViewer>
+                  <Button Grid.Column="2" Command="{x:Static ScrollBar.LineRightCommand}" Height="60" Width="60" Padding="17"
+                          CommandTarget="{Binding ElementName=scrollviewer}"
+                          IsEnabled="{Binding CanScrollRight, ElementName=scrollviewerNofitication}">
+                    <FrameworkElement.Style>
+                      <Style BasedOn="{StaticResource TransparentButtonStyle}" TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                          <DataTrigger Binding="{Binding ScrollableWidth, ElementName=scrollviewer}" Value="0">
+                            <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </FrameworkElement.Style>
+                    <Path Data="{StaticResource BackButtonGeometryGroup}" StrokeThickness="2" Stretch="Uniform"
+                          RenderTransformOrigin="0.5 0.5"
+                          Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}">
+                      <UIElement.RenderTransform>
+                        <RotateTransform Angle="180"/>
+                      </UIElement.RenderTransform>
+                    </Path>
+                  </Button>
+                </Grid>
+              </Border>
+              <ControlTemplate.Triggers>
+                <MultiTrigger>
+                  <MultiTrigger.Conditions>
+                    <Condition Property="ItemsControl.IsGrouping" Value="true"/>
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                  </MultiTrigger.Conditions>
+                  <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Control.Template>
+        </ListBox>
+        <Grid Row="2">
+          <TextBlock Style="{StaticResource DeviceListDescriptionTextBlockStyle}" TextAlignment="Center"
+                     VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18pt"
+                     Text="{Binding MAPP_SID_CHOOSE_TV_FROM_LIST_ABOCE_TO_GET_STARTED, Source={StaticResource LocalizationSource}}"/>
+        </Grid>
+      </Grid>
+      <Grid Row="2" Width="{Binding ActualWidth, ElementName=layoutRoot}">
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type Grid}">
+            <Setter Property="UIElement.Visibility" Value="Hidden"/>
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding IsDeviceAvailable}" Value="False">
+                <Setter Property="UIElement.Visibility" Value="Visible"/>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Row="0" Background="Transparent" Width="{Binding ActualWidth, ElementName=layoutRoot}">
+          <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Style="{StaticResource DeviceListNetworksNameTextBlockStyle}" TextWrapping="Wrap" FontSize="24pt"
+                       TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} - {1}">
+                  <Binding Path="MAPP_SID_MIX_CONNECT_NETWORK" Source="{StaticResource LocalizationSource}"/>
+                  <Binding Path="NetworkNames" Mode="OneWay"/>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Style="{StaticResource DeviceListHelpTextTextBlockStyle}" TextWrapping="Wrap" Margin="0 0 0 0"
+                       FontSize="24pt"
+                       Text="{Binding MAPP_SID_DON_T_SEE_TV_CHECK_FOLLOWING, Source={StaticResource LocalizationSource}}"/>
+          </StackPanel>
+        </Grid>
+        <Grid Row="2" Width="1306" HorizontalAlignment="Center">
+          <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
+          <Border Margin="0,0,0,6" CornerRadius="10" Background="#551A1C22">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <Border CornerRadius="10 0 0 10" Background="#FF1A1C22">
+                <TextBlock Text="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                           Margin="34,0,21,0" FontSize="53pt"/>
+              </Border>
+              <Image Grid.Column="1" Margin="50,0,34,0" Source="pack://application:,,,/Resources/Images/icon_tv_on.png"
+                     Stretch="None"/>
+              <TextBlock Grid.Column="2" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" FontSize="18pt"
+                         Margin="20 0"
+                         Text="{Binding MAPP_SID_MAKE_SURE_TV_TURNED_ON, Source={StaticResource LocalizationSource}}"/>
+            </Grid>
+          </Border>
+          <Border Grid.Row="1" Margin="0,6,0,0" CornerRadius="10" Background="#551A1C22">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <Border CornerRadius="10 0 0 10" Background="#FF1A1C22">
+                <TextBlock Text="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                           Margin="34,0,21,0" FontSize="53pt"/>
+              </Border>
+              <Image Grid.Column="1" Margin="50,0,34,0"
+                     Source="pack://application:,,,/Resources/Images/icon_network.png" Stretch="None"/>
+              <TextBlock Grid.Column="2" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" FontSize="18pt"
+                         Margin="20 0"
+                         Text="{Binding MAPP_SID_CHECK_NETWORK_CONNECTION_BOTH_TV_PC, Source={StaticResource LocalizationSource}}"/>
+            </Grid>
+          </Border>
+        </Grid>
+        <Grid Row="3" HorizontalAlignment="Center">
+          <TextBlock Style="{StaticResource DeviceListHelpTextTextBlockStyle}" FontSize="18pt"
+                     VerticalAlignment="Center"
+                     Text="{Binding MAPP_SID_TRY_AGAIN_CLICKING_REFRESH_NOT_SUPPORTED, Source={StaticResource LocalizationSource}}"/>
+        </Grid>
+      </Grid>
+      <Grid x:Name="LoadingGrid" Background="#55555555" Visibility="Hidden" RowSpan="3">
+        <animation:LoadingAnimation VerticalAlignment="Center" HorizontalAlignment="Center"/>
+      </Grid>
+    </Grid>
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState Name="NonLoading">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="LoadingGrid" Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState Name="Loading">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="LoadingGrid" Storyboard.TargetProperty="Visibility">
+              <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+</UserControl>
